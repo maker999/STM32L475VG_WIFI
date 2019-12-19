@@ -1,0 +1,1210 @@
+ARM GAS  /tmp/ccW9aSyB.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.SystemClock_Config,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	SystemClock_Config:
+  25              	.LFB129:
+  26              		.file 1 "Src/main.c"
+   1:Src/main.c    **** /**
+   2:Src/main.c    ****   ******************************************************************************
+   3:Src/main.c    ****   * @file    Wifi/WiFi_Client_Server/src/main.c
+   4:Src/main.c    ****   * @author  MCD Application Team
+   5:Src/main.c    ****   * @version V1.8.0
+   6:Src/main.c    ****   * @date    21-April-2017
+   7:Src/main.c    ****   * @brief   This file provides main program functions
+   8:Src/main.c    ****   ******************************************************************************
+   9:Src/main.c    ****   * @attention
+  10:Src/main.c    ****   *
+  11:Src/main.c    ****   * <h2><center>&copy; Copyright � 2017 STMicroelectronics International N.V. 
+  12:Src/main.c    ****   * All rights reserved.</center></h2>
+  13:Src/main.c    ****   *
+  14:Src/main.c    ****   * Redistribution and use in source and binary forms, with or without 
+  15:Src/main.c    ****   * modification, are permitted, provided that the following conditions are met:
+  16:Src/main.c    ****   *
+  17:Src/main.c    ****   * 1. Redistribution of source code must retain the above copyright notice, 
+  18:Src/main.c    ****   *    this list of conditions and the following disclaimer.
+  19:Src/main.c    ****   * 2. Redistributions in binary form must reproduce the above copyright notice,
+  20:Src/main.c    ****   *    this list of conditions and the following disclaimer in the documentation
+  21:Src/main.c    ****   *    and/or other materials provided with the distribution.
+  22:Src/main.c    ****   * 3. Neither the name of STMicroelectronics nor the names of other 
+  23:Src/main.c    ****   *    contributors to this software may be used to endorse or promote products 
+  24:Src/main.c    ****   *    derived from this software without specific written permission.
+  25:Src/main.c    ****   * 4. This software, including modifications and/or derivative works of this 
+  26:Src/main.c    ****   *    software, must execute solely and exclusively on microcontroller or
+  27:Src/main.c    ****   *    microprocessor devices manufactured by or for STMicroelectronics.
+  28:Src/main.c    ****   * 5. Redistribution and use of this software other than as permitted under 
+  29:Src/main.c    ****   *    this license is void and will automatically terminate your rights under 
+  30:Src/main.c    ****   *    this license. 
+  31:Src/main.c    ****   *
+  32:Src/main.c    ****   * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+ARM GAS  /tmp/ccW9aSyB.s 			page 2
+
+
+  33:Src/main.c    ****   * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  34:Src/main.c    ****   * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  35:Src/main.c    ****   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+  36:Src/main.c    ****   * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  37:Src/main.c    ****   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  38:Src/main.c    ****   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  39:Src/main.c    ****   * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  40:Src/main.c    ****   * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  41:Src/main.c    ****   * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  42:Src/main.c    ****   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  43:Src/main.c    ****   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  44:Src/main.c    ****   *
+  45:Src/main.c    ****   ******************************************************************************
+  46:Src/main.c    ****   */
+  47:Src/main.c    **** /* Includes ------------------------------------------------------------------*/
+  48:Src/main.c    **** #include "main.h"
+  49:Src/main.c    **** 
+  50:Src/main.c    **** /* Private defines -----------------------------------------------------------*/
+  51:Src/main.c    **** /* Update SSID and PASSWORD with own Access point settings */
+  52:Src/main.c    **** #define WIFI_SSID "R3C-network"
+  53:Src/main.c    **** #define WIFI_PASS "riddle&code&network"
+  54:Src/main.c    **** 
+  55:Src/main.c    **** #define WIFI_WRITE_TIMEOUT 10000
+  56:Src/main.c    **** #define WIFI_READ_TIMEOUT  10000
+  57:Src/main.c    **** 
+  58:Src/main.c    **** #define TERMINAL_USE
+  59:Src/main.c    **** 
+  60:Src/main.c    **** #define CONNECTION_TRIAL_MAX          10
+  61:Src/main.c    **** /* Private variables ---------------------------------------------------------*/
+  62:Src/main.c    **** #if defined (TERMINAL_USE)  
+  63:Src/main.c    **** extern UART_HandleTypeDef hDiscoUart;
+  64:Src/main.c    **** #endif /* TERMINAL_USE */
+  65:Src/main.c    **** uint8_t RemoteIP[] = {192,168,23,91};
+  66:Src/main.c    **** uint8_t RxData [100];
+  67:Src/main.c    **** char* modulename;
+  68:Src/main.c    **** uint8_t TxData[] = "GET / HTTP/1.1\r\nHost: oracles.r3c.network\r\nConnection: close\r\n\r\n";
+  69:Src/main.c    **** uint16_t RxLen;
+  70:Src/main.c    **** uint8_t  MAC_Addr[6]; 
+  71:Src/main.c    **** uint8_t  IP_Addr[4]; 
+  72:Src/main.c    **** /* Private function prototypes -----------------------------------------------*/
+  73:Src/main.c    **** #if defined (TERMINAL_USE)  
+  74:Src/main.c    **** #ifdef __GNUC__
+  75:Src/main.c    **** /* With GCC, small printf (option LD Linker->Libraries->Small printf
+  76:Src/main.c    ****    set to 'Yes') calls __io_putchar() */
+  77:Src/main.c    **** #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+  78:Src/main.c    **** #else
+  79:Src/main.c    **** #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+  80:Src/main.c    **** #endif /* __GNUC__ */
+  81:Src/main.c    **** #endif /* TERMINAL_USE */
+  82:Src/main.c    **** static void SystemClock_Config(void);
+  83:Src/main.c    **** /* Private functions ---------------------------------------------------------*/
+  84:Src/main.c    **** 
+  85:Src/main.c    **** /**
+  86:Src/main.c    ****   * @brief  Main program
+  87:Src/main.c    ****   * @param  None
+  88:Src/main.c    ****   * @retval None
+  89:Src/main.c    ****   */
+ARM GAS  /tmp/ccW9aSyB.s 			page 3
+
+
+  90:Src/main.c    **** int main(void)
+  91:Src/main.c    **** {
+  92:Src/main.c    ****   int32_t Socket = -1;
+  93:Src/main.c    ****   uint16_t Datalen = 1;
+  94:Src/main.c    ****   uint16_t Trials = CONNECTION_TRIAL_MAX;
+  95:Src/main.c    ****   
+  96:Src/main.c    ****   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  97:Src/main.c    ****   HAL_Init();
+  98:Src/main.c    ****   
+  99:Src/main.c    ****   /* Configure the system clock */
+ 100:Src/main.c    ****   SystemClock_Config();
+ 101:Src/main.c    ****   /* Configure LED2 */
+ 102:Src/main.c    ****   BSP_LED_Init(LED2);
+ 103:Src/main.c    ****   
+ 104:Src/main.c    **** #if defined (TERMINAL_USE)    
+ 105:Src/main.c    ****   /* Initialize all configured peripherals */
+ 106:Src/main.c    ****   hDiscoUart.Instance = DISCOVERY_COM1; 
+ 107:Src/main.c    ****   hDiscoUart.Init.BaudRate = 115200;
+ 108:Src/main.c    ****   hDiscoUart.Init.WordLength = UART_WORDLENGTH_8B;
+ 109:Src/main.c    ****   hDiscoUart.Init.StopBits = UART_STOPBITS_1;
+ 110:Src/main.c    ****   hDiscoUart.Init.Parity = UART_PARITY_NONE;
+ 111:Src/main.c    ****   hDiscoUart.Init.Mode = UART_MODE_TX_RX;
+ 112:Src/main.c    ****   hDiscoUart.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 113:Src/main.c    ****   hDiscoUart.Init.OverSampling = UART_OVERSAMPLING_16;
+ 114:Src/main.c    ****   hDiscoUart.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+ 115:Src/main.c    ****   hDiscoUart.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+ 116:Src/main.c    **** 
+ 117:Src/main.c    ****   BSP_COM_Init(COM1, &hDiscoUart);
+ 118:Src/main.c    **** 
+ 119:Src/main.c    ****   printf("****** WIFI Module in TCP Client mode demonstration ****** \n\n");
+ 120:Src/main.c    ****   printf("TCP Client Instructions :\n");
+ 121:Src/main.c    ****   printf("1- Make sure your Phone is connected to the same network that\n");
+ 122:Src/main.c    ****   printf("   you configured using the Configuration Access Point.\n");
+ 123:Src/main.c    ****   printf("2- Create a server by using the android application TCP Server\n");
+ 124:Src/main.c    ****   printf("   with port(8002).\n");
+ 125:Src/main.c    ****   printf("3- Get the Network Name or IP Address of your Android from the step 2.\n\n"); 
+ 126:Src/main.c    **** #endif /* TERMINAL_USE */
+ 127:Src/main.c    ****   /*Initialize  WIFI module */
+ 128:Src/main.c    ****   if(WIFI_Init() ==  WIFI_STATUS_OK)
+ 129:Src/main.c    ****   {
+ 130:Src/main.c    **** #if defined (TERMINAL_USE)
+ 131:Src/main.c    ****     printf("> WIFI Module Initialized.\n");  
+ 132:Src/main.c    **** #endif /* TERMINAL_USE */   
+ 133:Src/main.c    ****     if(WIFI_GetMAC_Address(MAC_Addr) == WIFI_STATUS_OK)
+ 134:Src/main.c    ****     {
+ 135:Src/main.c    **** #if defined (TERMINAL_USE)    
+ 136:Src/main.c    ****         printf("> es-wifi module MAC Address : %X:%X:%X:%X:%X:%X\n",     
+ 137:Src/main.c    ****                MAC_Addr[0],
+ 138:Src/main.c    ****                MAC_Addr[1],
+ 139:Src/main.c    ****                MAC_Addr[2],
+ 140:Src/main.c    ****                MAC_Addr[3],
+ 141:Src/main.c    ****                MAC_Addr[4],
+ 142:Src/main.c    ****                MAC_Addr[5]);   
+ 143:Src/main.c    **** #endif /* TERMINAL_USE */       
+ 144:Src/main.c    ****     }
+ 145:Src/main.c    ****     else
+ 146:Src/main.c    ****     {
+ARM GAS  /tmp/ccW9aSyB.s 			page 4
+
+
+ 147:Src/main.c    **** #if defined (TERMINAL_USE)  
+ 148:Src/main.c    ****         printf("> ERROR : CANNOT get MAC address\n");
+ 149:Src/main.c    **** #endif /* TERMINAL_USE */  
+ 150:Src/main.c    ****       BSP_LED_On(LED2);      
+ 151:Src/main.c    ****     }
+ 152:Src/main.c    ****     
+ 153:Src/main.c    ****     if( WIFI_Connect(WIFI_SSID, WIFI_PASS, WIFI_ECN_WPA2_PSK) == WIFI_STATUS_OK)
+ 154:Src/main.c    ****     {
+ 155:Src/main.c    **** #if defined (TERMINAL_USE)  
+ 156:Src/main.c    ****       printf("> es-wifi module connected \n");
+ 157:Src/main.c    **** #endif /* TERMINAL_USE */       
+ 158:Src/main.c    ****       if(WIFI_GetIP_Address(IP_Addr) == WIFI_STATUS_OK)
+ 159:Src/main.c    ****       {
+ 160:Src/main.c    **** #if defined (TERMINAL_USE)        
+ 161:Src/main.c    **** printf("> es-wifi module got IP Address : %d.%d.%d.%d\n",     
+ 162:Src/main.c    ****                IP_Addr[0],
+ 163:Src/main.c    ****                IP_Addr[1],
+ 164:Src/main.c    ****                IP_Addr[2],
+ 165:Src/main.c    ****                IP_Addr[3]); 
+ 166:Src/main.c    ****         
+ 167:Src/main.c    ****         printf("> Trying to connect to Server: %d.%d.%d.%d:8002 ...\n",     
+ 168:Src/main.c    ****                RemoteIP[0],
+ 169:Src/main.c    ****                RemoteIP[1],
+ 170:Src/main.c    ****                RemoteIP[2],
+ 171:Src/main.c    ****                RemoteIP[3]);
+ 172:Src/main.c    ****         
+ 173:Src/main.c    **** #endif /* TERMINAL_USE */  
+ 174:Src/main.c    ****         
+ 175:Src/main.c    ****         WIFI_DNS_Lookup("www.google.com", RemoteIP );
+ 176:Src/main.c    ****         while (Trials--)
+ 177:Src/main.c    ****         { 
+ 178:Src/main.c    ****           if( WIFI_OpenClientConnection(0, WIFI_TCP_PROTOCOL, "TCP_CLIENT", RemoteIP, 80, 0) == WIF
+ 179:Src/main.c    ****           {
+ 180:Src/main.c    **** #if defined (TERMINAL_USE)  
+ 181:Src/main.c    ****             printf("> TCP Connection opened successfully.\n"); 
+ 182:Src/main.c    **** #endif /* TERMINAL_USE */
+ 183:Src/main.c    ****             Socket = 0;
+ 184:Src/main.c    ****           }
+ 185:Src/main.c    ****         }
+ 186:Src/main.c    ****         if(!Trials)
+ 187:Src/main.c    ****         {
+ 188:Src/main.c    **** #if defined (TERMINAL_USE)  
+ 189:Src/main.c    ****           printf("> ERROR : Cannot open Connection\n");
+ 190:Src/main.c    **** #endif /* TERMINAL_USE */
+ 191:Src/main.c    ****           BSP_LED_On(LED2);    
+ 192:Src/main.c    ****         }
+ 193:Src/main.c    ****       }
+ 194:Src/main.c    ****       else
+ 195:Src/main.c    ****       {
+ 196:Src/main.c    **** #if defined (TERMINAL_USE)  
+ 197:Src/main.c    ****         printf("> ERROR : es-wifi module CANNOT get IP address\n");
+ 198:Src/main.c    **** #endif /* TERMINAL_USE */
+ 199:Src/main.c    ****         BSP_LED_On(LED2);      
+ 200:Src/main.c    ****       }
+ 201:Src/main.c    ****     }
+ 202:Src/main.c    ****     else
+ 203:Src/main.c    ****     {
+ARM GAS  /tmp/ccW9aSyB.s 			page 5
+
+
+ 204:Src/main.c    **** #if defined (TERMINAL_USE)  
+ 205:Src/main.c    ****         printf("> ERROR : es-wifi module NOT connected\n");
+ 206:Src/main.c    **** #endif /* TERMINAL_USE */ 
+ 207:Src/main.c    ****       BSP_LED_On(LED2);
+ 208:Src/main.c    ****     }
+ 209:Src/main.c    ****   }
+ 210:Src/main.c    ****   else
+ 211:Src/main.c    ****   {
+ 212:Src/main.c    **** #if defined (TERMINAL_USE)  
+ 213:Src/main.c    ****     printf("> ERROR : WIFI Module cannot be initialized.\n"); 
+ 214:Src/main.c    **** #endif /* TERMINAL_USE */
+ 215:Src/main.c    ****     BSP_LED_On(LED2);
+ 216:Src/main.c    ****   }
+ 217:Src/main.c    **** 
+ 218:Src/main.c    ****   
+ 219:Src/main.c    ****   while(1)
+ 220:Src/main.c    ****   {
+ 221:Src/main.c    ****     if(Socket != -1)
+ 222:Src/main.c    ****     {
+ 223:Src/main.c    ****       if(WIFI_SendData(Socket, TxData, sizeof(TxData), &Datalen, WIFI_WRITE_TIMEOUT) != WIFI_STATUS
+ 224:Src/main.c    ****       {
+ 225:Src/main.c    ****         //if(Datalen > 0)
+ 226:Src/main.c    ****         {
+ 227:Src/main.c    ****           if(WIFI_ReceiveData(Socket, RxData, sizeof(RxData), &Datalen, WIFI_READ_TIMEOUT) == WIFI_
+ 228:Src/main.c    ****           {
+ 229:Src/main.c    **** #if defined (TERMINAL_USE)  
+ 230:Src/main.c    ****             printf("> ERROR : Failed to send Data.\n");   
+ 231:Src/main.c    **** #endif /* TERMINAL_USE */ 
+ 232:Src/main.c    ****           } 
+ 233:Src/main.c    ****         }
+ 234:Src/main.c    ****       }
+ 235:Src/main.c    ****       else
+ 236:Src/main.c    ****       {
+ 237:Src/main.c    **** #if defined (TERMINAL_USE)  
+ 238:Src/main.c    ****         printf("> ERROR : Failed to Receive Data.\n");  
+ 239:Src/main.c    **** #endif /* TERMINAL_USE */
+ 240:Src/main.c    ****       }
+ 241:Src/main.c    ****     }
+ 242:Src/main.c    ****   }
+ 243:Src/main.c    **** 
+ 244:Src/main.c    **** }
+ 245:Src/main.c    **** 
+ 246:Src/main.c    **** /**
+ 247:Src/main.c    ****   * @brief  System Clock Configuration
+ 248:Src/main.c    ****   *         The system Clock is configured as follow : 
+ 249:Src/main.c    ****   *            System Clock source            = PLL (MSI)
+ 250:Src/main.c    ****   *            SYSCLK(Hz)                     = 80000000
+ 251:Src/main.c    ****   *            HCLK(Hz)                       = 80000000
+ 252:Src/main.c    ****   *            AHB Prescaler                  = 1
+ 253:Src/main.c    ****   *            APB1 Prescaler                 = 1
+ 254:Src/main.c    ****   *            APB2 Prescaler                 = 1
+ 255:Src/main.c    ****   *            MSI Frequency(Hz)              = 4000000
+ 256:Src/main.c    ****   *            PLL_M                          = 1
+ 257:Src/main.c    ****   *            PLL_N                          = 40
+ 258:Src/main.c    ****   *            PLL_R                          = 2
+ 259:Src/main.c    ****   *            PLL_P                          = 7
+ 260:Src/main.c    ****   *            PLL_Q                          = 4
+ARM GAS  /tmp/ccW9aSyB.s 			page 6
+
+
+ 261:Src/main.c    ****   *            Flash Latency(WS)              = 4
+ 262:Src/main.c    ****   * @param  None
+ 263:Src/main.c    ****   * @retval None
+ 264:Src/main.c    ****   */
+ 265:Src/main.c    **** static void SystemClock_Config(void)
+ 266:Src/main.c    **** {
+  27              		.loc 1 266 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 88
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 00B5     		push	{lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 14, -4
+  35 0002 97B0     		sub	sp, sp, #92
+  36              	.LCFI1:
+  37              		.cfi_def_cfa_offset 96
+ 267:Src/main.c    ****   RCC_ClkInitTypeDef RCC_ClkInitStruct;
+ 268:Src/main.c    ****   RCC_OscInitTypeDef RCC_OscInitStruct;
+ 269:Src/main.c    **** 
+ 270:Src/main.c    ****   /* MSI is enabled after System reset, activate PLL with MSI as source */
+ 271:Src/main.c    ****   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
+  38              		.loc 1 271 0
+  39 0004 1023     		movs	r3, #16
+  40 0006 0093     		str	r3, [sp]
+ 272:Src/main.c    ****   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
+  41              		.loc 1 272 0
+  42 0008 0123     		movs	r3, #1
+  43 000a 0693     		str	r3, [sp, #24]
+ 273:Src/main.c    ****   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
+  44              		.loc 1 273 0
+  45 000c 6022     		movs	r2, #96
+  46 000e 0892     		str	r2, [sp, #32]
+ 274:Src/main.c    ****   RCC_OscInitStruct.MSICalibrationValue = RCC_MSICALIBRATION_DEFAULT;
+  47              		.loc 1 274 0
+  48 0010 0022     		movs	r2, #0
+  49 0012 0792     		str	r2, [sp, #28]
+ 275:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  50              		.loc 1 275 0
+  51 0014 0222     		movs	r2, #2
+  52 0016 0A92     		str	r2, [sp, #40]
+ 276:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
+  53              		.loc 1 276 0
+  54 0018 0B93     		str	r3, [sp, #44]
+ 277:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLM = 1;
+  55              		.loc 1 277 0
+  56 001a 0C93     		str	r3, [sp, #48]
+ 278:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLN = 40;
+  57              		.loc 1 278 0
+  58 001c 2823     		movs	r3, #40
+  59 001e 0D93     		str	r3, [sp, #52]
+ 279:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLR = 2;
+  60              		.loc 1 279 0
+  61 0020 1092     		str	r2, [sp, #64]
+ 280:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLP = 7;
+  62              		.loc 1 280 0
+  63 0022 0723     		movs	r3, #7
+ARM GAS  /tmp/ccW9aSyB.s 			page 7
+
+
+  64 0024 0E93     		str	r3, [sp, #56]
+ 281:Src/main.c    ****   RCC_OscInitStruct.PLL.PLLQ = 4;
+  65              		.loc 1 281 0
+  66 0026 0423     		movs	r3, #4
+  67 0028 0F93     		str	r3, [sp, #60]
+ 282:Src/main.c    ****   if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  68              		.loc 1 282 0
+  69 002a 6846     		mov	r0, sp
+  70 002c FFF7FEFF 		bl	HAL_RCC_OscConfig
+  71              	.LVL0:
+  72 0030 00B1     		cbz	r0, .L2
+  73              	.L3:
+  74 0032 FEE7     		b	.L3
+  75              	.L2:
+ 283:Src/main.c    ****   {
+ 284:Src/main.c    ****     /* Initialization Error */
+ 285:Src/main.c    ****     while(1);
+ 286:Src/main.c    ****   }
+ 287:Src/main.c    ****   
+ 288:Src/main.c    ****   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
+ 289:Src/main.c    ****      clocks dividers */
+ 290:Src/main.c    ****   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | 
+  76              		.loc 1 290 0
+  77 0034 0F23     		movs	r3, #15
+  78 0036 1193     		str	r3, [sp, #68]
+ 291:Src/main.c    ****   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  79              		.loc 1 291 0
+  80 0038 0323     		movs	r3, #3
+  81 003a 1293     		str	r3, [sp, #72]
+ 292:Src/main.c    ****   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  82              		.loc 1 292 0
+  83 003c 0023     		movs	r3, #0
+  84 003e 1393     		str	r3, [sp, #76]
+ 293:Src/main.c    ****   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;  
+  85              		.loc 1 293 0
+  86 0040 1493     		str	r3, [sp, #80]
+ 294:Src/main.c    ****   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
+  87              		.loc 1 294 0
+  88 0042 1593     		str	r3, [sp, #84]
+ 295:Src/main.c    ****   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  89              		.loc 1 295 0
+  90 0044 0421     		movs	r1, #4
+  91 0046 11A8     		add	r0, sp, #68
+  92 0048 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+  93              	.LVL1:
+  94 004c 00B1     		cbz	r0, .L1
+  95              	.L5:
+  96 004e FEE7     		b	.L5
+  97              	.L1:
+ 296:Src/main.c    ****   {
+ 297:Src/main.c    ****     /* Initialization Error */
+ 298:Src/main.c    ****     while(1);
+ 299:Src/main.c    ****   }
+ 300:Src/main.c    **** }
+  98              		.loc 1 300 0
+  99 0050 17B0     		add	sp, sp, #92
+ 100              	.LCFI2:
+ARM GAS  /tmp/ccW9aSyB.s 			page 8
+
+
+ 101              		.cfi_def_cfa_offset 4
+ 102              		@ sp needed
+ 103 0052 5DF804FB 		ldr	pc, [sp], #4
+ 104              		.cfi_endproc
+ 105              	.LFE129:
+ 107              		.section	.text.main,"ax",%progbits
+ 108              		.align	1
+ 109              		.global	main
+ 110              		.syntax unified
+ 111              		.thumb
+ 112              		.thumb_func
+ 113              		.fpu fpv4-sp-d16
+ 115              	main:
+ 116              	.LFB128:
+  91:Src/main.c    ****   int32_t Socket = -1;
+ 117              		.loc 1 91 0
+ 118              		.cfi_startproc
+ 119              		@ args = 0, pretend = 0, frame = 8
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121 0000 30B5     		push	{r4, r5, lr}
+ 122              	.LCFI3:
+ 123              		.cfi_def_cfa_offset 12
+ 124              		.cfi_offset 4, -12
+ 125              		.cfi_offset 5, -8
+ 126              		.cfi_offset 14, -4
+ 127 0002 87B0     		sub	sp, sp, #28
+ 128              	.LCFI4:
+ 129              		.cfi_def_cfa_offset 40
+ 130              	.LVL2:
+  93:Src/main.c    ****   uint16_t Trials = CONNECTION_TRIAL_MAX;
+ 131              		.loc 1 93 0
+ 132 0004 0123     		movs	r3, #1
+ 133 0006 ADF81630 		strh	r3, [sp, #22]	@ movhi
+ 134              	.LVL3:
+  97:Src/main.c    ****   
+ 135              		.loc 1 97 0
+ 136 000a FFF7FEFF 		bl	HAL_Init
+ 137              	.LVL4:
+ 100:Src/main.c    ****   /* Configure LED2 */
+ 138              		.loc 1 100 0
+ 139 000e FFF7FEFF 		bl	SystemClock_Config
+ 140              	.LVL5:
+ 102:Src/main.c    ****   
+ 141              		.loc 1 102 0
+ 142 0012 0020     		movs	r0, #0
+ 143 0014 FFF7FEFF 		bl	BSP_LED_Init
+ 144              	.LVL6:
+ 106:Src/main.c    ****   hDiscoUart.Init.BaudRate = 115200;
+ 145              		.loc 1 106 0
+ 146 0018 6349     		ldr	r1, .L22
+ 147 001a 644B     		ldr	r3, .L22+4
+ 148 001c 0B60     		str	r3, [r1]
+ 107:Src/main.c    ****   hDiscoUart.Init.WordLength = UART_WORDLENGTH_8B;
+ 149              		.loc 1 107 0
+ 150 001e 4FF4E133 		mov	r3, #115200
+ 151 0022 4B60     		str	r3, [r1, #4]
+ 108:Src/main.c    ****   hDiscoUart.Init.StopBits = UART_STOPBITS_1;
+ARM GAS  /tmp/ccW9aSyB.s 			page 9
+
+
+ 152              		.loc 1 108 0
+ 153 0024 0020     		movs	r0, #0
+ 154 0026 8860     		str	r0, [r1, #8]
+ 109:Src/main.c    ****   hDiscoUart.Init.Parity = UART_PARITY_NONE;
+ 155              		.loc 1 109 0
+ 156 0028 C860     		str	r0, [r1, #12]
+ 110:Src/main.c    ****   hDiscoUart.Init.Mode = UART_MODE_TX_RX;
+ 157              		.loc 1 110 0
+ 158 002a 0861     		str	r0, [r1, #16]
+ 111:Src/main.c    ****   hDiscoUart.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+ 159              		.loc 1 111 0
+ 160 002c 0C23     		movs	r3, #12
+ 161 002e 4B61     		str	r3, [r1, #20]
+ 112:Src/main.c    ****   hDiscoUart.Init.OverSampling = UART_OVERSAMPLING_16;
+ 162              		.loc 1 112 0
+ 163 0030 8861     		str	r0, [r1, #24]
+ 113:Src/main.c    ****   hDiscoUart.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+ 164              		.loc 1 113 0
+ 165 0032 C861     		str	r0, [r1, #28]
+ 114:Src/main.c    ****   hDiscoUart.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+ 166              		.loc 1 114 0
+ 167 0034 0862     		str	r0, [r1, #32]
+ 115:Src/main.c    **** 
+ 168              		.loc 1 115 0
+ 169 0036 4862     		str	r0, [r1, #36]
+ 117:Src/main.c    **** 
+ 170              		.loc 1 117 0
+ 171 0038 FFF7FEFF 		bl	BSP_COM_Init
+ 172              	.LVL7:
+ 119:Src/main.c    ****   printf("TCP Client Instructions :\n");
+ 173              		.loc 1 119 0
+ 174 003c 5C48     		ldr	r0, .L22+8
+ 175 003e FFF7FEFF 		bl	puts
+ 176              	.LVL8:
+ 120:Src/main.c    ****   printf("1- Make sure your Phone is connected to the same network that\n");
+ 177              		.loc 1 120 0
+ 178 0042 5C48     		ldr	r0, .L22+12
+ 179 0044 FFF7FEFF 		bl	puts
+ 180              	.LVL9:
+ 121:Src/main.c    ****   printf("   you configured using the Configuration Access Point.\n");
+ 181              		.loc 1 121 0
+ 182 0048 5B48     		ldr	r0, .L22+16
+ 183 004a FFF7FEFF 		bl	puts
+ 184              	.LVL10:
+ 122:Src/main.c    ****   printf("2- Create a server by using the android application TCP Server\n");
+ 185              		.loc 1 122 0
+ 186 004e 5B48     		ldr	r0, .L22+20
+ 187 0050 FFF7FEFF 		bl	puts
+ 188              	.LVL11:
+ 123:Src/main.c    ****   printf("   with port(8002).\n");
+ 189              		.loc 1 123 0
+ 190 0054 5A48     		ldr	r0, .L22+24
+ 191 0056 FFF7FEFF 		bl	puts
+ 192              	.LVL12:
+ 124:Src/main.c    ****   printf("3- Get the Network Name or IP Address of your Android from the step 2.\n\n"); 
+ 193              		.loc 1 124 0
+ 194 005a 5A48     		ldr	r0, .L22+28
+ARM GAS  /tmp/ccW9aSyB.s 			page 10
+
+
+ 195 005c FFF7FEFF 		bl	puts
+ 196              	.LVL13:
+ 125:Src/main.c    **** #endif /* TERMINAL_USE */
+ 197              		.loc 1 125 0
+ 198 0060 5948     		ldr	r0, .L22+32
+ 199 0062 FFF7FEFF 		bl	puts
+ 200              	.LVL14:
+ 128:Src/main.c    ****   {
+ 201              		.loc 1 128 0
+ 202 0066 FFF7FEFF 		bl	WIFI_Init
+ 203              	.LVL15:
+ 204 006a 0028     		cmp	r0, #0
+ 205 006c 71D1     		bne	.L8
+ 131:Src/main.c    **** #endif /* TERMINAL_USE */   
+ 206              		.loc 1 131 0
+ 207 006e 5748     		ldr	r0, .L22+36
+ 208 0070 FFF7FEFF 		bl	puts
+ 209              	.LVL16:
+ 133:Src/main.c    ****     {
+ 210              		.loc 1 133 0
+ 211 0074 5648     		ldr	r0, .L22+40
+ 212 0076 FFF7FEFF 		bl	WIFI_GetMAC_Address
+ 213              	.LVL17:
+ 214 007a 0028     		cmp	r0, #0
+ 215 007c 40D1     		bne	.L9
+ 137:Src/main.c    ****                MAC_Addr[1],
+ 216              		.loc 1 137 0
+ 217 007e 5448     		ldr	r0, .L22+40
+ 218 0080 0178     		ldrb	r1, [r0]	@ zero_extendqisi2
+ 138:Src/main.c    ****                MAC_Addr[2],
+ 219              		.loc 1 138 0
+ 220 0082 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 139:Src/main.c    ****                MAC_Addr[3],
+ 221              		.loc 1 139 0
+ 222 0084 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 140:Src/main.c    ****                MAC_Addr[4],
+ 223              		.loc 1 140 0
+ 224 0086 C478     		ldrb	r4, [r0, #3]	@ zero_extendqisi2
+ 141:Src/main.c    ****                MAC_Addr[5]);   
+ 225              		.loc 1 141 0
+ 226 0088 0579     		ldrb	r5, [r0, #4]	@ zero_extendqisi2
+ 142:Src/main.c    **** #endif /* TERMINAL_USE */       
+ 227              		.loc 1 142 0
+ 228 008a 4079     		ldrb	r0, [r0, #5]	@ zero_extendqisi2
+ 136:Src/main.c    ****                MAC_Addr[0],
+ 229              		.loc 1 136 0
+ 230 008c 0290     		str	r0, [sp, #8]
+ 231 008e 0195     		str	r5, [sp, #4]
+ 232 0090 0094     		str	r4, [sp]
+ 233 0092 5048     		ldr	r0, .L22+44
+ 234 0094 FFF7FEFF 		bl	printf
+ 235              	.LVL18:
+ 236              	.L10:
+ 153:Src/main.c    ****     {
+ 237              		.loc 1 153 0
+ 238 0098 0322     		movs	r2, #3
+ 239 009a 4F49     		ldr	r1, .L22+48
+ARM GAS  /tmp/ccW9aSyB.s 			page 11
+
+
+ 240 009c 4F48     		ldr	r0, .L22+52
+ 241 009e FFF7FEFF 		bl	WIFI_Connect
+ 242              	.LVL19:
+ 243 00a2 0028     		cmp	r0, #0
+ 244 00a4 4CD1     		bne	.L11
+ 156:Src/main.c    **** #endif /* TERMINAL_USE */       
+ 245              		.loc 1 156 0
+ 246 00a6 4E48     		ldr	r0, .L22+56
+ 247 00a8 FFF7FEFF 		bl	puts
+ 248              	.LVL20:
+ 158:Src/main.c    ****       {
+ 249              		.loc 1 158 0
+ 250 00ac 4D48     		ldr	r0, .L22+60
+ 251 00ae FFF7FEFF 		bl	WIFI_GetIP_Address
+ 252              	.LVL21:
+ 253 00b2 0028     		cmp	r0, #0
+ 254 00b4 3BD1     		bne	.L12
+ 162:Src/main.c    ****                IP_Addr[1],
+ 255              		.loc 1 162 0
+ 256 00b6 4B48     		ldr	r0, .L22+60
+ 257 00b8 0178     		ldrb	r1, [r0]	@ zero_extendqisi2
+ 163:Src/main.c    ****                IP_Addr[2],
+ 258              		.loc 1 163 0
+ 259 00ba 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
+ 164:Src/main.c    ****                IP_Addr[3]); 
+ 260              		.loc 1 164 0
+ 261 00bc 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
+ 165:Src/main.c    ****         
+ 262              		.loc 1 165 0
+ 263 00be C078     		ldrb	r0, [r0, #3]	@ zero_extendqisi2
+ 161:Src/main.c    ****                IP_Addr[0],
+ 264              		.loc 1 161 0
+ 265 00c0 0090     		str	r0, [sp]
+ 266 00c2 4948     		ldr	r0, .L22+64
+ 267 00c4 FFF7FEFF 		bl	printf
+ 268              	.LVL22:
+ 168:Src/main.c    ****                RemoteIP[1],
+ 269              		.loc 1 168 0
+ 270 00c8 484C     		ldr	r4, .L22+68
+ 271 00ca 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
+ 169:Src/main.c    ****                RemoteIP[2],
+ 272              		.loc 1 169 0
+ 273 00cc 6278     		ldrb	r2, [r4, #1]	@ zero_extendqisi2
+ 170:Src/main.c    ****                RemoteIP[3]);
+ 274              		.loc 1 170 0
+ 275 00ce A378     		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 171:Src/main.c    ****         
+ 276              		.loc 1 171 0
+ 277 00d0 E078     		ldrb	r0, [r4, #3]	@ zero_extendqisi2
+ 167:Src/main.c    ****                RemoteIP[0],
+ 278              		.loc 1 167 0
+ 279 00d2 0090     		str	r0, [sp]
+ 280 00d4 4648     		ldr	r0, .L22+72
+ 281 00d6 FFF7FEFF 		bl	printf
+ 282              	.LVL23:
+ 175:Src/main.c    ****         while (Trials--)
+ 283              		.loc 1 175 0
+ARM GAS  /tmp/ccW9aSyB.s 			page 12
+
+
+ 284 00da 2146     		mov	r1, r4
+ 285 00dc 4548     		ldr	r0, .L22+76
+ 286 00de FFF7FEFF 		bl	WIFI_DNS_Lookup
+ 287              	.LVL24:
+  94:Src/main.c    ****   
+ 288              		.loc 1 94 0
+ 289 00e2 0A23     		movs	r3, #10
+  92:Src/main.c    ****   uint16_t Datalen = 1;
+ 290              		.loc 1 92 0
+ 291 00e4 4FF0FF34 		mov	r4, #-1
+ 292              	.LVL25:
+ 293              	.L13:
+ 176:Src/main.c    ****         { 
+ 294              		.loc 1 176 0
+ 295 00e8 5D1E     		subs	r5, r3, #1
+ 296 00ea ADB2     		uxth	r5, r5
+ 297              	.LVL26:
+ 298 00ec 7BB9     		cbnz	r3, .L15
+ 186:Src/main.c    ****         {
+ 299              		.loc 1 186 0
+ 300 00ee 002D     		cmp	r5, #0
+ 301 00f0 3BD1     		bne	.L18
+ 189:Src/main.c    **** #endif /* TERMINAL_USE */
+ 302              		.loc 1 189 0
+ 303 00f2 4148     		ldr	r0, .L22+80
+ 304 00f4 FFF7FEFF 		bl	puts
+ 305              	.LVL27:
+ 191:Src/main.c    ****         }
+ 306              		.loc 1 191 0
+ 307 00f8 0020     		movs	r0, #0
+ 308 00fa FFF7FEFF 		bl	BSP_LED_On
+ 309              	.LVL28:
+ 310 00fe 34E0     		b	.L18
+ 311              	.LVL29:
+ 312              	.L9:
+ 148:Src/main.c    **** #endif /* TERMINAL_USE */  
+ 313              		.loc 1 148 0
+ 314 0100 3E48     		ldr	r0, .L22+84
+ 315 0102 FFF7FEFF 		bl	puts
+ 316              	.LVL30:
+ 150:Src/main.c    ****     }
+ 317              		.loc 1 150 0
+ 318 0106 0020     		movs	r0, #0
+ 319 0108 FFF7FEFF 		bl	BSP_LED_On
+ 320              	.LVL31:
+ 321 010c C4E7     		b	.L10
+ 322              	.LVL32:
+ 323              	.L15:
+ 178:Src/main.c    ****           {
+ 324              		.loc 1 178 0
+ 325 010e 0020     		movs	r0, #0
+ 326 0110 0190     		str	r0, [sp, #4]
+ 327 0112 5023     		movs	r3, #80
+ 328 0114 0093     		str	r3, [sp]
+ 329 0116 354B     		ldr	r3, .L22+68
+ 330 0118 394A     		ldr	r2, .L22+88
+ 331 011a 0146     		mov	r1, r0
+ARM GAS  /tmp/ccW9aSyB.s 			page 13
+
+
+ 332 011c FFF7FEFF 		bl	WIFI_OpenClientConnection
+ 333              	.LVL33:
+ 334 0120 18B9     		cbnz	r0, .L14
+ 181:Src/main.c    **** #endif /* TERMINAL_USE */
+ 335              		.loc 1 181 0
+ 336 0122 3848     		ldr	r0, .L22+92
+ 337 0124 FFF7FEFF 		bl	puts
+ 338              	.LVL34:
+ 183:Src/main.c    ****           }
+ 339              		.loc 1 183 0
+ 340 0128 0024     		movs	r4, #0
+ 341              	.LVL35:
+ 342              	.L14:
+ 343 012a 2B46     		mov	r3, r5
+ 344 012c DCE7     		b	.L13
+ 345              	.LVL36:
+ 346              	.L12:
+ 197:Src/main.c    **** #endif /* TERMINAL_USE */
+ 347              		.loc 1 197 0
+ 348 012e 3648     		ldr	r0, .L22+96
+ 349 0130 FFF7FEFF 		bl	puts
+ 350              	.LVL37:
+ 199:Src/main.c    ****       }
+ 351              		.loc 1 199 0
+ 352 0134 0020     		movs	r0, #0
+ 353 0136 FFF7FEFF 		bl	BSP_LED_On
+ 354              	.LVL38:
+  92:Src/main.c    ****   uint16_t Datalen = 1;
+ 355              		.loc 1 92 0
+ 356 013a 4FF0FF34 		mov	r4, #-1
+ 357 013e 14E0     		b	.L18
+ 358              	.L11:
+ 205:Src/main.c    **** #endif /* TERMINAL_USE */ 
+ 359              		.loc 1 205 0
+ 360 0140 3248     		ldr	r0, .L22+100
+ 361 0142 FFF7FEFF 		bl	puts
+ 362              	.LVL39:
+ 207:Src/main.c    ****     }
+ 363              		.loc 1 207 0
+ 364 0146 0020     		movs	r0, #0
+ 365 0148 FFF7FEFF 		bl	BSP_LED_On
+ 366              	.LVL40:
+  92:Src/main.c    ****   uint16_t Datalen = 1;
+ 367              		.loc 1 92 0
+ 368 014c 4FF0FF34 		mov	r4, #-1
+ 369 0150 0BE0     		b	.L18
+ 370              	.L8:
+ 213:Src/main.c    **** #endif /* TERMINAL_USE */
+ 371              		.loc 1 213 0
+ 372 0152 2F48     		ldr	r0, .L22+104
+ 373 0154 FFF7FEFF 		bl	puts
+ 374              	.LVL41:
+ 215:Src/main.c    ****   }
+ 375              		.loc 1 215 0
+ 376 0158 0020     		movs	r0, #0
+ 377 015a FFF7FEFF 		bl	BSP_LED_On
+ 378              	.LVL42:
+ARM GAS  /tmp/ccW9aSyB.s 			page 14
+
+
+  92:Src/main.c    ****   uint16_t Datalen = 1;
+ 379              		.loc 1 92 0
+ 380 015e 4FF0FF34 		mov	r4, #-1
+ 381 0162 02E0     		b	.L18
+ 382              	.LVL43:
+ 383              	.L19:
+ 238:Src/main.c    **** #endif /* TERMINAL_USE */
+ 384              		.loc 1 238 0
+ 385 0164 2B48     		ldr	r0, .L22+108
+ 386 0166 FFF7FEFF 		bl	puts
+ 387              	.LVL44:
+ 388              	.L18:
+ 221:Src/main.c    ****     {
+ 389              		.loc 1 221 0
+ 390 016a 002C     		cmp	r4, #0
+ 391 016c FDD1     		bne	.L18
+ 223:Src/main.c    ****       {
+ 392              		.loc 1 223 0
+ 393 016e E5B2     		uxtb	r5, r4
+ 394 0170 42F21073 		movw	r3, #10000
+ 395 0174 0093     		str	r3, [sp]
+ 396 0176 0DF11603 		add	r3, sp, #22
+ 397 017a 4122     		movs	r2, #65
+ 398 017c 2649     		ldr	r1, .L22+112
+ 399 017e 2846     		mov	r0, r5
+ 400 0180 FFF7FEFF 		bl	WIFI_SendData
+ 401              	.LVL45:
+ 402 0184 0028     		cmp	r0, #0
+ 403 0186 EDD0     		beq	.L19
+ 227:Src/main.c    ****           {
+ 404              		.loc 1 227 0
+ 405 0188 42F21073 		movw	r3, #10000
+ 406 018c 0093     		str	r3, [sp]
+ 407 018e 0DF11603 		add	r3, sp, #22
+ 408 0192 6422     		movs	r2, #100
+ 409 0194 2149     		ldr	r1, .L22+116
+ 410 0196 2846     		mov	r0, r5
+ 411 0198 FFF7FEFF 		bl	WIFI_ReceiveData
+ 412              	.LVL46:
+ 413 019c 0028     		cmp	r0, #0
+ 414 019e E4D1     		bne	.L18
+ 230:Src/main.c    **** #endif /* TERMINAL_USE */ 
+ 415              		.loc 1 230 0
+ 416 01a0 1F48     		ldr	r0, .L22+120
+ 417 01a2 FFF7FEFF 		bl	puts
+ 418              	.LVL47:
+ 419 01a6 E0E7     		b	.L18
+ 420              	.L23:
+ 421              		.align	2
+ 422              	.L22:
+ 423 01a8 00000000 		.word	hDiscoUart
+ 424 01ac 00380140 		.word	1073821696
+ 425 01b0 00000000 		.word	.LC0
+ 426 01b4 40000000 		.word	.LC1
+ 427 01b8 5C000000 		.word	.LC2
+ 428 01bc 9C000000 		.word	.LC3
+ 429 01c0 D4000000 		.word	.LC4
+ARM GAS  /tmp/ccW9aSyB.s 			page 15
+
+
+ 430 01c4 14010000 		.word	.LC5
+ 431 01c8 28010000 		.word	.LC6
+ 432 01cc 70010000 		.word	.LC7
+ 433 01d0 00000000 		.word	MAC_Addr
+ 434 01d4 8C010000 		.word	.LC8
+ 435 01d8 E4010000 		.word	.LC10
+ 436 01dc F8010000 		.word	.LC11
+ 437 01e0 04020000 		.word	.LC12
+ 438 01e4 00000000 		.word	IP_Addr
+ 439 01e8 20020000 		.word	.LC13
+ 440 01ec 00000000 		.word	.LANCHOR0
+ 441 01f0 50020000 		.word	.LC14
+ 442 01f4 88020000 		.word	.LC15
+ 443 01f8 CC020000 		.word	.LC18
+ 444 01fc C0010000 		.word	.LC9
+ 445 0200 98020000 		.word	.LC16
+ 446 0204 A4020000 		.word	.LC17
+ 447 0208 F0020000 		.word	.LC19
+ 448 020c 20030000 		.word	.LC20
+ 449 0210 48030000 		.word	.LC21
+ 450 0214 98030000 		.word	.LC23
+ 451 0218 00000000 		.word	.LANCHOR1
+ 452 021c 00000000 		.word	RxData
+ 453 0220 78030000 		.word	.LC22
+ 454              		.cfi_endproc
+ 455              	.LFE128:
+ 457              		.section	.text.__io_putchar,"ax",%progbits
+ 458              		.align	1
+ 459              		.global	__io_putchar
+ 460              		.syntax unified
+ 461              		.thumb
+ 462              		.thumb_func
+ 463              		.fpu fpv4-sp-d16
+ 465              	__io_putchar:
+ 466              	.LFB130:
+ 301:Src/main.c    **** 
+ 302:Src/main.c    **** #if defined (TERMINAL_USE) 
+ 303:Src/main.c    **** /**
+ 304:Src/main.c    ****   * @brief  Retargets the C library printf function to the USART.
+ 305:Src/main.c    ****   * @param  None
+ 306:Src/main.c    ****   * @retval None
+ 307:Src/main.c    ****   */
+ 308:Src/main.c    **** PUTCHAR_PROTOTYPE
+ 309:Src/main.c    **** {
+ 467              		.loc 1 309 0
+ 468              		.cfi_startproc
+ 469              		@ args = 0, pretend = 0, frame = 8
+ 470              		@ frame_needed = 0, uses_anonymous_args = 0
+ 471              	.LVL48:
+ 472 0000 00B5     		push	{lr}
+ 473              	.LCFI5:
+ 474              		.cfi_def_cfa_offset 4
+ 475              		.cfi_offset 14, -4
+ 476 0002 83B0     		sub	sp, sp, #12
+ 477              	.LCFI6:
+ 478              		.cfi_def_cfa_offset 16
+ 479 0004 02A9     		add	r1, sp, #8
+ARM GAS  /tmp/ccW9aSyB.s 			page 16
+
+
+ 480 0006 41F8040D 		str	r0, [r1, #-4]!
+ 310:Src/main.c    ****   /* Place your implementation of fputc here */
+ 311:Src/main.c    ****   /* e.g. write a character to the USART1 and Loop until the end of transmission */
+ 312:Src/main.c    ****   HAL_UART_Transmit(&hDiscoUart, (uint8_t *)&ch, 1, 0xFFFF);
+ 481              		.loc 1 312 0
+ 482 000a 4FF6FF73 		movw	r3, #65535
+ 483 000e 0122     		movs	r2, #1
+ 484 0010 0348     		ldr	r0, .L26
+ 485              	.LVL49:
+ 486 0012 FFF7FEFF 		bl	HAL_UART_Transmit
+ 487              	.LVL50:
+ 313:Src/main.c    **** 
+ 314:Src/main.c    ****   return ch;
+ 315:Src/main.c    **** }
+ 488              		.loc 1 315 0
+ 489 0016 0198     		ldr	r0, [sp, #4]
+ 490 0018 03B0     		add	sp, sp, #12
+ 491              	.LCFI7:
+ 492              		.cfi_def_cfa_offset 4
+ 493              		@ sp needed
+ 494 001a 5DF804FB 		ldr	pc, [sp], #4
+ 495              	.L27:
+ 496 001e 00BF     		.align	2
+ 497              	.L26:
+ 498 0020 00000000 		.word	hDiscoUart
+ 499              		.cfi_endproc
+ 500              	.LFE130:
+ 502              		.comm	IP_Addr,4,4
+ 503              		.comm	MAC_Addr,6,4
+ 504              		.comm	RxLen,2,2
+ 505              		.global	TxData
+ 506              		.comm	modulename,4,4
+ 507              		.comm	RxData,100,4
+ 508              		.global	RemoteIP
+ 509              		.section	.data.RemoteIP,"aw",%progbits
+ 510              		.align	2
+ 511              		.set	.LANCHOR0,. + 0
+ 514              	RemoteIP:
+ 515 0000 C0       		.byte	-64
+ 516 0001 A8       		.byte	-88
+ 517 0002 17       		.byte	23
+ 518 0003 5B       		.byte	91
+ 519              		.section	.data.TxData,"aw",%progbits
+ 520              		.align	2
+ 521              		.set	.LANCHOR1,. + 0
+ 524              	TxData:
+ 525 0000 47455420 		.ascii	"GET / HTTP/1.1\015\012Host: oracles.r3c.network\015"
+ 525      2F204854 
+ 525      54502F31 
+ 525      2E310D0A 
+ 525      486F7374 
+ 526 002a 0A436F6E 		.ascii	"\012Connection: close\015\012\015\012\000"
+ 526      6E656374 
+ 526      696F6E3A 
+ 526      20636C6F 
+ 526      73650D0A 
+ 527              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ARM GAS  /tmp/ccW9aSyB.s 			page 17
+
+
+ 528              		.align	2
+ 529              	.LC0:
+ 530 0000 2A2A2A2A 		.ascii	"****** WIFI Module in TCP Client mode demonstration"
+ 530      2A2A2057 
+ 530      49464920 
+ 530      4D6F6475 
+ 530      6C652069 
+ 531 0033 202A2A2A 		.ascii	" ****** \012\000"
+ 531      2A2A2A20 
+ 531      0A00
+ 532 003d 000000   		.space	3
+ 533              	.LC1:
+ 534 0040 54435020 		.ascii	"TCP Client Instructions :\000"
+ 534      436C6965 
+ 534      6E742049 
+ 534      6E737472 
+ 534      75637469 
+ 535 005a 0000     		.space	2
+ 536              	.LC2:
+ 537 005c 312D204D 		.ascii	"1- Make sure your Phone is connected to the same ne"
+ 537      616B6520 
+ 537      73757265 
+ 537      20796F75 
+ 537      72205068 
+ 538 008f 74776F72 		.ascii	"twork that\000"
+ 538      6B207468 
+ 538      617400
+ 539 009a 0000     		.space	2
+ 540              	.LC3:
+ 541 009c 20202079 		.ascii	"   you configured using the Configuration Access Po"
+ 541      6F752063 
+ 541      6F6E6669 
+ 541      67757265 
+ 541      64207573 
+ 542 00cf 696E742E 		.ascii	"int.\000"
+ 542      00
+ 543              	.LC4:
+ 544 00d4 322D2043 		.ascii	"2- Create a server by using the android application"
+ 544      72656174 
+ 544      65206120 
+ 544      73657276 
+ 544      65722062 
+ 545 0107 20544350 		.ascii	" TCP Server\000"
+ 545      20536572 
+ 545      76657200 
+ 546 0113 00       		.space	1
+ 547              	.LC5:
+ 548 0114 20202077 		.ascii	"   with port(8002).\000"
+ 548      69746820 
+ 548      706F7274 
+ 548      28383030 
+ 548      32292E00 
+ 549              	.LC6:
+ 550 0128 332D2047 		.ascii	"3- Get the Network Name or IP Address of your Andro"
+ 550      65742074 
+ 550      6865204E 
+ 550      6574776F 
+ARM GAS  /tmp/ccW9aSyB.s 			page 18
+
+
+ 550      726B204E 
+ 551 015b 69642066 		.ascii	"id from the step 2.\012\000"
+ 551      726F6D20 
+ 551      74686520 
+ 551      73746570 
+ 551      20322E0A 
+ 552              	.LC7:
+ 553 0170 3E205749 		.ascii	"> WIFI Module Initialized.\000"
+ 553      4649204D 
+ 553      6F64756C 
+ 553      6520496E 
+ 553      69746961 
+ 554 018b 00       		.space	1
+ 555              	.LC8:
+ 556 018c 3E206573 		.ascii	"> es-wifi module MAC Address : %X:%X:%X:%X:%X:%X\012"
+ 556      2D776966 
+ 556      69206D6F 
+ 556      64756C65 
+ 556      204D4143 
+ 557 01bd 00       		.ascii	"\000"
+ 558 01be 0000     		.space	2
+ 559              	.LC9:
+ 560 01c0 3E204552 		.ascii	"> ERROR : CANNOT get MAC address\000"
+ 560      524F5220 
+ 560      3A204341 
+ 560      4E4E4F54 
+ 560      20676574 
+ 561 01e1 000000   		.space	3
+ 562              	.LC10:
+ 563 01e4 72696464 		.ascii	"riddle&code&network\000"
+ 563      6C652663 
+ 563      6F646526 
+ 563      6E657477 
+ 563      6F726B00 
+ 564              	.LC11:
+ 565 01f8 5233432D 		.ascii	"R3C-network\000"
+ 565      6E657477 
+ 565      6F726B00 
+ 566              	.LC12:
+ 567 0204 3E206573 		.ascii	"> es-wifi module connected \000"
+ 567      2D776966 
+ 567      69206D6F 
+ 567      64756C65 
+ 567      20636F6E 
+ 568              	.LC13:
+ 569 0220 3E206573 		.ascii	"> es-wifi module got IP Address : %d.%d.%d.%d\012\000"
+ 569      2D776966 
+ 569      69206D6F 
+ 569      64756C65 
+ 569      20676F74 
+ 570 024f 00       		.space	1
+ 571              	.LC14:
+ 572 0250 3E205472 		.ascii	"> Trying to connect to Server: %d.%d.%d.%d:8002 ..."
+ 572      79696E67 
+ 572      20746F20 
+ 572      636F6E6E 
+ 572      65637420 
+ARM GAS  /tmp/ccW9aSyB.s 			page 19
+
+
+ 573 0283 0A00     		.ascii	"\012\000"
+ 574 0285 000000   		.space	3
+ 575              	.LC15:
+ 576 0288 7777772E 		.ascii	"www.google.com\000"
+ 576      676F6F67 
+ 576      6C652E63 
+ 576      6F6D00
+ 577 0297 00       		.space	1
+ 578              	.LC16:
+ 579 0298 5443505F 		.ascii	"TCP_CLIENT\000"
+ 579      434C4945 
+ 579      4E5400
+ 580 02a3 00       		.space	1
+ 581              	.LC17:
+ 582 02a4 3E205443 		.ascii	"> TCP Connection opened successfully.\000"
+ 582      5020436F 
+ 582      6E6E6563 
+ 582      74696F6E 
+ 582      206F7065 
+ 583 02ca 0000     		.space	2
+ 584              	.LC18:
+ 585 02cc 3E204552 		.ascii	"> ERROR : Cannot open Connection\000"
+ 585      524F5220 
+ 585      3A204361 
+ 585      6E6E6F74 
+ 585      206F7065 
+ 586 02ed 000000   		.space	3
+ 587              	.LC19:
+ 588 02f0 3E204552 		.ascii	"> ERROR : es-wifi module CANNOT get IP address\000"
+ 588      524F5220 
+ 588      3A206573 
+ 588      2D776966 
+ 588      69206D6F 
+ 589 031f 00       		.space	1
+ 590              	.LC20:
+ 591 0320 3E204552 		.ascii	"> ERROR : es-wifi module NOT connected\000"
+ 591      524F5220 
+ 591      3A206573 
+ 591      2D776966 
+ 591      69206D6F 
+ 592 0347 00       		.space	1
+ 593              	.LC21:
+ 594 0348 3E204552 		.ascii	"> ERROR : WIFI Module cannot be initialized.\000"
+ 594      524F5220 
+ 594      3A205749 
+ 594      4649204D 
+ 594      6F64756C 
+ 595 0375 000000   		.space	3
+ 596              	.LC22:
+ 597 0378 3E204552 		.ascii	"> ERROR : Failed to send Data.\000"
+ 597      524F5220 
+ 597      3A204661 
+ 597      696C6564 
+ 597      20746F20 
+ 598 0397 00       		.space	1
+ 599              	.LC23:
+ 600 0398 3E204552 		.ascii	"> ERROR : Failed to Receive Data.\000"
+ARM GAS  /tmp/ccW9aSyB.s 			page 20
+
+
+ 600      524F5220 
+ 600      3A204661 
+ 600      696C6564 
+ 600      20746F20 
+ 601              		.text
+ 602              	.Letext0:
+ 603              		.file 2 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/machine/_default_types.h"
+ 604              		.file 3 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_stdint.h"
+ 605              		.file 4 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/lock.h"
+ 606              		.file 5 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_types.h"
+ 607              		.file 6 "/opt/gcc-arm-none-eabi-7-2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 608              		.file 7 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/reent.h"
+ 609              		.file 8 "Drivers/CMSIS/Include/core_cm4.h"
+ 610              		.file 9 "Drivers/CMSIS/Device/ST/STM32L4xx/Include/system_stm32l4xx.h"
+ 611              		.file 10 "Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l475xx.h"
+ 612              		.file 11 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h"
+ 613              		.file 12 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h"
+ 614              		.file 13 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h"
+ 615              		.file 14 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h"
+ 616              		.file 15 "libs/WIFI/Inc/wifi.h"
+ 617              		.file 16 "libs/iot/stm32l475e_iot01.h"
+ 618              		.file 17 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h"
+ 619              		.file 18 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/stdio.h"
+ 620              		.file 19 "<built-in>"
+ARM GAS  /tmp/ccW9aSyB.s 			page 21
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.c
+     /tmp/ccW9aSyB.s:18     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/ccW9aSyB.s:24     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccW9aSyB.s:108    .text.main:0000000000000000 $t
+     /tmp/ccW9aSyB.s:115    .text.main:0000000000000000 main
+     /tmp/ccW9aSyB.s:423    .text.main:00000000000001a8 $d
+                            *COM*:0000000000000006 MAC_Addr
+                            *COM*:0000000000000004 IP_Addr
+                            *COM*:0000000000000064 RxData
+     /tmp/ccW9aSyB.s:458    .text.__io_putchar:0000000000000000 $t
+     /tmp/ccW9aSyB.s:465    .text.__io_putchar:0000000000000000 __io_putchar
+     /tmp/ccW9aSyB.s:498    .text.__io_putchar:0000000000000020 $d
+                            *COM*:0000000000000002 RxLen
+     /tmp/ccW9aSyB.s:524    .data.TxData:0000000000000000 TxData
+                            *COM*:0000000000000004 modulename
+     /tmp/ccW9aSyB.s:514    .data.RemoteIP:0000000000000000 RemoteIP
+     /tmp/ccW9aSyB.s:510    .data.RemoteIP:0000000000000000 $d
+     /tmp/ccW9aSyB.s:520    .data.TxData:0000000000000000 $d
+     /tmp/ccW9aSyB.s:528    .rodata.main.str1.4:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_Init
+BSP_LED_Init
+BSP_COM_Init
+puts
+WIFI_Init
+WIFI_GetMAC_Address
+printf
+WIFI_Connect
+WIFI_GetIP_Address
+WIFI_DNS_Lookup
+BSP_LED_On
+WIFI_OpenClientConnection
+WIFI_SendData
+WIFI_ReceiveData
+hDiscoUart
+HAL_UART_Transmit

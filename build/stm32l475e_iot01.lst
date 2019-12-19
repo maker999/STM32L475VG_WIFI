@@ -1,0 +1,3153 @@
+ARM GAS  /tmp/cczG30i3.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"stm32l475e_iot01.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.I2Cx_MspDeInit,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv4-sp-d16
+  24              	I2Cx_MspDeInit:
+  25              	.LFB140:
+  26              		.file 1 "libs/iot/stm32l475e_iot01.c"
+   1:libs/iot/stm32l475e_iot01.c **** /**
+   2:libs/iot/stm32l475e_iot01.c ****   ******************************************************************************
+   3:libs/iot/stm32l475e_iot01.c ****   * @file    stm32l475e_iot01.c
+   4:libs/iot/stm32l475e_iot01.c ****   * @author  MCD Application Team
+   5:libs/iot/stm32l475e_iot01.c ****   * @version V1.1.0
+   6:libs/iot/stm32l475e_iot01.c ****   * @date    21-April-2017
+   7:libs/iot/stm32l475e_iot01.c ****   * @brief   STM32L475E-IOT01 board support package
+   8:libs/iot/stm32l475e_iot01.c ****   ******************************************************************************
+   9:libs/iot/stm32l475e_iot01.c ****   * @attention
+  10:libs/iot/stm32l475e_iot01.c ****   *
+  11:libs/iot/stm32l475e_iot01.c ****   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
+  12:libs/iot/stm32l475e_iot01.c ****   * All rights reserved.</center></h2>
+  13:libs/iot/stm32l475e_iot01.c ****   *
+  14:libs/iot/stm32l475e_iot01.c ****   * Redistribution and use in source and binary forms, with or without
+  15:libs/iot/stm32l475e_iot01.c ****   * modification, are permitted, provided that the following conditions are met:
+  16:libs/iot/stm32l475e_iot01.c ****   *
+  17:libs/iot/stm32l475e_iot01.c ****   * 1. Redistribution of source code must retain the above copyright notice,
+  18:libs/iot/stm32l475e_iot01.c ****   *    this list of conditions and the following disclaimer.
+  19:libs/iot/stm32l475e_iot01.c ****   * 2. Redistributions in binary form must reproduce the above copyright notice,
+  20:libs/iot/stm32l475e_iot01.c ****   *    this list of conditions and the following disclaimer in the documentation
+  21:libs/iot/stm32l475e_iot01.c ****   *    and/or other materials provided with the distribution.
+  22:libs/iot/stm32l475e_iot01.c ****   * 3. Neither the name of STMicroelectronics nor the names of other
+  23:libs/iot/stm32l475e_iot01.c ****   *    contributors to this software may be used to endorse or promote products
+  24:libs/iot/stm32l475e_iot01.c ****   *    derived from this software without specific written permission.
+  25:libs/iot/stm32l475e_iot01.c ****   * 4. This software, including modifications and/or derivative works of this
+  26:libs/iot/stm32l475e_iot01.c ****   *    software, must execute solely and exclusively on microcontroller or
+  27:libs/iot/stm32l475e_iot01.c ****   *    microprocessor devices manufactured by or for STMicroelectronics.
+  28:libs/iot/stm32l475e_iot01.c ****   * 5. Redistribution and use of this software other than as permitted under
+  29:libs/iot/stm32l475e_iot01.c ****   *    this license is void and will automatically terminate your rights under
+  30:libs/iot/stm32l475e_iot01.c ****   *    this license.
+  31:libs/iot/stm32l475e_iot01.c ****   *
+  32:libs/iot/stm32l475e_iot01.c ****   * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+ARM GAS  /tmp/cczG30i3.s 			page 2
+
+
+  33:libs/iot/stm32l475e_iot01.c ****   * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+  34:libs/iot/stm32l475e_iot01.c ****   * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  35:libs/iot/stm32l475e_iot01.c ****   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+  36:libs/iot/stm32l475e_iot01.c ****   * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
+  37:libs/iot/stm32l475e_iot01.c ****   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  38:libs/iot/stm32l475e_iot01.c ****   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  39:libs/iot/stm32l475e_iot01.c ****   * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+  40:libs/iot/stm32l475e_iot01.c ****   * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  41:libs/iot/stm32l475e_iot01.c ****   * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+  42:libs/iot/stm32l475e_iot01.c ****   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  43:libs/iot/stm32l475e_iot01.c ****   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  44:libs/iot/stm32l475e_iot01.c ****   *
+  45:libs/iot/stm32l475e_iot01.c ****   ******************************************************************************
+  46:libs/iot/stm32l475e_iot01.c ****   */
+  47:libs/iot/stm32l475e_iot01.c **** 
+  48:libs/iot/stm32l475e_iot01.c **** /* Includes ------------------------------------------------------------------*/
+  49:libs/iot/stm32l475e_iot01.c **** #include "stm32l475e_iot01.h"
+  50:libs/iot/stm32l475e_iot01.c **** 
+  51:libs/iot/stm32l475e_iot01.c **** /** @defgroup BSP BSP
+  52:libs/iot/stm32l475e_iot01.c ****   * @{
+  53:libs/iot/stm32l475e_iot01.c ****   */ 
+  54:libs/iot/stm32l475e_iot01.c **** 
+  55:libs/iot/stm32l475e_iot01.c **** /** @defgroup STM32L475E_IOT01 STM32L475E_IOT01
+  56:libs/iot/stm32l475e_iot01.c ****   * @{
+  57:libs/iot/stm32l475e_iot01.c ****   */
+  58:libs/iot/stm32l475e_iot01.c **** 
+  59:libs/iot/stm32l475e_iot01.c **** /** @defgroup STM32L475E_IOT01_LOW_LEVEL LOW LEVEL
+  60:libs/iot/stm32l475e_iot01.c ****   * @{
+  61:libs/iot/stm32l475e_iot01.c ****   */
+  62:libs/iot/stm32l475e_iot01.c **** 
+  63:libs/iot/stm32l475e_iot01.c **** /** @defgroup STM32L475E_IOT01_LOW_LEVEL_Private_Defines LOW LEVEL Private Def
+  64:libs/iot/stm32l475e_iot01.c ****   * @{
+  65:libs/iot/stm32l475e_iot01.c ****   */
+  66:libs/iot/stm32l475e_iot01.c **** /**
+  67:libs/iot/stm32l475e_iot01.c ****  * @brief STM32L475E IOT01 BSP Driver version number V1.1.0
+  68:libs/iot/stm32l475e_iot01.c ****    */
+  69:libs/iot/stm32l475e_iot01.c **** #define __STM32L475E_IOT01_BSP_VERSION_MAIN   (0x01) /*!< [31:24] main version */
+  70:libs/iot/stm32l475e_iot01.c **** #define __STM32L475E_IOT01_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
+  71:libs/iot/stm32l475e_iot01.c **** #define __STM32L475E_IOT01_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
+  72:libs/iot/stm32l475e_iot01.c **** #define __STM32L475E_IOT01_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
+  73:libs/iot/stm32l475e_iot01.c **** #define __STM32L475E_IOT01_BSP_VERSION        ((__STM32L475E_IOT01_BSP_VERSION_MAIN << 24)\
+  74:libs/iot/stm32l475e_iot01.c ****                                                  |(__STM32L475E_IOT01_BSP_VERSION_SUB1 << 16)\
+  75:libs/iot/stm32l475e_iot01.c ****                                                  |(__STM32L475E_IOT01_BSP_VERSION_SUB2 << 8 )\
+  76:libs/iot/stm32l475e_iot01.c ****                                                  |(__STM32L475E_IOT01_BSP_VERSION_RC))
+  77:libs/iot/stm32l475e_iot01.c **** /**
+  78:libs/iot/stm32l475e_iot01.c ****   * @}
+  79:libs/iot/stm32l475e_iot01.c ****   */
+  80:libs/iot/stm32l475e_iot01.c **** 
+  81:libs/iot/stm32l475e_iot01.c **** /** @defgroup STM32L475E_IOT01_LOW_LEVEL_Private_Variables LOW LEVEL Variables 
+  82:libs/iot/stm32l475e_iot01.c ****   * @{
+  83:libs/iot/stm32l475e_iot01.c ****   */
+  84:libs/iot/stm32l475e_iot01.c **** 
+  85:libs/iot/stm32l475e_iot01.c **** const uint32_t GPIO_PIN[LEDn] = {LED2_PIN};
+  86:libs/iot/stm32l475e_iot01.c **** 
+  87:libs/iot/stm32l475e_iot01.c **** 
+  88:libs/iot/stm32l475e_iot01.c **** GPIO_TypeDef* GPIO_PORT[LEDn] = {LED2_GPIO_PORT};
+  89:libs/iot/stm32l475e_iot01.c **** 
+ARM GAS  /tmp/cczG30i3.s 			page 3
+
+
+  90:libs/iot/stm32l475e_iot01.c **** 
+  91:libs/iot/stm32l475e_iot01.c **** GPIO_TypeDef* BUTTON_PORT[BUTTONn] = {USER_BUTTON_GPIO_PORT};
+  92:libs/iot/stm32l475e_iot01.c **** 
+  93:libs/iot/stm32l475e_iot01.c **** const uint16_t BUTTON_PIN[BUTTONn] = {USER_BUTTON_PIN};
+  94:libs/iot/stm32l475e_iot01.c **** 
+  95:libs/iot/stm32l475e_iot01.c **** const uint16_t BUTTON_IRQn[BUTTONn] = {USER_BUTTON_EXTI_IRQn};
+  96:libs/iot/stm32l475e_iot01.c **** 
+  97:libs/iot/stm32l475e_iot01.c **** USART_TypeDef* COM_USART[COMn] = {DISCOVERY_COM1};
+  98:libs/iot/stm32l475e_iot01.c **** 
+  99:libs/iot/stm32l475e_iot01.c **** GPIO_TypeDef* COM_TX_PORT[COMn] = {DISCOVERY_COM1_TX_GPIO_PORT};
+ 100:libs/iot/stm32l475e_iot01.c **** 
+ 101:libs/iot/stm32l475e_iot01.c **** GPIO_TypeDef* COM_RX_PORT[COMn] = {DISCOVERY_COM1_RX_GPIO_PORT};
+ 102:libs/iot/stm32l475e_iot01.c **** 
+ 103:libs/iot/stm32l475e_iot01.c **** const uint16_t COM_TX_PIN[COMn] = {DISCOVERY_COM1_TX_PIN};
+ 104:libs/iot/stm32l475e_iot01.c **** 
+ 105:libs/iot/stm32l475e_iot01.c **** const uint16_t COM_RX_PIN[COMn] = {DISCOVERY_COM1_RX_PIN};
+ 106:libs/iot/stm32l475e_iot01.c **** 
+ 107:libs/iot/stm32l475e_iot01.c **** const uint16_t COM_TX_AF[COMn] = {DISCOVERY_COM1_TX_AF};
+ 108:libs/iot/stm32l475e_iot01.c **** 
+ 109:libs/iot/stm32l475e_iot01.c **** const uint16_t COM_RX_AF[COMn] = {DISCOVERY_COM1_RX_AF};
+ 110:libs/iot/stm32l475e_iot01.c **** 
+ 111:libs/iot/stm32l475e_iot01.c **** I2C_HandleTypeDef hI2cHandler;
+ 112:libs/iot/stm32l475e_iot01.c **** UART_HandleTypeDef hDiscoUart;
+ 113:libs/iot/stm32l475e_iot01.c **** 
+ 114:libs/iot/stm32l475e_iot01.c **** /**
+ 115:libs/iot/stm32l475e_iot01.c ****   * @}
+ 116:libs/iot/stm32l475e_iot01.c ****   */
+ 117:libs/iot/stm32l475e_iot01.c **** /** @defgroup STM32L475E_IOT01_LOW_LEVEL_Private_FunctionPrototypes LOW LEVEL Private Function Prot
+ 118:libs/iot/stm32l475e_iot01.c ****   * @{
+ 119:libs/iot/stm32l475e_iot01.c ****   */
+ 120:libs/iot/stm32l475e_iot01.c **** static void     I2Cx_MspInit(I2C_HandleTypeDef *i2c_handler);
+ 121:libs/iot/stm32l475e_iot01.c **** static void     I2Cx_MspDeInit(I2C_HandleTypeDef *i2c_handler);
+ 122:libs/iot/stm32l475e_iot01.c **** static void     I2Cx_Init(I2C_HandleTypeDef *i2c_handler);
+ 123:libs/iot/stm32l475e_iot01.c **** static void     I2Cx_DeInit(I2C_HandleTypeDef *i2c_handler);
+ 124:libs/iot/stm32l475e_iot01.c **** static HAL_StatusTypeDef I2Cx_ReadMultiple(I2C_HandleTypeDef *i2c_handler, uint8_t Addr, uint16_t R
+ 125:libs/iot/stm32l475e_iot01.c **** static HAL_StatusTypeDef I2Cx_WriteMultiple(I2C_HandleTypeDef *i2c_handler, uint8_t Addr, uint16_t 
+ 126:libs/iot/stm32l475e_iot01.c **** static HAL_StatusTypeDef I2Cx_IsDeviceReady(I2C_HandleTypeDef *i2c_handler, uint16_t DevAddress, ui
+ 127:libs/iot/stm32l475e_iot01.c **** static void              I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr);
+ 128:libs/iot/stm32l475e_iot01.c **** 
+ 129:libs/iot/stm32l475e_iot01.c **** /* Sensors IO functions */
+ 130:libs/iot/stm32l475e_iot01.c **** void     SENSOR_IO_Init(void);
+ 131:libs/iot/stm32l475e_iot01.c **** void     SENSOR_IO_DeInit(void);
+ 132:libs/iot/stm32l475e_iot01.c **** void     SENSOR_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
+ 133:libs/iot/stm32l475e_iot01.c **** uint8_t  SENSOR_IO_Read(uint8_t Addr, uint8_t Reg);
+ 134:libs/iot/stm32l475e_iot01.c **** uint16_t SENSOR_IO_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length);
+ 135:libs/iot/stm32l475e_iot01.c **** void     SENSOR_IO_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length);
+ 136:libs/iot/stm32l475e_iot01.c **** HAL_StatusTypeDef SENSOR_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
+ 137:libs/iot/stm32l475e_iot01.c **** void     SENSOR_IO_Delay(uint32_t Delay);
+ 138:libs/iot/stm32l475e_iot01.c **** 
+ 139:libs/iot/stm32l475e_iot01.c **** void     NFC_IO_Init(uint8_t GpoIrqEnable);
+ 140:libs/iot/stm32l475e_iot01.c **** void     NFC_IO_DeInit(void);
+ 141:libs/iot/stm32l475e_iot01.c **** uint16_t NFC_IO_ReadMultiple (uint8_t Addr, uint8_t *pBuffer, uint16_t Length );
+ 142:libs/iot/stm32l475e_iot01.c **** uint16_t NFC_IO_WriteMultiple (uint8_t Addr, uint8_t *pBuffer, uint16_t Length);
+ 143:libs/iot/stm32l475e_iot01.c **** uint16_t NFC_IO_IsDeviceReady (uint8_t Addr, uint32_t Trials);
+ 144:libs/iot/stm32l475e_iot01.c **** void     NFC_IO_ReadState(uint8_t * pPinState);
+ 145:libs/iot/stm32l475e_iot01.c **** void     NFC_IO_RfDisable(uint8_t PinState);
+ 146:libs/iot/stm32l475e_iot01.c **** void     NFC_IO_Delay(uint32_t Delay);
+ARM GAS  /tmp/cczG30i3.s 			page 4
+
+
+ 147:libs/iot/stm32l475e_iot01.c **** 
+ 148:libs/iot/stm32l475e_iot01.c **** /**
+ 149:libs/iot/stm32l475e_iot01.c ****   * @}
+ 150:libs/iot/stm32l475e_iot01.c ****   */
+ 151:libs/iot/stm32l475e_iot01.c **** 
+ 152:libs/iot/stm32l475e_iot01.c **** /** @defgroup STM32L475E_IOT01_LOW_LEVEL_Private_Functions LOW LEVEL Private Functions
+ 153:libs/iot/stm32l475e_iot01.c ****   * @{
+ 154:libs/iot/stm32l475e_iot01.c ****   */ 
+ 155:libs/iot/stm32l475e_iot01.c **** 
+ 156:libs/iot/stm32l475e_iot01.c **** /**
+ 157:libs/iot/stm32l475e_iot01.c ****   * @brief  This method returns the STM32L475E IOT01 BSP Driver revision
+ 158:libs/iot/stm32l475e_iot01.c ****   * @retval version: 0xXYZR (8bits for each decimal, R for RC)
+ 159:libs/iot/stm32l475e_iot01.c ****   */
+ 160:libs/iot/stm32l475e_iot01.c **** uint32_t BSP_GetVersion(void)
+ 161:libs/iot/stm32l475e_iot01.c **** {
+ 162:libs/iot/stm32l475e_iot01.c ****   return __STM32L475E_IOT01_BSP_VERSION;
+ 163:libs/iot/stm32l475e_iot01.c **** }
+ 164:libs/iot/stm32l475e_iot01.c **** 
+ 165:libs/iot/stm32l475e_iot01.c **** /**
+ 166:libs/iot/stm32l475e_iot01.c ****   * @brief  Configures LEDs.
+ 167:libs/iot/stm32l475e_iot01.c ****   * @param  Led: LED to be configured. 
+ 168:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 169:libs/iot/stm32l475e_iot01.c ****   *            @arg  LED2
+ 170:libs/iot/stm32l475e_iot01.c ****   */
+ 171:libs/iot/stm32l475e_iot01.c **** void BSP_LED_Init(Led_TypeDef Led)
+ 172:libs/iot/stm32l475e_iot01.c **** {
+ 173:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef  gpio_init_structure;
+ 174:libs/iot/stm32l475e_iot01.c ****   
+ 175:libs/iot/stm32l475e_iot01.c ****   LEDx_GPIO_CLK_ENABLE(Led);
+ 176:libs/iot/stm32l475e_iot01.c ****   /* Configure the GPIO_LED pin */
+ 177:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pin   = GPIO_PIN[Led];
+ 178:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Mode  = GPIO_MODE_OUTPUT_PP;
+ 179:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pull  = GPIO_NOPULL;
+ 180:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+ 181:libs/iot/stm32l475e_iot01.c ****   
+ 182:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_Init(GPIO_PORT[Led], &gpio_init_structure);
+ 183:libs/iot/stm32l475e_iot01.c **** }
+ 184:libs/iot/stm32l475e_iot01.c **** 
+ 185:libs/iot/stm32l475e_iot01.c **** /**
+ 186:libs/iot/stm32l475e_iot01.c ****   * @brief  DeInit LEDs.
+ 187:libs/iot/stm32l475e_iot01.c ****   * @param  Led: LED to be configured. 
+ 188:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 189:libs/iot/stm32l475e_iot01.c ****   *            @arg  LED2
+ 190:libs/iot/stm32l475e_iot01.c ****   */
+ 191:libs/iot/stm32l475e_iot01.c **** void BSP_LED_DeInit(Led_TypeDef Led)
+ 192:libs/iot/stm32l475e_iot01.c **** {
+ 193:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef  gpio_init_structure;
+ 194:libs/iot/stm32l475e_iot01.c ****   
+ 195:libs/iot/stm32l475e_iot01.c ****   /* DeInit the GPIO_LED pin */
+ 196:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pin = GPIO_PIN[Led];
+ 197:libs/iot/stm32l475e_iot01.c ****   
+ 198:libs/iot/stm32l475e_iot01.c ****   /* Turn off LED */
+ 199:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_WritePin(GPIO_PORT[Led], GPIO_PIN[Led], GPIO_PIN_RESET);
+ 200:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_DeInit(GPIO_PORT[Led], gpio_init_structure.Pin);
+ 201:libs/iot/stm32l475e_iot01.c **** }
+ 202:libs/iot/stm32l475e_iot01.c **** 
+ 203:libs/iot/stm32l475e_iot01.c **** /**
+ARM GAS  /tmp/cczG30i3.s 			page 5
+
+
+ 204:libs/iot/stm32l475e_iot01.c ****   * @brief  Turns selected LED On.
+ 205:libs/iot/stm32l475e_iot01.c ****   * @param  Led: LED to be set on 
+ 206:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 207:libs/iot/stm32l475e_iot01.c ****   *            @arg  LED2
+ 208:libs/iot/stm32l475e_iot01.c ****   */
+ 209:libs/iot/stm32l475e_iot01.c **** void BSP_LED_On(Led_TypeDef Led)
+ 210:libs/iot/stm32l475e_iot01.c **** {
+ 211:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_WritePin(GPIO_PORT[Led], GPIO_PIN[Led], GPIO_PIN_SET);
+ 212:libs/iot/stm32l475e_iot01.c **** }
+ 213:libs/iot/stm32l475e_iot01.c **** 
+ 214:libs/iot/stm32l475e_iot01.c **** /**
+ 215:libs/iot/stm32l475e_iot01.c ****   * @brief  Turns selected LED Off. 
+ 216:libs/iot/stm32l475e_iot01.c ****   * @param  Led: LED to be set off
+ 217:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 218:libs/iot/stm32l475e_iot01.c ****   *            @arg  LED2
+ 219:libs/iot/stm32l475e_iot01.c ****   */
+ 220:libs/iot/stm32l475e_iot01.c **** void BSP_LED_Off(Led_TypeDef Led)
+ 221:libs/iot/stm32l475e_iot01.c **** {
+ 222:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_WritePin(GPIO_PORT[Led], GPIO_PIN[Led], GPIO_PIN_RESET);
+ 223:libs/iot/stm32l475e_iot01.c **** }
+ 224:libs/iot/stm32l475e_iot01.c **** 
+ 225:libs/iot/stm32l475e_iot01.c **** /**
+ 226:libs/iot/stm32l475e_iot01.c ****   * @brief  Toggles the selected LED.
+ 227:libs/iot/stm32l475e_iot01.c ****   * @param  Led: LED to be toggled
+ 228:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 229:libs/iot/stm32l475e_iot01.c ****   *            @arg  LED2
+ 230:libs/iot/stm32l475e_iot01.c ****   */
+ 231:libs/iot/stm32l475e_iot01.c **** void BSP_LED_Toggle(Led_TypeDef Led)
+ 232:libs/iot/stm32l475e_iot01.c **** {
+ 233:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_TogglePin(GPIO_PORT[Led], GPIO_PIN[Led]);
+ 234:libs/iot/stm32l475e_iot01.c **** }
+ 235:libs/iot/stm32l475e_iot01.c **** 
+ 236:libs/iot/stm32l475e_iot01.c **** /**
+ 237:libs/iot/stm32l475e_iot01.c ****   * @brief  Configures button GPIO and EXTI Line.
+ 238:libs/iot/stm32l475e_iot01.c ****   * @param  Button: Button to be configured
+ 239:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 240:libs/iot/stm32l475e_iot01.c ****   *            @arg  BUTTON_WAKEUP: Wakeup Push Button
+ 241:libs/iot/stm32l475e_iot01.c ****   * @param  ButtonMode: Button mode
+ 242:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 243:libs/iot/stm32l475e_iot01.c ****   *            @arg  BUTTON_MODE_GPIO: Button will be used as simple IO
+ 244:libs/iot/stm32l475e_iot01.c ****   *            @arg  BUTTON_MODE_EXTI: Button will be connected to EXTI line 
+ 245:libs/iot/stm32l475e_iot01.c ****   *                                    with interrupt generation capability  
+ 246:libs/iot/stm32l475e_iot01.c ****   */
+ 247:libs/iot/stm32l475e_iot01.c **** void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
+ 248:libs/iot/stm32l475e_iot01.c **** {
+ 249:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 250:libs/iot/stm32l475e_iot01.c ****   
+ 251:libs/iot/stm32l475e_iot01.c ****   /* Enable the BUTTON clock */
+ 252:libs/iot/stm32l475e_iot01.c ****   USER_BUTTON_GPIO_CLK_ENABLE();
+ 253:libs/iot/stm32l475e_iot01.c ****   
+ 254:libs/iot/stm32l475e_iot01.c ****   if(ButtonMode == BUTTON_MODE_GPIO)
+ 255:libs/iot/stm32l475e_iot01.c ****   {
+ 256:libs/iot/stm32l475e_iot01.c ****     /* Configure Button pin as input */
+ 257:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Pin = BUTTON_PIN[Button];
+ 258:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Mode = GPIO_MODE_INPUT;
+ 259:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Pull = GPIO_PULLUP;
+ 260:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+ARM GAS  /tmp/cczG30i3.s 			page 6
+
+
+ 261:libs/iot/stm32l475e_iot01.c ****     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
+ 262:libs/iot/stm32l475e_iot01.c ****   }
+ 263:libs/iot/stm32l475e_iot01.c ****   
+ 264:libs/iot/stm32l475e_iot01.c ****   if(ButtonMode == BUTTON_MODE_EXTI)
+ 265:libs/iot/stm32l475e_iot01.c ****   {
+ 266:libs/iot/stm32l475e_iot01.c ****     /* Configure Button pin as input with External interrupt */
+ 267:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Pin = BUTTON_PIN[Button];
+ 268:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Pull = GPIO_PULLUP;
+ 269:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 270:libs/iot/stm32l475e_iot01.c ****     
+ 271:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Mode = GPIO_MODE_IT_RISING;
+ 272:libs/iot/stm32l475e_iot01.c ****     
+ 273:libs/iot/stm32l475e_iot01.c ****     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
+ 274:libs/iot/stm32l475e_iot01.c ****     
+ 275:libs/iot/stm32l475e_iot01.c ****     /* Enable and set Button EXTI Interrupt to the lowest priority */
+ 276:libs/iot/stm32l475e_iot01.c ****     HAL_NVIC_SetPriority((IRQn_Type)(BUTTON_IRQn[Button]), 0x0F, 0x00);
+ 277:libs/iot/stm32l475e_iot01.c ****     HAL_NVIC_EnableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
+ 278:libs/iot/stm32l475e_iot01.c ****   }
+ 279:libs/iot/stm32l475e_iot01.c **** }
+ 280:libs/iot/stm32l475e_iot01.c **** 
+ 281:libs/iot/stm32l475e_iot01.c **** /**
+ 282:libs/iot/stm32l475e_iot01.c ****   * @brief  Push Button DeInit.
+ 283:libs/iot/stm32l475e_iot01.c ****   * @param  Button: Button to be configured
+ 284:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 285:libs/iot/stm32l475e_iot01.c ****   *            @arg  BUTTON_WAKEUP: Wakeup Push Button 
+ 286:libs/iot/stm32l475e_iot01.c ****   * @note PB DeInit does not disable the GPIO clock
+ 287:libs/iot/stm32l475e_iot01.c ****   */
+ 288:libs/iot/stm32l475e_iot01.c **** void BSP_PB_DeInit(Button_TypeDef Button)
+ 289:libs/iot/stm32l475e_iot01.c **** {
+ 290:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 291:libs/iot/stm32l475e_iot01.c **** 
+ 292:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pin = BUTTON_PIN[Button];
+ 293:libs/iot/stm32l475e_iot01.c ****   HAL_NVIC_DisableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
+ 294:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_DeInit(BUTTON_PORT[Button], gpio_init_structure.Pin);
+ 295:libs/iot/stm32l475e_iot01.c **** }
+ 296:libs/iot/stm32l475e_iot01.c **** 
+ 297:libs/iot/stm32l475e_iot01.c **** 
+ 298:libs/iot/stm32l475e_iot01.c **** /**
+ 299:libs/iot/stm32l475e_iot01.c ****   * @brief  Returns the selected button state.
+ 300:libs/iot/stm32l475e_iot01.c ****   * @param  Button: Button to be checked
+ 301:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 302:libs/iot/stm32l475e_iot01.c ****   *            @arg  BUTTON_WAKEUP: Wakeup Push Button 
+ 303:libs/iot/stm32l475e_iot01.c ****   * @retval The Button GPIO pin value (GPIO_PIN_RESET = button pressed)
+ 304:libs/iot/stm32l475e_iot01.c ****   */
+ 305:libs/iot/stm32l475e_iot01.c **** uint32_t BSP_PB_GetState(Button_TypeDef Button)
+ 306:libs/iot/stm32l475e_iot01.c **** {
+ 307:libs/iot/stm32l475e_iot01.c ****   return HAL_GPIO_ReadPin(BUTTON_PORT[Button], BUTTON_PIN[Button]);
+ 308:libs/iot/stm32l475e_iot01.c **** }
+ 309:libs/iot/stm32l475e_iot01.c **** 
+ 310:libs/iot/stm32l475e_iot01.c **** /**
+ 311:libs/iot/stm32l475e_iot01.c ****   * @brief  Configures COM port.
+ 312:libs/iot/stm32l475e_iot01.c ****   * @param  COM: COM port to be configured.
+ 313:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 314:libs/iot/stm32l475e_iot01.c ****   *            @arg  COM1 
+ 315:libs/iot/stm32l475e_iot01.c ****   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
+ 316:libs/iot/stm32l475e_iot01.c ****   *                configuration information for the specified USART peripheral.
+ 317:libs/iot/stm32l475e_iot01.c ****   */
+ARM GAS  /tmp/cczG30i3.s 			page 7
+
+
+ 318:libs/iot/stm32l475e_iot01.c **** void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
+ 319:libs/iot/stm32l475e_iot01.c **** {
+ 320:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 321:libs/iot/stm32l475e_iot01.c **** 
+ 322:libs/iot/stm32l475e_iot01.c ****   /* Enable GPIO clock */
+ 323:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_COMx_TX_GPIO_CLK_ENABLE(COM);
+ 324:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_COMx_RX_GPIO_CLK_ENABLE(COM);
+ 325:libs/iot/stm32l475e_iot01.c **** 
+ 326:libs/iot/stm32l475e_iot01.c ****   /* Enable USART clock */
+ 327:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_COMx_CLK_ENABLE(COM);
+ 328:libs/iot/stm32l475e_iot01.c **** 
+ 329:libs/iot/stm32l475e_iot01.c ****   /* Configure USART Tx as alternate function */
+ 330:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pin = COM_TX_PIN[COM];
+ 331:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+ 332:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+ 333:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pull = GPIO_NOPULL;
+ 334:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Alternate = COM_TX_AF[COM];
+ 335:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_Init(COM_TX_PORT[COM], &gpio_init_structure);
+ 336:libs/iot/stm32l475e_iot01.c **** 
+ 337:libs/iot/stm32l475e_iot01.c ****   /* Configure USART Rx as alternate function */
+ 338:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pin = COM_RX_PIN[COM];
+ 339:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+ 340:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Alternate = COM_RX_AF[COM];
+ 341:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_Init(COM_RX_PORT[COM], &gpio_init_structure);
+ 342:libs/iot/stm32l475e_iot01.c **** 
+ 343:libs/iot/stm32l475e_iot01.c ****   /* USART configuration */
+ 344:libs/iot/stm32l475e_iot01.c ****   huart->Instance = COM_USART[COM];
+ 345:libs/iot/stm32l475e_iot01.c ****   HAL_UART_Init(huart);
+ 346:libs/iot/stm32l475e_iot01.c **** }
+ 347:libs/iot/stm32l475e_iot01.c **** 
+ 348:libs/iot/stm32l475e_iot01.c **** /**
+ 349:libs/iot/stm32l475e_iot01.c ****   * @brief  DeInit COM port.
+ 350:libs/iot/stm32l475e_iot01.c ****   * @param  COM: COM port to be configured.
+ 351:libs/iot/stm32l475e_iot01.c ****   *          This parameter can be one of the following values:
+ 352:libs/iot/stm32l475e_iot01.c ****   *            @arg  COM1 
+ 353:libs/iot/stm32l475e_iot01.c ****   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
+ 354:libs/iot/stm32l475e_iot01.c ****   *                configuration information for the specified USART peripheral.
+ 355:libs/iot/stm32l475e_iot01.c ****   */
+ 356:libs/iot/stm32l475e_iot01.c **** void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
+ 357:libs/iot/stm32l475e_iot01.c **** {
+ 358:libs/iot/stm32l475e_iot01.c ****   /* USART configuration */
+ 359:libs/iot/stm32l475e_iot01.c ****   huart->Instance = COM_USART[COM];
+ 360:libs/iot/stm32l475e_iot01.c ****   HAL_UART_DeInit(huart);
+ 361:libs/iot/stm32l475e_iot01.c **** 
+ 362:libs/iot/stm32l475e_iot01.c ****   /* Enable USART clock */
+ 363:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_COMx_CLK_DISABLE(COM);
+ 364:libs/iot/stm32l475e_iot01.c **** 
+ 365:libs/iot/stm32l475e_iot01.c ****   /* DeInit GPIO pins can be done in the application 
+ 366:libs/iot/stm32l475e_iot01.c ****      (by surcharging this __weak function) */
+ 367:libs/iot/stm32l475e_iot01.c **** 
+ 368:libs/iot/stm32l475e_iot01.c ****   /* GPIO pins clock, FMC clock and DMA clock can be shut down in the application 
+ 369:libs/iot/stm32l475e_iot01.c ****      by surcharging this __weak function */ 
+ 370:libs/iot/stm32l475e_iot01.c **** }
+ 371:libs/iot/stm32l475e_iot01.c **** 
+ 372:libs/iot/stm32l475e_iot01.c **** 
+ 373:libs/iot/stm32l475e_iot01.c **** /*******************************************************************************
+ 374:libs/iot/stm32l475e_iot01.c ****                             BUS OPERATIONS
+ARM GAS  /tmp/cczG30i3.s 			page 8
+
+
+ 375:libs/iot/stm32l475e_iot01.c **** *******************************************************************************/
+ 376:libs/iot/stm32l475e_iot01.c **** 
+ 377:libs/iot/stm32l475e_iot01.c **** /******************************* I2C Routines *********************************/
+ 378:libs/iot/stm32l475e_iot01.c **** /**
+ 379:libs/iot/stm32l475e_iot01.c ****   * @brief  Initializes I2C MSP.
+ 380:libs/iot/stm32l475e_iot01.c ****   * @param  i2c_handler : I2C handler
+ 381:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 382:libs/iot/stm32l475e_iot01.c ****   */
+ 383:libs/iot/stm32l475e_iot01.c **** static void I2Cx_MspInit(I2C_HandleTypeDef *i2c_handler)
+ 384:libs/iot/stm32l475e_iot01.c **** {
+ 385:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef  gpio_init_structure;
+ 386:libs/iot/stm32l475e_iot01.c **** 
+ 387:libs/iot/stm32l475e_iot01.c ****   /*** Configure the GPIOs ***/
+ 388:libs/iot/stm32l475e_iot01.c ****   /* Enable GPIO clock */
+ 389:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_I2Cx_SCL_SDA_GPIO_CLK_ENABLE();
+ 390:libs/iot/stm32l475e_iot01.c **** 
+ 391:libs/iot/stm32l475e_iot01.c ****   /* Configure I2C Tx, Rx as alternate function */
+ 392:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pin = DISCOVERY_I2Cx_SCL_PIN | DISCOVERY_I2Cx_SDA_PIN;
+ 393:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Mode = GPIO_MODE_AF_OD;
+ 394:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pull = GPIO_PULLUP;
+ 395:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 396:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Alternate = DISCOVERY_I2Cx_SCL_SDA_AF;
+ 397:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_Init(DISCOVERY_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
+ 398:libs/iot/stm32l475e_iot01.c **** 
+ 399:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_Init(DISCOVERY_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
+ 400:libs/iot/stm32l475e_iot01.c **** 
+ 401:libs/iot/stm32l475e_iot01.c ****   /*** Configure the I2C peripheral ***/
+ 402:libs/iot/stm32l475e_iot01.c ****   /* Enable I2C clock */
+ 403:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_I2Cx_CLK_ENABLE();
+ 404:libs/iot/stm32l475e_iot01.c **** 
+ 405:libs/iot/stm32l475e_iot01.c ****   /* Force the I2C peripheral clock reset */
+ 406:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_I2Cx_FORCE_RESET();
+ 407:libs/iot/stm32l475e_iot01.c **** 
+ 408:libs/iot/stm32l475e_iot01.c ****   /* Release the I2C peripheral clock reset */
+ 409:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_I2Cx_RELEASE_RESET();
+ 410:libs/iot/stm32l475e_iot01.c **** 
+ 411:libs/iot/stm32l475e_iot01.c ****   /* Enable and set I2Cx Interrupt to a lower priority */
+ 412:libs/iot/stm32l475e_iot01.c ****   HAL_NVIC_SetPriority(DISCOVERY_I2Cx_EV_IRQn, 0x0F, 0);
+ 413:libs/iot/stm32l475e_iot01.c ****   HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_EV_IRQn);
+ 414:libs/iot/stm32l475e_iot01.c **** 
+ 415:libs/iot/stm32l475e_iot01.c ****   /* Enable and set I2Cx Interrupt to a lower priority */
+ 416:libs/iot/stm32l475e_iot01.c ****   HAL_NVIC_SetPriority(DISCOVERY_I2Cx_ER_IRQn, 0x0F, 0);
+ 417:libs/iot/stm32l475e_iot01.c ****   HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_ER_IRQn);
+ 418:libs/iot/stm32l475e_iot01.c **** }
+ 419:libs/iot/stm32l475e_iot01.c **** 
+ 420:libs/iot/stm32l475e_iot01.c **** /**
+ 421:libs/iot/stm32l475e_iot01.c ****   * @brief  DeInitializes I2C MSP.
+ 422:libs/iot/stm32l475e_iot01.c ****   * @param  i2c_handler : I2C handler
+ 423:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 424:libs/iot/stm32l475e_iot01.c ****   */
+ 425:libs/iot/stm32l475e_iot01.c **** static void I2Cx_MspDeInit(I2C_HandleTypeDef *i2c_handler)
+ 426:libs/iot/stm32l475e_iot01.c **** {
+  27              		.loc 1 426 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+ARM GAS  /tmp/cczG30i3.s 			page 9
+
+
+  32 0000 08B5     		push	{r3, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+ 427:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef  gpio_init_structure;
+ 428:libs/iot/stm32l475e_iot01.c ****   
+ 429:libs/iot/stm32l475e_iot01.c ****   /* Configure I2C Tx, Rx as alternate function */
+ 430:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pin = DISCOVERY_I2Cx_SCL_PIN | DISCOVERY_I2Cx_SDA_PIN;
+ 431:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_DeInit(DISCOVERY_I2Cx_SCL_SDA_GPIO_PORT, gpio_init_structure.Pin);
+  37              		.loc 1 431 0
+  38 0002 4FF44061 		mov	r1, #3072
+  39 0006 0648     		ldr	r0, .L3
+  40              	.LVL1:
+  41 0008 FFF7FEFF 		bl	HAL_GPIO_DeInit
+  42              	.LVL2:
+ 432:libs/iot/stm32l475e_iot01.c ****   /* Disable GPIO clock */
+ 433:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_I2Cx_SCL_SDA_GPIO_CLK_DISABLE();
+  43              		.loc 1 433 0
+  44 000c 054B     		ldr	r3, .L3+4
+  45 000e DA6C     		ldr	r2, [r3, #76]
+  46 0010 22F00202 		bic	r2, r2, #2
+  47 0014 DA64     		str	r2, [r3, #76]
+ 434:libs/iot/stm32l475e_iot01.c ****   
+ 435:libs/iot/stm32l475e_iot01.c ****   /* Disable I2C clock */
+ 436:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_I2Cx_CLK_DISABLE();
+  48              		.loc 1 436 0
+  49 0016 9A6D     		ldr	r2, [r3, #88]
+  50 0018 22F48002 		bic	r2, r2, #4194304
+  51 001c 9A65     		str	r2, [r3, #88]
+ 437:libs/iot/stm32l475e_iot01.c **** }
+  52              		.loc 1 437 0
+  53 001e 08BD     		pop	{r3, pc}
+  54              	.L4:
+  55              		.align	2
+  56              	.L3:
+  57 0020 00040048 		.word	1207960576
+  58 0024 00100240 		.word	1073876992
+  59              		.cfi_endproc
+  60              	.LFE140:
+  62              		.section	.text.I2Cx_MspInit,"ax",%progbits
+  63              		.align	1
+  64              		.syntax unified
+  65              		.thumb
+  66              		.thumb_func
+  67              		.fpu fpv4-sp-d16
+  69              	I2Cx_MspInit:
+  70              	.LFB139:
+ 384:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef  gpio_init_structure;
+  71              		.loc 1 384 0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 32
+  74              		@ frame_needed = 0, uses_anonymous_args = 0
+  75              	.LVL3:
+  76 0000 30B5     		push	{r4, r5, lr}
+  77              	.LCFI1:
+  78              		.cfi_def_cfa_offset 12
+ARM GAS  /tmp/cczG30i3.s 			page 10
+
+
+  79              		.cfi_offset 4, -12
+  80              		.cfi_offset 5, -8
+  81              		.cfi_offset 14, -4
+  82 0002 89B0     		sub	sp, sp, #36
+  83              	.LCFI2:
+  84              		.cfi_def_cfa_offset 48
+  85              	.LBB2:
+ 389:libs/iot/stm32l475e_iot01.c **** 
+  86              		.loc 1 389 0
+  87 0004 204C     		ldr	r4, .L7
+  88 0006 E36C     		ldr	r3, [r4, #76]
+  89 0008 43F00203 		orr	r3, r3, #2
+  90 000c E364     		str	r3, [r4, #76]
+  91 000e E36C     		ldr	r3, [r4, #76]
+  92 0010 03F00203 		and	r3, r3, #2
+  93 0014 0193     		str	r3, [sp, #4]
+  94 0016 019B     		ldr	r3, [sp, #4]
+  95              	.LBE2:
+ 392:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Mode = GPIO_MODE_AF_OD;
+  96              		.loc 1 392 0
+  97 0018 4FF44063 		mov	r3, #3072
+  98 001c 0393     		str	r3, [sp, #12]
+ 393:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pull = GPIO_PULLUP;
+  99              		.loc 1 393 0
+ 100 001e 1223     		movs	r3, #18
+ 101 0020 0493     		str	r3, [sp, #16]
+ 394:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 102              		.loc 1 394 0
+ 103 0022 0123     		movs	r3, #1
+ 104 0024 0593     		str	r3, [sp, #20]
+ 395:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Alternate = DISCOVERY_I2Cx_SCL_SDA_AF;
+ 105              		.loc 1 395 0
+ 106 0026 0323     		movs	r3, #3
+ 107 0028 0693     		str	r3, [sp, #24]
+ 396:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_Init(DISCOVERY_I2Cx_SCL_SDA_GPIO_PORT, &gpio_init_structure);
+ 108              		.loc 1 396 0
+ 109 002a 0423     		movs	r3, #4
+ 110 002c 0793     		str	r3, [sp, #28]
+ 397:libs/iot/stm32l475e_iot01.c **** 
+ 111              		.loc 1 397 0
+ 112 002e 174D     		ldr	r5, .L7+4
+ 113 0030 03A9     		add	r1, sp, #12
+ 114 0032 2846     		mov	r0, r5
+ 115              	.LVL4:
+ 116 0034 FFF7FEFF 		bl	HAL_GPIO_Init
+ 117              	.LVL5:
+ 399:libs/iot/stm32l475e_iot01.c **** 
+ 118              		.loc 1 399 0
+ 119 0038 03A9     		add	r1, sp, #12
+ 120 003a 2846     		mov	r0, r5
+ 121 003c FFF7FEFF 		bl	HAL_GPIO_Init
+ 122              	.LVL6:
+ 123              	.LBB3:
+ 403:libs/iot/stm32l475e_iot01.c **** 
+ 124              		.loc 1 403 0
+ 125 0040 A36D     		ldr	r3, [r4, #88]
+ 126 0042 43F48003 		orr	r3, r3, #4194304
+ARM GAS  /tmp/cczG30i3.s 			page 11
+
+
+ 127 0046 A365     		str	r3, [r4, #88]
+ 128 0048 A36D     		ldr	r3, [r4, #88]
+ 129 004a 03F48003 		and	r3, r3, #4194304
+ 130 004e 0293     		str	r3, [sp, #8]
+ 131 0050 029B     		ldr	r3, [sp, #8]
+ 132              	.LBE3:
+ 406:libs/iot/stm32l475e_iot01.c **** 
+ 133              		.loc 1 406 0
+ 134 0052 A36B     		ldr	r3, [r4, #56]
+ 135 0054 43F48003 		orr	r3, r3, #4194304
+ 136 0058 A363     		str	r3, [r4, #56]
+ 409:libs/iot/stm32l475e_iot01.c **** 
+ 137              		.loc 1 409 0
+ 138 005a A36B     		ldr	r3, [r4, #56]
+ 139 005c 23F48003 		bic	r3, r3, #4194304
+ 140 0060 A363     		str	r3, [r4, #56]
+ 412:libs/iot/stm32l475e_iot01.c ****   HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_EV_IRQn);
+ 141              		.loc 1 412 0
+ 142 0062 0022     		movs	r2, #0
+ 143 0064 0F21     		movs	r1, #15
+ 144 0066 2120     		movs	r0, #33
+ 145 0068 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 146              	.LVL7:
+ 413:libs/iot/stm32l475e_iot01.c **** 
+ 147              		.loc 1 413 0
+ 148 006c 2120     		movs	r0, #33
+ 149 006e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 150              	.LVL8:
+ 416:libs/iot/stm32l475e_iot01.c ****   HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_ER_IRQn);
+ 151              		.loc 1 416 0
+ 152 0072 0022     		movs	r2, #0
+ 153 0074 0F21     		movs	r1, #15
+ 154 0076 2220     		movs	r0, #34
+ 155 0078 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 156              	.LVL9:
+ 417:libs/iot/stm32l475e_iot01.c **** }
+ 157              		.loc 1 417 0
+ 158 007c 2220     		movs	r0, #34
+ 159 007e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 160              	.LVL10:
+ 418:libs/iot/stm32l475e_iot01.c **** 
+ 161              		.loc 1 418 0
+ 162 0082 09B0     		add	sp, sp, #36
+ 163              	.LCFI3:
+ 164              		.cfi_def_cfa_offset 12
+ 165              		@ sp needed
+ 166 0084 30BD     		pop	{r4, r5, pc}
+ 167              	.L8:
+ 168 0086 00BF     		.align	2
+ 169              	.L7:
+ 170 0088 00100240 		.word	1073876992
+ 171 008c 00040048 		.word	1207960576
+ 172              		.cfi_endproc
+ 173              	.LFE139:
+ 175              		.section	.text.I2Cx_Init,"ax",%progbits
+ 176              		.align	1
+ 177              		.syntax unified
+ARM GAS  /tmp/cczG30i3.s 			page 12
+
+
+ 178              		.thumb
+ 179              		.thumb_func
+ 180              		.fpu fpv4-sp-d16
+ 182              	I2Cx_Init:
+ 183              	.LFB141:
+ 438:libs/iot/stm32l475e_iot01.c **** 
+ 439:libs/iot/stm32l475e_iot01.c **** /**
+ 440:libs/iot/stm32l475e_iot01.c ****   * @brief  Initializes I2C HAL.
+ 441:libs/iot/stm32l475e_iot01.c ****   * @param  i2c_handler : I2C handler
+ 442:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 443:libs/iot/stm32l475e_iot01.c ****   */
+ 444:libs/iot/stm32l475e_iot01.c **** static void I2Cx_Init(I2C_HandleTypeDef *i2c_handler)
+ 445:libs/iot/stm32l475e_iot01.c **** {
+ 184              		.loc 1 445 0
+ 185              		.cfi_startproc
+ 186              		@ args = 0, pretend = 0, frame = 0
+ 187              		@ frame_needed = 0, uses_anonymous_args = 0
+ 188              	.LVL11:
+ 189 0000 38B5     		push	{r3, r4, r5, lr}
+ 190              	.LCFI4:
+ 191              		.cfi_def_cfa_offset 16
+ 192              		.cfi_offset 3, -16
+ 193              		.cfi_offset 4, -12
+ 194              		.cfi_offset 5, -8
+ 195              		.cfi_offset 14, -4
+ 196 0002 0446     		mov	r4, r0
+ 446:libs/iot/stm32l475e_iot01.c ****   /* I2C configuration */
+ 447:libs/iot/stm32l475e_iot01.c ****   i2c_handler->Instance              = DISCOVERY_I2Cx;
+ 197              		.loc 1 447 0
+ 198 0004 0A4B     		ldr	r3, .L11
+ 199 0006 0360     		str	r3, [r0]
+ 448:libs/iot/stm32l475e_iot01.c ****   i2c_handler->Init.Timing           = DISCOVERY_I2Cx_TIMING;
+ 200              		.loc 1 448 0
+ 201 0008 0A4B     		ldr	r3, .L11+4
+ 202 000a 4360     		str	r3, [r0, #4]
+ 449:libs/iot/stm32l475e_iot01.c ****   i2c_handler->Init.OwnAddress1      = 0;
+ 203              		.loc 1 449 0
+ 204 000c 0025     		movs	r5, #0
+ 205 000e 8560     		str	r5, [r0, #8]
+ 450:libs/iot/stm32l475e_iot01.c ****   i2c_handler->Init.AddressingMode   = I2C_ADDRESSINGMODE_7BIT;
+ 206              		.loc 1 450 0
+ 207 0010 0123     		movs	r3, #1
+ 208 0012 C360     		str	r3, [r0, #12]
+ 451:libs/iot/stm32l475e_iot01.c ****   i2c_handler->Init.DualAddressMode  = I2C_DUALADDRESS_DISABLE;
+ 209              		.loc 1 451 0
+ 210 0014 0561     		str	r5, [r0, #16]
+ 452:libs/iot/stm32l475e_iot01.c ****   i2c_handler->Init.OwnAddress2      = 0;
+ 211              		.loc 1 452 0
+ 212 0016 4561     		str	r5, [r0, #20]
+ 453:libs/iot/stm32l475e_iot01.c ****   i2c_handler->Init.GeneralCallMode  = I2C_GENERALCALL_DISABLE;
+ 213              		.loc 1 453 0
+ 214 0018 C561     		str	r5, [r0, #28]
+ 454:libs/iot/stm32l475e_iot01.c ****   i2c_handler->Init.NoStretchMode    = I2C_NOSTRETCH_DISABLE;
+ 215              		.loc 1 454 0
+ 216 001a 0562     		str	r5, [r0, #32]
+ 455:libs/iot/stm32l475e_iot01.c **** 
+ 456:libs/iot/stm32l475e_iot01.c ****   /* Init the I2C */
+ARM GAS  /tmp/cczG30i3.s 			page 13
+
+
+ 457:libs/iot/stm32l475e_iot01.c ****   I2Cx_MspInit(i2c_handler);
+ 217              		.loc 1 457 0
+ 218 001c FFF7FEFF 		bl	I2Cx_MspInit
+ 219              	.LVL12:
+ 458:libs/iot/stm32l475e_iot01.c ****   HAL_I2C_Init(i2c_handler);
+ 220              		.loc 1 458 0
+ 221 0020 2046     		mov	r0, r4
+ 222 0022 FFF7FEFF 		bl	HAL_I2C_Init
+ 223              	.LVL13:
+ 459:libs/iot/stm32l475e_iot01.c ****   
+ 460:libs/iot/stm32l475e_iot01.c ****   /**Configure Analogue filter */
+ 461:libs/iot/stm32l475e_iot01.c ****   HAL_I2CEx_ConfigAnalogFilter(i2c_handler, I2C_ANALOGFILTER_ENABLE);  
+ 224              		.loc 1 461 0
+ 225 0026 2946     		mov	r1, r5
+ 226 0028 2046     		mov	r0, r4
+ 227 002a FFF7FEFF 		bl	HAL_I2CEx_ConfigAnalogFilter
+ 228              	.LVL14:
+ 462:libs/iot/stm32l475e_iot01.c **** }
+ 229              		.loc 1 462 0
+ 230 002e 38BD     		pop	{r3, r4, r5, pc}
+ 231              	.LVL15:
+ 232              	.L12:
+ 233              		.align	2
+ 234              	.L11:
+ 235 0030 00580040 		.word	1073764352
+ 236 0034 81267000 		.word	7349889
+ 237              		.cfi_endproc
+ 238              	.LFE141:
+ 240              		.section	.text.I2Cx_DeInit,"ax",%progbits
+ 241              		.align	1
+ 242              		.syntax unified
+ 243              		.thumb
+ 244              		.thumb_func
+ 245              		.fpu fpv4-sp-d16
+ 247              	I2Cx_DeInit:
+ 248              	.LFB142:
+ 463:libs/iot/stm32l475e_iot01.c **** 
+ 464:libs/iot/stm32l475e_iot01.c **** /**
+ 465:libs/iot/stm32l475e_iot01.c ****   * @brief  DeInitializes I2C HAL.
+ 466:libs/iot/stm32l475e_iot01.c ****   * @param  i2c_handler : I2C handler
+ 467:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 468:libs/iot/stm32l475e_iot01.c ****   */
+ 469:libs/iot/stm32l475e_iot01.c **** static void I2Cx_DeInit(I2C_HandleTypeDef *i2c_handler)
+ 470:libs/iot/stm32l475e_iot01.c **** {  /* DeInit the I2C */
+ 249              		.loc 1 470 0
+ 250              		.cfi_startproc
+ 251              		@ args = 0, pretend = 0, frame = 0
+ 252              		@ frame_needed = 0, uses_anonymous_args = 0
+ 253              	.LVL16:
+ 254 0000 10B5     		push	{r4, lr}
+ 255              	.LCFI5:
+ 256              		.cfi_def_cfa_offset 8
+ 257              		.cfi_offset 4, -8
+ 258              		.cfi_offset 14, -4
+ 259 0002 0446     		mov	r4, r0
+ 471:libs/iot/stm32l475e_iot01.c ****   I2Cx_MspDeInit(i2c_handler);
+ 260              		.loc 1 471 0
+ARM GAS  /tmp/cczG30i3.s 			page 14
+
+
+ 261 0004 FFF7FEFF 		bl	I2Cx_MspDeInit
+ 262              	.LVL17:
+ 472:libs/iot/stm32l475e_iot01.c ****   HAL_I2C_DeInit(i2c_handler); 
+ 263              		.loc 1 472 0
+ 264 0008 2046     		mov	r0, r4
+ 265 000a FFF7FEFF 		bl	HAL_I2C_DeInit
+ 266              	.LVL18:
+ 473:libs/iot/stm32l475e_iot01.c **** }
+ 267              		.loc 1 473 0
+ 268 000e 10BD     		pop	{r4, pc}
+ 269              		.cfi_endproc
+ 270              	.LFE142:
+ 272              		.section	.text.I2Cx_Error,"ax",%progbits
+ 273              		.align	1
+ 274              		.syntax unified
+ 275              		.thumb
+ 276              		.thumb_func
+ 277              		.fpu fpv4-sp-d16
+ 279              	I2Cx_Error:
+ 280              	.LFB146:
+ 474:libs/iot/stm32l475e_iot01.c **** 
+ 475:libs/iot/stm32l475e_iot01.c **** /**
+ 476:libs/iot/stm32l475e_iot01.c ****   * @brief  Reads multiple data.
+ 477:libs/iot/stm32l475e_iot01.c ****   * @param  i2c_handler : I2C handler
+ 478:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: I2C address
+ 479:libs/iot/stm32l475e_iot01.c ****   * @param  Reg: Reg address
+ 480:libs/iot/stm32l475e_iot01.c ****   * @param  MemAddress: memory address
+ 481:libs/iot/stm32l475e_iot01.c ****   * @param  Buffer: Pointer to data buffer
+ 482:libs/iot/stm32l475e_iot01.c ****   * @param  Length: Length of the data
+ 483:libs/iot/stm32l475e_iot01.c ****   * @retval HAL status
+ 484:libs/iot/stm32l475e_iot01.c ****   */
+ 485:libs/iot/stm32l475e_iot01.c **** static HAL_StatusTypeDef I2Cx_ReadMultiple(I2C_HandleTypeDef *i2c_handler, uint8_t Addr, uint16_t R
+ 486:libs/iot/stm32l475e_iot01.c **** {
+ 487:libs/iot/stm32l475e_iot01.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 488:libs/iot/stm32l475e_iot01.c **** 
+ 489:libs/iot/stm32l475e_iot01.c ****   status = HAL_I2C_Mem_Read(i2c_handler, Addr, (uint16_t)Reg, MemAddress, Buffer, Length, 1000);
+ 490:libs/iot/stm32l475e_iot01.c **** 
+ 491:libs/iot/stm32l475e_iot01.c ****   /* Check the communication status */
+ 492:libs/iot/stm32l475e_iot01.c ****   if(status != HAL_OK)
+ 493:libs/iot/stm32l475e_iot01.c ****   {
+ 494:libs/iot/stm32l475e_iot01.c ****     /* I2C error occured */
+ 495:libs/iot/stm32l475e_iot01.c ****     I2Cx_Error(i2c_handler, Addr);
+ 496:libs/iot/stm32l475e_iot01.c ****   }
+ 497:libs/iot/stm32l475e_iot01.c ****   return status;
+ 498:libs/iot/stm32l475e_iot01.c **** }
+ 499:libs/iot/stm32l475e_iot01.c **** 
+ 500:libs/iot/stm32l475e_iot01.c **** 
+ 501:libs/iot/stm32l475e_iot01.c **** /**
+ 502:libs/iot/stm32l475e_iot01.c ****   * @brief  Writes a value in a register of the device through BUS in using DMA mode.
+ 503:libs/iot/stm32l475e_iot01.c ****   * @param  i2c_handler : I2C handler
+ 504:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: Device address on BUS Bus.
+ 505:libs/iot/stm32l475e_iot01.c ****   * @param  Reg: The target register address to write
+ 506:libs/iot/stm32l475e_iot01.c ****   * @param  MemAddress: memory address
+ 507:libs/iot/stm32l475e_iot01.c ****   * @param  Buffer: The target register value to be written
+ 508:libs/iot/stm32l475e_iot01.c ****   * @param  Length: buffer size to be written
+ 509:libs/iot/stm32l475e_iot01.c ****   * @retval HAL status
+ 510:libs/iot/stm32l475e_iot01.c ****   */
+ARM GAS  /tmp/cczG30i3.s 			page 15
+
+
+ 511:libs/iot/stm32l475e_iot01.c **** static HAL_StatusTypeDef I2Cx_WriteMultiple(I2C_HandleTypeDef *i2c_handler, uint8_t Addr, uint16_t 
+ 512:libs/iot/stm32l475e_iot01.c **** {
+ 513:libs/iot/stm32l475e_iot01.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 514:libs/iot/stm32l475e_iot01.c **** 
+ 515:libs/iot/stm32l475e_iot01.c ****   status = HAL_I2C_Mem_Write(i2c_handler, Addr, (uint16_t)Reg, MemAddress, Buffer, Length, 1000);
+ 516:libs/iot/stm32l475e_iot01.c **** 
+ 517:libs/iot/stm32l475e_iot01.c ****   /* Check the communication status */
+ 518:libs/iot/stm32l475e_iot01.c ****   if(status != HAL_OK)
+ 519:libs/iot/stm32l475e_iot01.c ****   {
+ 520:libs/iot/stm32l475e_iot01.c ****     /* Re-Initiaize the I2C Bus */
+ 521:libs/iot/stm32l475e_iot01.c ****     I2Cx_Error(i2c_handler, Addr);
+ 522:libs/iot/stm32l475e_iot01.c ****   }
+ 523:libs/iot/stm32l475e_iot01.c ****   return status;
+ 524:libs/iot/stm32l475e_iot01.c **** }
+ 525:libs/iot/stm32l475e_iot01.c **** 
+ 526:libs/iot/stm32l475e_iot01.c **** /**
+ 527:libs/iot/stm32l475e_iot01.c ****   * @brief  Checks if target device is ready for communication. 
+ 528:libs/iot/stm32l475e_iot01.c ****   * @note   This function is used with Memory devices
+ 529:libs/iot/stm32l475e_iot01.c ****   * @param  i2c_handler : I2C handler
+ 530:libs/iot/stm32l475e_iot01.c ****   * @param  DevAddress: Target device address
+ 531:libs/iot/stm32l475e_iot01.c ****   * @param  Trials: Number of trials
+ 532:libs/iot/stm32l475e_iot01.c ****   * @retval HAL status
+ 533:libs/iot/stm32l475e_iot01.c ****   */
+ 534:libs/iot/stm32l475e_iot01.c **** static HAL_StatusTypeDef I2Cx_IsDeviceReady(I2C_HandleTypeDef *i2c_handler, uint16_t DevAddress, ui
+ 535:libs/iot/stm32l475e_iot01.c **** { 
+ 536:libs/iot/stm32l475e_iot01.c ****   return (HAL_I2C_IsDeviceReady(i2c_handler, DevAddress, Trials, 1000));
+ 537:libs/iot/stm32l475e_iot01.c **** }
+ 538:libs/iot/stm32l475e_iot01.c **** 
+ 539:libs/iot/stm32l475e_iot01.c **** /**
+ 540:libs/iot/stm32l475e_iot01.c ****   * @brief  Manages error callback by re-initializing I2C.
+ 541:libs/iot/stm32l475e_iot01.c ****   * @param  i2c_handler : I2C handler
+ 542:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: I2C Address
+ 543:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 544:libs/iot/stm32l475e_iot01.c ****   */
+ 545:libs/iot/stm32l475e_iot01.c **** static void I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr)
+ 546:libs/iot/stm32l475e_iot01.c **** {
+ 281              		.loc 1 546 0
+ 282              		.cfi_startproc
+ 283              		@ args = 0, pretend = 0, frame = 0
+ 284              		@ frame_needed = 0, uses_anonymous_args = 0
+ 285              	.LVL19:
+ 286 0000 10B5     		push	{r4, lr}
+ 287              	.LCFI6:
+ 288              		.cfi_def_cfa_offset 8
+ 289              		.cfi_offset 4, -8
+ 290              		.cfi_offset 14, -4
+ 291 0002 0446     		mov	r4, r0
+ 547:libs/iot/stm32l475e_iot01.c ****   /* De-initialize the I2C communication bus */
+ 548:libs/iot/stm32l475e_iot01.c ****   HAL_I2C_DeInit(i2c_handler);
+ 292              		.loc 1 548 0
+ 293 0004 FFF7FEFF 		bl	HAL_I2C_DeInit
+ 294              	.LVL20:
+ 549:libs/iot/stm32l475e_iot01.c ****   
+ 550:libs/iot/stm32l475e_iot01.c ****   /* Re-Initialize the I2C communication bus */
+ 551:libs/iot/stm32l475e_iot01.c ****   I2Cx_Init(i2c_handler);
+ 295              		.loc 1 551 0
+ 296 0008 2046     		mov	r0, r4
+ARM GAS  /tmp/cczG30i3.s 			page 16
+
+
+ 297 000a FFF7FEFF 		bl	I2Cx_Init
+ 298              	.LVL21:
+ 552:libs/iot/stm32l475e_iot01.c **** }
+ 299              		.loc 1 552 0
+ 300 000e 10BD     		pop	{r4, pc}
+ 301              		.cfi_endproc
+ 302              	.LFE146:
+ 304              		.section	.text.I2Cx_WriteMultiple,"ax",%progbits
+ 305              		.align	1
+ 306              		.syntax unified
+ 307              		.thumb
+ 308              		.thumb_func
+ 309              		.fpu fpv4-sp-d16
+ 311              	I2Cx_WriteMultiple:
+ 312              	.LFB144:
+ 512:libs/iot/stm32l475e_iot01.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 313              		.loc 1 512 0
+ 314              		.cfi_startproc
+ 315              		@ args = 8, pretend = 0, frame = 0
+ 316              		@ frame_needed = 0, uses_anonymous_args = 0
+ 317              	.LVL22:
+ 318 0000 70B5     		push	{r4, r5, r6, lr}
+ 319              	.LCFI7:
+ 320              		.cfi_def_cfa_offset 16
+ 321              		.cfi_offset 4, -16
+ 322              		.cfi_offset 5, -12
+ 323              		.cfi_offset 6, -8
+ 324              		.cfi_offset 14, -4
+ 325 0002 84B0     		sub	sp, sp, #16
+ 326              	.LCFI8:
+ 327              		.cfi_def_cfa_offset 32
+ 328 0004 0646     		mov	r6, r0
+ 329 0006 0C46     		mov	r4, r1
+ 330              	.LVL23:
+ 515:libs/iot/stm32l475e_iot01.c **** 
+ 331              		.loc 1 515 0
+ 332 0008 4FF47A71 		mov	r1, #1000
+ 333              	.LVL24:
+ 334 000c 0291     		str	r1, [sp, #8]
+ 335 000e BDF82410 		ldrh	r1, [sp, #36]
+ 336 0012 0191     		str	r1, [sp, #4]
+ 337 0014 0899     		ldr	r1, [sp, #32]
+ 338 0016 0091     		str	r1, [sp]
+ 339 0018 2146     		mov	r1, r4
+ 340 001a FFF7FEFF 		bl	HAL_I2C_Mem_Write
+ 341              	.LVL25:
+ 518:libs/iot/stm32l475e_iot01.c ****   {
+ 342              		.loc 1 518 0
+ 343 001e 0546     		mov	r5, r0
+ 344 0020 10B9     		cbnz	r0, .L20
+ 345              	.LVL26:
+ 346              	.L18:
+ 524:libs/iot/stm32l475e_iot01.c **** 
+ 347              		.loc 1 524 0
+ 348 0022 2846     		mov	r0, r5
+ 349 0024 04B0     		add	sp, sp, #16
+ 350              	.LCFI9:
+ARM GAS  /tmp/cczG30i3.s 			page 17
+
+
+ 351              		.cfi_remember_state
+ 352              		.cfi_def_cfa_offset 16
+ 353              		@ sp needed
+ 354 0026 70BD     		pop	{r4, r5, r6, pc}
+ 355              	.LVL27:
+ 356              	.L20:
+ 357              	.LCFI10:
+ 358              		.cfi_restore_state
+ 521:libs/iot/stm32l475e_iot01.c ****   }
+ 359              		.loc 1 521 0
+ 360 0028 2146     		mov	r1, r4
+ 361 002a 3046     		mov	r0, r6
+ 362              	.LVL28:
+ 363 002c FFF7FEFF 		bl	I2Cx_Error
+ 364              	.LVL29:
+ 365 0030 F7E7     		b	.L18
+ 366              		.cfi_endproc
+ 367              	.LFE144:
+ 369              		.section	.text.I2Cx_ReadMultiple,"ax",%progbits
+ 370              		.align	1
+ 371              		.syntax unified
+ 372              		.thumb
+ 373              		.thumb_func
+ 374              		.fpu fpv4-sp-d16
+ 376              	I2Cx_ReadMultiple:
+ 377              	.LFB143:
+ 486:libs/iot/stm32l475e_iot01.c ****   HAL_StatusTypeDef status = HAL_OK;
+ 378              		.loc 1 486 0
+ 379              		.cfi_startproc
+ 380              		@ args = 8, pretend = 0, frame = 0
+ 381              		@ frame_needed = 0, uses_anonymous_args = 0
+ 382              	.LVL30:
+ 383 0000 70B5     		push	{r4, r5, r6, lr}
+ 384              	.LCFI11:
+ 385              		.cfi_def_cfa_offset 16
+ 386              		.cfi_offset 4, -16
+ 387              		.cfi_offset 5, -12
+ 388              		.cfi_offset 6, -8
+ 389              		.cfi_offset 14, -4
+ 390 0002 84B0     		sub	sp, sp, #16
+ 391              	.LCFI12:
+ 392              		.cfi_def_cfa_offset 32
+ 393 0004 0646     		mov	r6, r0
+ 394 0006 0C46     		mov	r4, r1
+ 395              	.LVL31:
+ 489:libs/iot/stm32l475e_iot01.c **** 
+ 396              		.loc 1 489 0
+ 397 0008 4FF47A71 		mov	r1, #1000
+ 398              	.LVL32:
+ 399 000c 0291     		str	r1, [sp, #8]
+ 400 000e BDF82410 		ldrh	r1, [sp, #36]
+ 401 0012 0191     		str	r1, [sp, #4]
+ 402 0014 0899     		ldr	r1, [sp, #32]
+ 403 0016 0091     		str	r1, [sp]
+ 404 0018 2146     		mov	r1, r4
+ 405 001a FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 406              	.LVL33:
+ARM GAS  /tmp/cczG30i3.s 			page 18
+
+
+ 492:libs/iot/stm32l475e_iot01.c ****   {
+ 407              		.loc 1 492 0
+ 408 001e 0546     		mov	r5, r0
+ 409 0020 10B9     		cbnz	r0, .L24
+ 410              	.LVL34:
+ 411              	.L22:
+ 498:libs/iot/stm32l475e_iot01.c **** 
+ 412              		.loc 1 498 0
+ 413 0022 2846     		mov	r0, r5
+ 414 0024 04B0     		add	sp, sp, #16
+ 415              	.LCFI13:
+ 416              		.cfi_remember_state
+ 417              		.cfi_def_cfa_offset 16
+ 418              		@ sp needed
+ 419 0026 70BD     		pop	{r4, r5, r6, pc}
+ 420              	.LVL35:
+ 421              	.L24:
+ 422              	.LCFI14:
+ 423              		.cfi_restore_state
+ 495:libs/iot/stm32l475e_iot01.c ****   }
+ 424              		.loc 1 495 0
+ 425 0028 2146     		mov	r1, r4
+ 426 002a 3046     		mov	r0, r6
+ 427              	.LVL36:
+ 428 002c FFF7FEFF 		bl	I2Cx_Error
+ 429              	.LVL37:
+ 430 0030 F7E7     		b	.L22
+ 431              		.cfi_endproc
+ 432              	.LFE143:
+ 434              		.section	.text.I2Cx_IsDeviceReady,"ax",%progbits
+ 435              		.align	1
+ 436              		.syntax unified
+ 437              		.thumb
+ 438              		.thumb_func
+ 439              		.fpu fpv4-sp-d16
+ 441              	I2Cx_IsDeviceReady:
+ 442              	.LFB145:
+ 535:libs/iot/stm32l475e_iot01.c ****   return (HAL_I2C_IsDeviceReady(i2c_handler, DevAddress, Trials, 1000));
+ 443              		.loc 1 535 0
+ 444              		.cfi_startproc
+ 445              		@ args = 0, pretend = 0, frame = 0
+ 446              		@ frame_needed = 0, uses_anonymous_args = 0
+ 447              	.LVL38:
+ 448 0000 08B5     		push	{r3, lr}
+ 449              	.LCFI15:
+ 450              		.cfi_def_cfa_offset 8
+ 451              		.cfi_offset 3, -8
+ 452              		.cfi_offset 14, -4
+ 536:libs/iot/stm32l475e_iot01.c **** }
+ 453              		.loc 1 536 0
+ 454 0002 4FF47A73 		mov	r3, #1000
+ 455 0006 FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
+ 456              	.LVL39:
+ 537:libs/iot/stm32l475e_iot01.c **** 
+ 457              		.loc 1 537 0
+ 458 000a 08BD     		pop	{r3, pc}
+ 459              		.cfi_endproc
+ARM GAS  /tmp/cczG30i3.s 			page 19
+
+
+ 460              	.LFE145:
+ 462              		.section	.text.BSP_GetVersion,"ax",%progbits
+ 463              		.align	1
+ 464              		.global	BSP_GetVersion
+ 465              		.syntax unified
+ 466              		.thumb
+ 467              		.thumb_func
+ 468              		.fpu fpv4-sp-d16
+ 470              	BSP_GetVersion:
+ 471              	.LFB128:
+ 161:libs/iot/stm32l475e_iot01.c ****   return __STM32L475E_IOT01_BSP_VERSION;
+ 472              		.loc 1 161 0
+ 473              		.cfi_startproc
+ 474              		@ args = 0, pretend = 0, frame = 0
+ 475              		@ frame_needed = 0, uses_anonymous_args = 0
+ 476              		@ link register save eliminated.
+ 163:libs/iot/stm32l475e_iot01.c **** 
+ 477              		.loc 1 163 0
+ 478 0000 0048     		ldr	r0, .L28
+ 479 0002 7047     		bx	lr
+ 480              	.L29:
+ 481              		.align	2
+ 482              	.L28:
+ 483 0004 00000101 		.word	16842752
+ 484              		.cfi_endproc
+ 485              	.LFE128:
+ 487              		.section	.text.BSP_LED_Init,"ax",%progbits
+ 488              		.align	1
+ 489              		.global	BSP_LED_Init
+ 490              		.syntax unified
+ 491              		.thumb
+ 492              		.thumb_func
+ 493              		.fpu fpv4-sp-d16
+ 495              	BSP_LED_Init:
+ 496              	.LFB129:
+ 172:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef  gpio_init_structure;
+ 497              		.loc 1 172 0
+ 498              		.cfi_startproc
+ 499              		@ args = 0, pretend = 0, frame = 24
+ 500              		@ frame_needed = 0, uses_anonymous_args = 0
+ 501              	.LVL40:
+ 502 0000 10B5     		push	{r4, lr}
+ 503              	.LCFI16:
+ 504              		.cfi_def_cfa_offset 8
+ 505              		.cfi_offset 4, -8
+ 506              		.cfi_offset 14, -4
+ 507 0002 86B0     		sub	sp, sp, #24
+ 508              	.LCFI17:
+ 509              		.cfi_def_cfa_offset 32
+ 175:libs/iot/stm32l475e_iot01.c ****   /* Configure the GPIO_LED pin */
+ 510              		.loc 1 175 0
+ 511 0004 0446     		mov	r4, r0
+ 512 0006 48B9     		cbnz	r0, .L31
+ 513              	.LBB4:
+ 175:libs/iot/stm32l475e_iot01.c ****   /* Configure the GPIO_LED pin */
+ 514              		.loc 1 175 0 is_stmt 0 discriminator 1
+ 515 0008 0D4B     		ldr	r3, .L33
+ARM GAS  /tmp/cczG30i3.s 			page 20
+
+
+ 516 000a DA6C     		ldr	r2, [r3, #76]
+ 517 000c 42F00202 		orr	r2, r2, #2
+ 518 0010 DA64     		str	r2, [r3, #76]
+ 519 0012 DB6C     		ldr	r3, [r3, #76]
+ 520 0014 03F00203 		and	r3, r3, #2
+ 521 0018 0093     		str	r3, [sp]
+ 522 001a 009B     		ldr	r3, [sp]
+ 523              	.L31:
+ 524              	.LBE4:
+ 177:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Mode  = GPIO_MODE_OUTPUT_PP;
+ 525              		.loc 1 177 0 is_stmt 1
+ 526 001c 4FF48043 		mov	r3, #16384
+ 527 0020 0193     		str	r3, [sp, #4]
+ 178:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pull  = GPIO_NOPULL;
+ 528              		.loc 1 178 0
+ 529 0022 0123     		movs	r3, #1
+ 530 0024 0293     		str	r3, [sp, #8]
+ 179:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+ 531              		.loc 1 179 0
+ 532 0026 0023     		movs	r3, #0
+ 533 0028 0393     		str	r3, [sp, #12]
+ 180:libs/iot/stm32l475e_iot01.c ****   
+ 534              		.loc 1 180 0
+ 535 002a 0223     		movs	r3, #2
+ 536 002c 0493     		str	r3, [sp, #16]
+ 182:libs/iot/stm32l475e_iot01.c **** }
+ 537              		.loc 1 182 0
+ 538 002e 01A9     		add	r1, sp, #4
+ 539 0030 044B     		ldr	r3, .L33+4
+ 540 0032 53F82400 		ldr	r0, [r3, r4, lsl #2]
+ 541              	.LVL41:
+ 542 0036 FFF7FEFF 		bl	HAL_GPIO_Init
+ 543              	.LVL42:
+ 183:libs/iot/stm32l475e_iot01.c **** 
+ 544              		.loc 1 183 0
+ 545 003a 06B0     		add	sp, sp, #24
+ 546              	.LCFI18:
+ 547              		.cfi_def_cfa_offset 8
+ 548              		@ sp needed
+ 549 003c 10BD     		pop	{r4, pc}
+ 550              	.L34:
+ 551 003e 00BF     		.align	2
+ 552              	.L33:
+ 553 0040 00100240 		.word	1073876992
+ 554 0044 00000000 		.word	.LANCHOR0
+ 555              		.cfi_endproc
+ 556              	.LFE129:
+ 558              		.section	.text.BSP_LED_DeInit,"ax",%progbits
+ 559              		.align	1
+ 560              		.global	BSP_LED_DeInit
+ 561              		.syntax unified
+ 562              		.thumb
+ 563              		.thumb_func
+ 564              		.fpu fpv4-sp-d16
+ 566              	BSP_LED_DeInit:
+ 567              	.LFB130:
+ 192:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef  gpio_init_structure;
+ARM GAS  /tmp/cczG30i3.s 			page 21
+
+
+ 568              		.loc 1 192 0
+ 569              		.cfi_startproc
+ 570              		@ args = 0, pretend = 0, frame = 0
+ 571              		@ frame_needed = 0, uses_anonymous_args = 0
+ 572              	.LVL43:
+ 573 0000 38B5     		push	{r3, r4, r5, lr}
+ 574              	.LCFI19:
+ 575              		.cfi_def_cfa_offset 16
+ 576              		.cfi_offset 3, -16
+ 577              		.cfi_offset 4, -12
+ 578              		.cfi_offset 5, -8
+ 579              		.cfi_offset 14, -4
+ 580 0002 0546     		mov	r5, r0
+ 199:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_DeInit(GPIO_PORT[Led], gpio_init_structure.Pin);
+ 581              		.loc 1 199 0
+ 582 0004 074C     		ldr	r4, .L37
+ 583 0006 0022     		movs	r2, #0
+ 584 0008 4FF48041 		mov	r1, #16384
+ 585 000c 54F82000 		ldr	r0, [r4, r0, lsl #2]
+ 586              	.LVL44:
+ 587 0010 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 588              	.LVL45:
+ 200:libs/iot/stm32l475e_iot01.c **** }
+ 589              		.loc 1 200 0
+ 590 0014 4FF48041 		mov	r1, #16384
+ 591 0018 54F82500 		ldr	r0, [r4, r5, lsl #2]
+ 592 001c FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 593              	.LVL46:
+ 201:libs/iot/stm32l475e_iot01.c **** 
+ 594              		.loc 1 201 0
+ 595 0020 38BD     		pop	{r3, r4, r5, pc}
+ 596              	.L38:
+ 597 0022 00BF     		.align	2
+ 598              	.L37:
+ 599 0024 00000000 		.word	.LANCHOR0
+ 600              		.cfi_endproc
+ 601              	.LFE130:
+ 603              		.section	.text.BSP_LED_On,"ax",%progbits
+ 604              		.align	1
+ 605              		.global	BSP_LED_On
+ 606              		.syntax unified
+ 607              		.thumb
+ 608              		.thumb_func
+ 609              		.fpu fpv4-sp-d16
+ 611              	BSP_LED_On:
+ 612              	.LFB131:
+ 210:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_WritePin(GPIO_PORT[Led], GPIO_PIN[Led], GPIO_PIN_SET);
+ 613              		.loc 1 210 0
+ 614              		.cfi_startproc
+ 615              		@ args = 0, pretend = 0, frame = 0
+ 616              		@ frame_needed = 0, uses_anonymous_args = 0
+ 617              	.LVL47:
+ 618 0000 08B5     		push	{r3, lr}
+ 619              	.LCFI20:
+ 620              		.cfi_def_cfa_offset 8
+ 621              		.cfi_offset 3, -8
+ 622              		.cfi_offset 14, -4
+ARM GAS  /tmp/cczG30i3.s 			page 22
+
+
+ 211:libs/iot/stm32l475e_iot01.c **** }
+ 623              		.loc 1 211 0
+ 624 0002 0122     		movs	r2, #1
+ 625 0004 4FF48041 		mov	r1, #16384
+ 626 0008 024B     		ldr	r3, .L41
+ 627 000a 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 628              	.LVL48:
+ 629 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 630              	.LVL49:
+ 212:libs/iot/stm32l475e_iot01.c **** 
+ 631              		.loc 1 212 0
+ 632 0012 08BD     		pop	{r3, pc}
+ 633              	.L42:
+ 634              		.align	2
+ 635              	.L41:
+ 636 0014 00000000 		.word	.LANCHOR0
+ 637              		.cfi_endproc
+ 638              	.LFE131:
+ 640              		.section	.text.BSP_LED_Off,"ax",%progbits
+ 641              		.align	1
+ 642              		.global	BSP_LED_Off
+ 643              		.syntax unified
+ 644              		.thumb
+ 645              		.thumb_func
+ 646              		.fpu fpv4-sp-d16
+ 648              	BSP_LED_Off:
+ 649              	.LFB132:
+ 221:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_WritePin(GPIO_PORT[Led], GPIO_PIN[Led], GPIO_PIN_RESET);
+ 650              		.loc 1 221 0
+ 651              		.cfi_startproc
+ 652              		@ args = 0, pretend = 0, frame = 0
+ 653              		@ frame_needed = 0, uses_anonymous_args = 0
+ 654              	.LVL50:
+ 655 0000 08B5     		push	{r3, lr}
+ 656              	.LCFI21:
+ 657              		.cfi_def_cfa_offset 8
+ 658              		.cfi_offset 3, -8
+ 659              		.cfi_offset 14, -4
+ 222:libs/iot/stm32l475e_iot01.c **** }
+ 660              		.loc 1 222 0
+ 661 0002 0022     		movs	r2, #0
+ 662 0004 4FF48041 		mov	r1, #16384
+ 663 0008 024B     		ldr	r3, .L45
+ 664 000a 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 665              	.LVL51:
+ 666 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 667              	.LVL52:
+ 223:libs/iot/stm32l475e_iot01.c **** 
+ 668              		.loc 1 223 0
+ 669 0012 08BD     		pop	{r3, pc}
+ 670              	.L46:
+ 671              		.align	2
+ 672              	.L45:
+ 673 0014 00000000 		.word	.LANCHOR0
+ 674              		.cfi_endproc
+ 675              	.LFE132:
+ 677              		.section	.text.BSP_LED_Toggle,"ax",%progbits
+ARM GAS  /tmp/cczG30i3.s 			page 23
+
+
+ 678              		.align	1
+ 679              		.global	BSP_LED_Toggle
+ 680              		.syntax unified
+ 681              		.thumb
+ 682              		.thumb_func
+ 683              		.fpu fpv4-sp-d16
+ 685              	BSP_LED_Toggle:
+ 686              	.LFB133:
+ 232:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_TogglePin(GPIO_PORT[Led], GPIO_PIN[Led]);
+ 687              		.loc 1 232 0
+ 688              		.cfi_startproc
+ 689              		@ args = 0, pretend = 0, frame = 0
+ 690              		@ frame_needed = 0, uses_anonymous_args = 0
+ 691              	.LVL53:
+ 692 0000 08B5     		push	{r3, lr}
+ 693              	.LCFI22:
+ 694              		.cfi_def_cfa_offset 8
+ 695              		.cfi_offset 3, -8
+ 696              		.cfi_offset 14, -4
+ 233:libs/iot/stm32l475e_iot01.c **** }
+ 697              		.loc 1 233 0
+ 698 0002 4FF48041 		mov	r1, #16384
+ 699 0006 034B     		ldr	r3, .L49
+ 700 0008 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 701              	.LVL54:
+ 702 000c FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 703              	.LVL55:
+ 234:libs/iot/stm32l475e_iot01.c **** 
+ 704              		.loc 1 234 0
+ 705 0010 08BD     		pop	{r3, pc}
+ 706              	.L50:
+ 707 0012 00BF     		.align	2
+ 708              	.L49:
+ 709 0014 00000000 		.word	.LANCHOR0
+ 710              		.cfi_endproc
+ 711              	.LFE133:
+ 713              		.section	.text.BSP_PB_Init,"ax",%progbits
+ 714              		.align	1
+ 715              		.global	BSP_PB_Init
+ 716              		.syntax unified
+ 717              		.thumb
+ 718              		.thumb_func
+ 719              		.fpu fpv4-sp-d16
+ 721              	BSP_PB_Init:
+ 722              	.LFB134:
+ 248:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 723              		.loc 1 248 0
+ 724              		.cfi_startproc
+ 725              		@ args = 0, pretend = 0, frame = 24
+ 726              		@ frame_needed = 0, uses_anonymous_args = 0
+ 727              	.LVL56:
+ 728 0000 30B5     		push	{r4, r5, lr}
+ 729              	.LCFI23:
+ 730              		.cfi_def_cfa_offset 12
+ 731              		.cfi_offset 4, -12
+ 732              		.cfi_offset 5, -8
+ 733              		.cfi_offset 14, -4
+ARM GAS  /tmp/cczG30i3.s 			page 24
+
+
+ 734 0002 87B0     		sub	sp, sp, #28
+ 735              	.LCFI24:
+ 736              		.cfi_def_cfa_offset 40
+ 737 0004 0546     		mov	r5, r0
+ 738              	.LBB5:
+ 252:libs/iot/stm32l475e_iot01.c ****   
+ 739              		.loc 1 252 0
+ 740 0006 1C4B     		ldr	r3, .L57
+ 741 0008 DA6C     		ldr	r2, [r3, #76]
+ 742 000a 42F00402 		orr	r2, r2, #4
+ 743 000e DA64     		str	r2, [r3, #76]
+ 744 0010 DB6C     		ldr	r3, [r3, #76]
+ 745 0012 03F00403 		and	r3, r3, #4
+ 746 0016 0093     		str	r3, [sp]
+ 747 0018 009B     		ldr	r3, [sp]
+ 748              	.LBE5:
+ 254:libs/iot/stm32l475e_iot01.c ****   {
+ 749              		.loc 1 254 0
+ 750 001a 0C46     		mov	r4, r1
+ 751 001c 19B1     		cbz	r1, .L55
+ 752              	.LVL57:
+ 753              	.L52:
+ 264:libs/iot/stm32l475e_iot01.c ****   {
+ 754              		.loc 1 264 0
+ 755 001e 012C     		cmp	r4, #1
+ 756 0020 11D0     		beq	.L56
+ 757              	.L51:
+ 279:libs/iot/stm32l475e_iot01.c **** 
+ 758              		.loc 1 279 0
+ 759 0022 07B0     		add	sp, sp, #28
+ 760              	.LCFI25:
+ 761              		.cfi_remember_state
+ 762              		.cfi_def_cfa_offset 12
+ 763              		@ sp needed
+ 764 0024 30BD     		pop	{r4, r5, pc}
+ 765              	.LVL58:
+ 766              	.L55:
+ 767              	.LCFI26:
+ 768              		.cfi_restore_state
+ 257:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Mode = GPIO_MODE_INPUT;
+ 769              		.loc 1 257 0
+ 770 0026 4FF40053 		mov	r3, #8192
+ 771 002a 0193     		str	r3, [sp, #4]
+ 258:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Pull = GPIO_PULLUP;
+ 772              		.loc 1 258 0
+ 773 002c 0023     		movs	r3, #0
+ 774 002e 0293     		str	r3, [sp, #8]
+ 259:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+ 775              		.loc 1 259 0
+ 776 0030 0123     		movs	r3, #1
+ 777 0032 0393     		str	r3, [sp, #12]
+ 260:libs/iot/stm32l475e_iot01.c ****     HAL_GPIO_Init(BUTTON_PORT[Button], &gpio_init_structure);
+ 778              		.loc 1 260 0
+ 779 0034 0223     		movs	r3, #2
+ 780 0036 0493     		str	r3, [sp, #16]
+ 261:libs/iot/stm32l475e_iot01.c ****   }
+ 781              		.loc 1 261 0
+ARM GAS  /tmp/cczG30i3.s 			page 25
+
+
+ 782 0038 01A9     		add	r1, sp, #4
+ 783              	.LVL59:
+ 784 003a 104B     		ldr	r3, .L57+4
+ 785 003c 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 786              	.LVL60:
+ 787 0040 FFF7FEFF 		bl	HAL_GPIO_Init
+ 788              	.LVL61:
+ 789 0044 EBE7     		b	.L52
+ 790              	.L56:
+ 267:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Pull = GPIO_PULLUP;
+ 791              		.loc 1 267 0
+ 792 0046 4FF40053 		mov	r3, #8192
+ 793 004a 0193     		str	r3, [sp, #4]
+ 268:libs/iot/stm32l475e_iot01.c ****     gpio_init_structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 794              		.loc 1 268 0
+ 795 004c 0123     		movs	r3, #1
+ 796 004e 0393     		str	r3, [sp, #12]
+ 269:libs/iot/stm32l475e_iot01.c ****     
+ 797              		.loc 1 269 0
+ 798 0050 0323     		movs	r3, #3
+ 799 0052 0493     		str	r3, [sp, #16]
+ 271:libs/iot/stm32l475e_iot01.c ****     
+ 800              		.loc 1 271 0
+ 801 0054 0A4B     		ldr	r3, .L57+8
+ 802 0056 0293     		str	r3, [sp, #8]
+ 273:libs/iot/stm32l475e_iot01.c ****     
+ 803              		.loc 1 273 0
+ 804 0058 01A9     		add	r1, sp, #4
+ 805 005a 084B     		ldr	r3, .L57+4
+ 806 005c 53F82500 		ldr	r0, [r3, r5, lsl #2]
+ 807 0060 FFF7FEFF 		bl	HAL_GPIO_Init
+ 808              	.LVL62:
+ 276:libs/iot/stm32l475e_iot01.c ****     HAL_NVIC_EnableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
+ 809              		.loc 1 276 0
+ 810 0064 0022     		movs	r2, #0
+ 811 0066 0F21     		movs	r1, #15
+ 812 0068 2820     		movs	r0, #40
+ 813 006a FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 814              	.LVL63:
+ 277:libs/iot/stm32l475e_iot01.c ****   }
+ 815              		.loc 1 277 0
+ 816 006e 2820     		movs	r0, #40
+ 817 0070 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 818              	.LVL64:
+ 279:libs/iot/stm32l475e_iot01.c **** 
+ 819              		.loc 1 279 0
+ 820 0074 D5E7     		b	.L51
+ 821              	.L58:
+ 822 0076 00BF     		.align	2
+ 823              	.L57:
+ 824 0078 00100240 		.word	1073876992
+ 825 007c 00000000 		.word	.LANCHOR1
+ 826 0080 00001110 		.word	269549568
+ 827              		.cfi_endproc
+ 828              	.LFE134:
+ 830              		.section	.text.BSP_PB_DeInit,"ax",%progbits
+ 831              		.align	1
+ARM GAS  /tmp/cczG30i3.s 			page 26
+
+
+ 832              		.global	BSP_PB_DeInit
+ 833              		.syntax unified
+ 834              		.thumb
+ 835              		.thumb_func
+ 836              		.fpu fpv4-sp-d16
+ 838              	BSP_PB_DeInit:
+ 839              	.LFB135:
+ 289:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 840              		.loc 1 289 0
+ 841              		.cfi_startproc
+ 842              		@ args = 0, pretend = 0, frame = 0
+ 843              		@ frame_needed = 0, uses_anonymous_args = 0
+ 844              	.LVL65:
+ 845 0000 10B5     		push	{r4, lr}
+ 846              	.LCFI27:
+ 847              		.cfi_def_cfa_offset 8
+ 848              		.cfi_offset 4, -8
+ 849              		.cfi_offset 14, -4
+ 850 0002 0446     		mov	r4, r0
+ 293:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_DeInit(BUTTON_PORT[Button], gpio_init_structure.Pin);
+ 851              		.loc 1 293 0
+ 852 0004 2820     		movs	r0, #40
+ 853              	.LVL66:
+ 854 0006 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 855              	.LVL67:
+ 294:libs/iot/stm32l475e_iot01.c **** }
+ 856              		.loc 1 294 0
+ 857 000a 4FF40051 		mov	r1, #8192
+ 858 000e 034B     		ldr	r3, .L61
+ 859 0010 53F82400 		ldr	r0, [r3, r4, lsl #2]
+ 860 0014 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 861              	.LVL68:
+ 295:libs/iot/stm32l475e_iot01.c **** 
+ 862              		.loc 1 295 0
+ 863 0018 10BD     		pop	{r4, pc}
+ 864              	.L62:
+ 865 001a 00BF     		.align	2
+ 866              	.L61:
+ 867 001c 00000000 		.word	.LANCHOR1
+ 868              		.cfi_endproc
+ 869              	.LFE135:
+ 871              		.section	.text.BSP_PB_GetState,"ax",%progbits
+ 872              		.align	1
+ 873              		.global	BSP_PB_GetState
+ 874              		.syntax unified
+ 875              		.thumb
+ 876              		.thumb_func
+ 877              		.fpu fpv4-sp-d16
+ 879              	BSP_PB_GetState:
+ 880              	.LFB136:
+ 306:libs/iot/stm32l475e_iot01.c ****   return HAL_GPIO_ReadPin(BUTTON_PORT[Button], BUTTON_PIN[Button]);
+ 881              		.loc 1 306 0
+ 882              		.cfi_startproc
+ 883              		@ args = 0, pretend = 0, frame = 0
+ 884              		@ frame_needed = 0, uses_anonymous_args = 0
+ 885              	.LVL69:
+ 886 0000 08B5     		push	{r3, lr}
+ARM GAS  /tmp/cczG30i3.s 			page 27
+
+
+ 887              	.LCFI28:
+ 888              		.cfi_def_cfa_offset 8
+ 889              		.cfi_offset 3, -8
+ 890              		.cfi_offset 14, -4
+ 307:libs/iot/stm32l475e_iot01.c **** }
+ 891              		.loc 1 307 0
+ 892 0002 4FF40051 		mov	r1, #8192
+ 893 0006 034B     		ldr	r3, .L65
+ 894 0008 53F82000 		ldr	r0, [r3, r0, lsl #2]
+ 895              	.LVL70:
+ 896 000c FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 897              	.LVL71:
+ 308:libs/iot/stm32l475e_iot01.c **** 
+ 898              		.loc 1 308 0
+ 899 0010 08BD     		pop	{r3, pc}
+ 900              	.L66:
+ 901 0012 00BF     		.align	2
+ 902              	.L65:
+ 903 0014 00000000 		.word	.LANCHOR1
+ 904              		.cfi_endproc
+ 905              	.LFE136:
+ 907              		.section	.text.BSP_COM_Init,"ax",%progbits
+ 908              		.align	1
+ 909              		.global	BSP_COM_Init
+ 910              		.syntax unified
+ 911              		.thumb
+ 912              		.thumb_func
+ 913              		.fpu fpv4-sp-d16
+ 915              	BSP_COM_Init:
+ 916              	.LFB137:
+ 319:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef gpio_init_structure;
+ 917              		.loc 1 319 0
+ 918              		.cfi_startproc
+ 919              		@ args = 0, pretend = 0, frame = 32
+ 920              		@ frame_needed = 0, uses_anonymous_args = 0
+ 921              	.LVL72:
+ 922 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 923              	.LCFI29:
+ 924              		.cfi_def_cfa_offset 20
+ 925              		.cfi_offset 4, -20
+ 926              		.cfi_offset 5, -16
+ 927              		.cfi_offset 6, -12
+ 928              		.cfi_offset 7, -8
+ 929              		.cfi_offset 14, -4
+ 930 0002 89B0     		sub	sp, sp, #36
+ 931              	.LCFI30:
+ 932              		.cfi_def_cfa_offset 56
+ 933 0004 0E46     		mov	r6, r1
+ 323:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_COMx_RX_GPIO_CLK_ENABLE(COM);
+ 934              		.loc 1 323 0
+ 935 0006 0446     		mov	r4, r0
+ 936 0008 48B9     		cbnz	r0, .L68
+ 937              	.LBB6:
+ 323:libs/iot/stm32l475e_iot01.c ****   DISCOVERY_COMx_RX_GPIO_CLK_ENABLE(COM);
+ 938              		.loc 1 323 0 is_stmt 0 discriminator 1
+ 939 000a 214B     		ldr	r3, .L72
+ 940 000c DA6C     		ldr	r2, [r3, #76]
+ARM GAS  /tmp/cczG30i3.s 			page 28
+
+
+ 941 000e 42F00202 		orr	r2, r2, #2
+ 942 0012 DA64     		str	r2, [r3, #76]
+ 943 0014 DB6C     		ldr	r3, [r3, #76]
+ 944 0016 03F00203 		and	r3, r3, #2
+ 945 001a 0093     		str	r3, [sp]
+ 946 001c 009B     		ldr	r3, [sp]
+ 947              	.L68:
+ 948              	.LBE6:
+ 324:libs/iot/stm32l475e_iot01.c **** 
+ 949              		.loc 1 324 0 is_stmt 1
+ 950 001e 4CB9     		cbnz	r4, .L69
+ 951              	.LBB7:
+ 324:libs/iot/stm32l475e_iot01.c **** 
+ 952              		.loc 1 324 0 is_stmt 0 discriminator 1
+ 953 0020 1B4B     		ldr	r3, .L72
+ 954 0022 DA6C     		ldr	r2, [r3, #76]
+ 955 0024 42F00202 		orr	r2, r2, #2
+ 956 0028 DA64     		str	r2, [r3, #76]
+ 957 002a DB6C     		ldr	r3, [r3, #76]
+ 958 002c 03F00203 		and	r3, r3, #2
+ 959 0030 0193     		str	r3, [sp, #4]
+ 960 0032 019B     		ldr	r3, [sp, #4]
+ 961              	.L69:
+ 962              	.LBE7:
+ 327:libs/iot/stm32l475e_iot01.c **** 
+ 963              		.loc 1 327 0 is_stmt 1
+ 964 0034 4CB9     		cbnz	r4, .L70
+ 965              	.LBB8:
+ 327:libs/iot/stm32l475e_iot01.c **** 
+ 966              		.loc 1 327 0 is_stmt 0 discriminator 1
+ 967 0036 164B     		ldr	r3, .L72
+ 968 0038 1A6E     		ldr	r2, [r3, #96]
+ 969 003a 42F48042 		orr	r2, r2, #16384
+ 970 003e 1A66     		str	r2, [r3, #96]
+ 971 0040 1B6E     		ldr	r3, [r3, #96]
+ 972 0042 03F48043 		and	r3, r3, #16384
+ 973 0046 0293     		str	r3, [sp, #8]
+ 974 0048 029B     		ldr	r3, [sp, #8]
+ 975              	.L70:
+ 976              	.LBE8:
+ 330:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+ 977              		.loc 1 330 0 is_stmt 1
+ 978 004a 4023     		movs	r3, #64
+ 979 004c 0393     		str	r3, [sp, #12]
+ 331:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Speed = GPIO_SPEED_FREQ_HIGH;
+ 980              		.loc 1 331 0
+ 981 004e 0225     		movs	r5, #2
+ 982 0050 0495     		str	r5, [sp, #16]
+ 332:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Pull = GPIO_NOPULL;
+ 983              		.loc 1 332 0
+ 984 0052 0695     		str	r5, [sp, #24]
+ 333:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Alternate = COM_TX_AF[COM];
+ 985              		.loc 1 333 0
+ 986 0054 0023     		movs	r3, #0
+ 987 0056 0593     		str	r3, [sp, #20]
+ 334:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_Init(COM_TX_PORT[COM], &gpio_init_structure);
+ 988              		.loc 1 334 0
+ARM GAS  /tmp/cczG30i3.s 			page 29
+
+
+ 989 0058 0727     		movs	r7, #7
+ 990 005a 0797     		str	r7, [sp, #28]
+ 335:libs/iot/stm32l475e_iot01.c **** 
+ 991              		.loc 1 335 0
+ 992 005c 03A9     		add	r1, sp, #12
+ 993              	.LVL73:
+ 994 005e 0D4B     		ldr	r3, .L72+4
+ 995 0060 53F82400 		ldr	r0, [r3, r4, lsl #2]
+ 996              	.LVL74:
+ 997 0064 FFF7FEFF 		bl	HAL_GPIO_Init
+ 998              	.LVL75:
+ 338:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Mode = GPIO_MODE_AF_PP;
+ 999              		.loc 1 338 0
+ 1000 0068 8023     		movs	r3, #128
+ 1001 006a 0393     		str	r3, [sp, #12]
+ 339:libs/iot/stm32l475e_iot01.c ****   gpio_init_structure.Alternate = COM_RX_AF[COM];
+ 1002              		.loc 1 339 0
+ 1003 006c 0495     		str	r5, [sp, #16]
+ 340:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_Init(COM_RX_PORT[COM], &gpio_init_structure);
+ 1004              		.loc 1 340 0
+ 1005 006e 0797     		str	r7, [sp, #28]
+ 341:libs/iot/stm32l475e_iot01.c **** 
+ 1006              		.loc 1 341 0
+ 1007 0070 03A9     		add	r1, sp, #12
+ 1008 0072 094B     		ldr	r3, .L72+8
+ 1009 0074 53F82400 		ldr	r0, [r3, r4, lsl #2]
+ 1010 0078 FFF7FEFF 		bl	HAL_GPIO_Init
+ 1011              	.LVL76:
+ 344:libs/iot/stm32l475e_iot01.c ****   HAL_UART_Init(huart);
+ 1012              		.loc 1 344 0
+ 1013 007c 074B     		ldr	r3, .L72+12
+ 1014 007e 53F82430 		ldr	r3, [r3, r4, lsl #2]
+ 1015 0082 3360     		str	r3, [r6]
+ 345:libs/iot/stm32l475e_iot01.c **** }
+ 1016              		.loc 1 345 0
+ 1017 0084 3046     		mov	r0, r6
+ 1018 0086 FFF7FEFF 		bl	HAL_UART_Init
+ 1019              	.LVL77:
+ 346:libs/iot/stm32l475e_iot01.c **** 
+ 1020              		.loc 1 346 0
+ 1021 008a 09B0     		add	sp, sp, #36
+ 1022              	.LCFI31:
+ 1023              		.cfi_def_cfa_offset 20
+ 1024              		@ sp needed
+ 1025 008c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1026              	.LVL78:
+ 1027              	.L73:
+ 1028 008e 00BF     		.align	2
+ 1029              	.L72:
+ 1030 0090 00100240 		.word	1073876992
+ 1031 0094 00000000 		.word	.LANCHOR2
+ 1032 0098 00000000 		.word	.LANCHOR3
+ 1033 009c 00000000 		.word	.LANCHOR4
+ 1034              		.cfi_endproc
+ 1035              	.LFE137:
+ 1037              		.section	.text.BSP_COM_DeInit,"ax",%progbits
+ 1038              		.align	1
+ARM GAS  /tmp/cczG30i3.s 			page 30
+
+
+ 1039              		.global	BSP_COM_DeInit
+ 1040              		.syntax unified
+ 1041              		.thumb
+ 1042              		.thumb_func
+ 1043              		.fpu fpv4-sp-d16
+ 1045              	BSP_COM_DeInit:
+ 1046              	.LFB138:
+ 357:libs/iot/stm32l475e_iot01.c ****   /* USART configuration */
+ 1047              		.loc 1 357 0
+ 1048              		.cfi_startproc
+ 1049              		@ args = 0, pretend = 0, frame = 0
+ 1050              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1051              	.LVL79:
+ 1052 0000 10B5     		push	{r4, lr}
+ 1053              	.LCFI32:
+ 1054              		.cfi_def_cfa_offset 8
+ 1055              		.cfi_offset 4, -8
+ 1056              		.cfi_offset 14, -4
+ 1057 0002 0446     		mov	r4, r0
+ 359:libs/iot/stm32l475e_iot01.c ****   HAL_UART_DeInit(huart);
+ 1058              		.loc 1 359 0
+ 1059 0004 064B     		ldr	r3, .L77
+ 1060 0006 53F82030 		ldr	r3, [r3, r0, lsl #2]
+ 1061 000a 0B60     		str	r3, [r1]
+ 360:libs/iot/stm32l475e_iot01.c **** 
+ 1062              		.loc 1 360 0
+ 1063 000c 0846     		mov	r0, r1
+ 1064              	.LVL80:
+ 1065 000e FFF7FEFF 		bl	HAL_UART_DeInit
+ 1066              	.LVL81:
+ 363:libs/iot/stm32l475e_iot01.c **** 
+ 1067              		.loc 1 363 0
+ 1068 0012 24B9     		cbnz	r4, .L74
+ 363:libs/iot/stm32l475e_iot01.c **** 
+ 1069              		.loc 1 363 0 is_stmt 0 discriminator 1
+ 1070 0014 034A     		ldr	r2, .L77+4
+ 1071 0016 136E     		ldr	r3, [r2, #96]
+ 1072 0018 23F48043 		bic	r3, r3, #16384
+ 1073 001c 1366     		str	r3, [r2, #96]
+ 1074              	.L74:
+ 370:libs/iot/stm32l475e_iot01.c **** 
+ 1075              		.loc 1 370 0 is_stmt 1
+ 1076 001e 10BD     		pop	{r4, pc}
+ 1077              	.L78:
+ 1078              		.align	2
+ 1079              	.L77:
+ 1080 0020 00000000 		.word	.LANCHOR4
+ 1081 0024 00100240 		.word	1073876992
+ 1082              		.cfi_endproc
+ 1083              	.LFE138:
+ 1085              		.section	.text.SENSOR_IO_Init,"ax",%progbits
+ 1086              		.align	1
+ 1087              		.global	SENSOR_IO_Init
+ 1088              		.syntax unified
+ 1089              		.thumb
+ 1090              		.thumb_func
+ 1091              		.fpu fpv4-sp-d16
+ARM GAS  /tmp/cczG30i3.s 			page 31
+
+
+ 1093              	SENSOR_IO_Init:
+ 1094              	.LFB147:
+ 553:libs/iot/stm32l475e_iot01.c **** 
+ 554:libs/iot/stm32l475e_iot01.c **** /**
+ 555:libs/iot/stm32l475e_iot01.c ****   * @}
+ 556:libs/iot/stm32l475e_iot01.c ****   */
+ 557:libs/iot/stm32l475e_iot01.c **** 
+ 558:libs/iot/stm32l475e_iot01.c **** /*******************************************************************************
+ 559:libs/iot/stm32l475e_iot01.c ****                             LINK OPERATIONS
+ 560:libs/iot/stm32l475e_iot01.c **** *******************************************************************************/
+ 561:libs/iot/stm32l475e_iot01.c **** /******************************** LINK Sensors ********************************/
+ 562:libs/iot/stm32l475e_iot01.c **** 
+ 563:libs/iot/stm32l475e_iot01.c **** /**
+ 564:libs/iot/stm32l475e_iot01.c ****   * @brief  Initializes Sensors low level.
+ 565:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 566:libs/iot/stm32l475e_iot01.c ****   */
+ 567:libs/iot/stm32l475e_iot01.c **** void SENSOR_IO_Init(void)
+ 568:libs/iot/stm32l475e_iot01.c **** {
+ 1095              		.loc 1 568 0
+ 1096              		.cfi_startproc
+ 1097              		@ args = 0, pretend = 0, frame = 0
+ 1098              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1099 0000 08B5     		push	{r3, lr}
+ 1100              	.LCFI33:
+ 1101              		.cfi_def_cfa_offset 8
+ 1102              		.cfi_offset 3, -8
+ 1103              		.cfi_offset 14, -4
+ 569:libs/iot/stm32l475e_iot01.c ****   I2Cx_Init(&hI2cHandler);
+ 1104              		.loc 1 569 0
+ 1105 0002 0248     		ldr	r0, .L81
+ 1106 0004 FFF7FEFF 		bl	I2Cx_Init
+ 1107              	.LVL82:
+ 570:libs/iot/stm32l475e_iot01.c **** }
+ 1108              		.loc 1 570 0
+ 1109 0008 08BD     		pop	{r3, pc}
+ 1110              	.L82:
+ 1111 000a 00BF     		.align	2
+ 1112              	.L81:
+ 1113 000c 00000000 		.word	hI2cHandler
+ 1114              		.cfi_endproc
+ 1115              	.LFE147:
+ 1117              		.section	.text.SENSOR_IO_DeInit,"ax",%progbits
+ 1118              		.align	1
+ 1119              		.global	SENSOR_IO_DeInit
+ 1120              		.syntax unified
+ 1121              		.thumb
+ 1122              		.thumb_func
+ 1123              		.fpu fpv4-sp-d16
+ 1125              	SENSOR_IO_DeInit:
+ 1126              	.LFB148:
+ 571:libs/iot/stm32l475e_iot01.c **** 
+ 572:libs/iot/stm32l475e_iot01.c **** /**
+ 573:libs/iot/stm32l475e_iot01.c ****   * @brief  DeInitializes Sensors low level.
+ 574:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 575:libs/iot/stm32l475e_iot01.c ****   */
+ 576:libs/iot/stm32l475e_iot01.c **** void SENSOR_IO_DeInit(void)
+ 577:libs/iot/stm32l475e_iot01.c **** {
+ARM GAS  /tmp/cczG30i3.s 			page 32
+
+
+ 1127              		.loc 1 577 0
+ 1128              		.cfi_startproc
+ 1129              		@ args = 0, pretend = 0, frame = 0
+ 1130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1131 0000 08B5     		push	{r3, lr}
+ 1132              	.LCFI34:
+ 1133              		.cfi_def_cfa_offset 8
+ 1134              		.cfi_offset 3, -8
+ 1135              		.cfi_offset 14, -4
+ 578:libs/iot/stm32l475e_iot01.c ****   I2Cx_DeInit(&hI2cHandler);
+ 1136              		.loc 1 578 0
+ 1137 0002 0248     		ldr	r0, .L85
+ 1138 0004 FFF7FEFF 		bl	I2Cx_DeInit
+ 1139              	.LVL83:
+ 579:libs/iot/stm32l475e_iot01.c **** }
+ 1140              		.loc 1 579 0
+ 1141 0008 08BD     		pop	{r3, pc}
+ 1142              	.L86:
+ 1143 000a 00BF     		.align	2
+ 1144              	.L85:
+ 1145 000c 00000000 		.word	hI2cHandler
+ 1146              		.cfi_endproc
+ 1147              	.LFE148:
+ 1149              		.section	.text.SENSOR_IO_Write,"ax",%progbits
+ 1150              		.align	1
+ 1151              		.global	SENSOR_IO_Write
+ 1152              		.syntax unified
+ 1153              		.thumb
+ 1154              		.thumb_func
+ 1155              		.fpu fpv4-sp-d16
+ 1157              	SENSOR_IO_Write:
+ 1158              	.LFB149:
+ 580:libs/iot/stm32l475e_iot01.c **** 
+ 581:libs/iot/stm32l475e_iot01.c **** /**
+ 582:libs/iot/stm32l475e_iot01.c ****   * @brief  Writes a single data.
+ 583:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: I2C address
+ 584:libs/iot/stm32l475e_iot01.c ****   * @param  Reg: Reg address
+ 585:libs/iot/stm32l475e_iot01.c ****   * @param  Value: Data to be written
+ 586:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 587:libs/iot/stm32l475e_iot01.c ****   */
+ 588:libs/iot/stm32l475e_iot01.c **** void SENSOR_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
+ 589:libs/iot/stm32l475e_iot01.c **** {
+ 1159              		.loc 1 589 0
+ 1160              		.cfi_startproc
+ 1161              		@ args = 0, pretend = 0, frame = 8
+ 1162              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1163              	.LVL84:
+ 1164 0000 10B5     		push	{r4, lr}
+ 1165              	.LCFI35:
+ 1166              		.cfi_def_cfa_offset 8
+ 1167              		.cfi_offset 4, -8
+ 1168              		.cfi_offset 14, -4
+ 1169 0002 84B0     		sub	sp, sp, #16
+ 1170              	.LCFI36:
+ 1171              		.cfi_def_cfa_offset 24
+ 1172 0004 04AC     		add	r4, sp, #16
+ 1173 0006 04F8012D 		strb	r2, [r4, #-1]!
+ARM GAS  /tmp/cczG30i3.s 			page 33
+
+
+ 590:libs/iot/stm32l475e_iot01.c ****   I2Cx_WriteMultiple(&hI2cHandler, Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT,(uint8_t*)&Value, 1);
+ 1174              		.loc 1 590 0
+ 1175 000a 0123     		movs	r3, #1
+ 1176 000c 0193     		str	r3, [sp, #4]
+ 1177 000e 0094     		str	r4, [sp]
+ 1178 0010 0A46     		mov	r2, r1
+ 1179              	.LVL85:
+ 1180 0012 0146     		mov	r1, r0
+ 1181              	.LVL86:
+ 1182 0014 0248     		ldr	r0, .L89
+ 1183              	.LVL87:
+ 1184 0016 FFF7FEFF 		bl	I2Cx_WriteMultiple
+ 1185              	.LVL88:
+ 591:libs/iot/stm32l475e_iot01.c **** }
+ 1186              		.loc 1 591 0
+ 1187 001a 04B0     		add	sp, sp, #16
+ 1188              	.LCFI37:
+ 1189              		.cfi_def_cfa_offset 8
+ 1190              		@ sp needed
+ 1191 001c 10BD     		pop	{r4, pc}
+ 1192              	.L90:
+ 1193 001e 00BF     		.align	2
+ 1194              	.L89:
+ 1195 0020 00000000 		.word	hI2cHandler
+ 1196              		.cfi_endproc
+ 1197              	.LFE149:
+ 1199              		.section	.text.SENSOR_IO_Read,"ax",%progbits
+ 1200              		.align	1
+ 1201              		.global	SENSOR_IO_Read
+ 1202              		.syntax unified
+ 1203              		.thumb
+ 1204              		.thumb_func
+ 1205              		.fpu fpv4-sp-d16
+ 1207              	SENSOR_IO_Read:
+ 1208              	.LFB150:
+ 592:libs/iot/stm32l475e_iot01.c **** 
+ 593:libs/iot/stm32l475e_iot01.c **** /**
+ 594:libs/iot/stm32l475e_iot01.c ****   * @brief  Reads a single data.
+ 595:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: I2C address
+ 596:libs/iot/stm32l475e_iot01.c ****   * @param  Reg: Reg address
+ 597:libs/iot/stm32l475e_iot01.c ****   * @retval Data to be read
+ 598:libs/iot/stm32l475e_iot01.c ****   */
+ 599:libs/iot/stm32l475e_iot01.c **** uint8_t SENSOR_IO_Read(uint8_t Addr, uint8_t Reg)
+ 600:libs/iot/stm32l475e_iot01.c **** {
+ 1209              		.loc 1 600 0
+ 1210              		.cfi_startproc
+ 1211              		@ args = 0, pretend = 0, frame = 8
+ 1212              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1213              	.LVL89:
+ 1214 0000 00B5     		push	{lr}
+ 1215              	.LCFI38:
+ 1216              		.cfi_def_cfa_offset 4
+ 1217              		.cfi_offset 14, -4
+ 1218 0002 85B0     		sub	sp, sp, #20
+ 1219              	.LCFI39:
+ 1220              		.cfi_def_cfa_offset 24
+ 601:libs/iot/stm32l475e_iot01.c ****   uint8_t read_value = 0;
+ARM GAS  /tmp/cczG30i3.s 			page 34
+
+
+ 1221              		.loc 1 601 0
+ 1222 0004 04AA     		add	r2, sp, #16
+ 1223 0006 0023     		movs	r3, #0
+ 1224 0008 02F8013D 		strb	r3, [r2, #-1]!
+ 602:libs/iot/stm32l475e_iot01.c **** 
+ 603:libs/iot/stm32l475e_iot01.c ****   I2Cx_ReadMultiple(&hI2cHandler, Addr, Reg, I2C_MEMADD_SIZE_8BIT, (uint8_t*)&read_value, 1);
+ 1225              		.loc 1 603 0
+ 1226 000c 0123     		movs	r3, #1
+ 1227 000e 0193     		str	r3, [sp, #4]
+ 1228 0010 0092     		str	r2, [sp]
+ 1229 0012 0A46     		mov	r2, r1
+ 1230 0014 0146     		mov	r1, r0
+ 1231              	.LVL90:
+ 1232 0016 0448     		ldr	r0, .L93
+ 1233              	.LVL91:
+ 1234 0018 FFF7FEFF 		bl	I2Cx_ReadMultiple
+ 1235              	.LVL92:
+ 604:libs/iot/stm32l475e_iot01.c **** 
+ 605:libs/iot/stm32l475e_iot01.c ****   return read_value;
+ 606:libs/iot/stm32l475e_iot01.c **** }
+ 1236              		.loc 1 606 0
+ 1237 001c 9DF80F00 		ldrb	r0, [sp, #15]	@ zero_extendqisi2
+ 1238 0020 05B0     		add	sp, sp, #20
+ 1239              	.LCFI40:
+ 1240              		.cfi_def_cfa_offset 4
+ 1241              		@ sp needed
+ 1242 0022 5DF804FB 		ldr	pc, [sp], #4
+ 1243              	.L94:
+ 1244 0026 00BF     		.align	2
+ 1245              	.L93:
+ 1246 0028 00000000 		.word	hI2cHandler
+ 1247              		.cfi_endproc
+ 1248              	.LFE150:
+ 1250              		.section	.text.SENSOR_IO_ReadMultiple,"ax",%progbits
+ 1251              		.align	1
+ 1252              		.global	SENSOR_IO_ReadMultiple
+ 1253              		.syntax unified
+ 1254              		.thumb
+ 1255              		.thumb_func
+ 1256              		.fpu fpv4-sp-d16
+ 1258              	SENSOR_IO_ReadMultiple:
+ 1259              	.LFB151:
+ 607:libs/iot/stm32l475e_iot01.c **** 
+ 608:libs/iot/stm32l475e_iot01.c **** /**
+ 609:libs/iot/stm32l475e_iot01.c ****   * @brief  Reads multiple data with I2C communication
+ 610:libs/iot/stm32l475e_iot01.c ****   *         channel from TouchScreen.
+ 611:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: I2C address
+ 612:libs/iot/stm32l475e_iot01.c ****   * @param  Reg: Register address
+ 613:libs/iot/stm32l475e_iot01.c ****   * @param  Buffer: Pointer to data buffer
+ 614:libs/iot/stm32l475e_iot01.c ****   * @param  Length: Length of the data
+ 615:libs/iot/stm32l475e_iot01.c ****   * @retval HAL status
+ 616:libs/iot/stm32l475e_iot01.c ****   */
+ 617:libs/iot/stm32l475e_iot01.c **** uint16_t SENSOR_IO_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length)
+ 618:libs/iot/stm32l475e_iot01.c **** {
+ 1260              		.loc 1 618 0
+ 1261              		.cfi_startproc
+ 1262              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/cczG30i3.s 			page 35
+
+
+ 1263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1264              	.LVL93:
+ 1265 0000 00B5     		push	{lr}
+ 1266              	.LCFI41:
+ 1267              		.cfi_def_cfa_offset 4
+ 1268              		.cfi_offset 14, -4
+ 1269 0002 83B0     		sub	sp, sp, #12
+ 1270              	.LCFI42:
+ 1271              		.cfi_def_cfa_offset 16
+ 619:libs/iot/stm32l475e_iot01.c ****  return I2Cx_ReadMultiple(&hI2cHandler, Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT, Buffer, Length);
+ 1272              		.loc 1 619 0
+ 1273 0004 0193     		str	r3, [sp, #4]
+ 1274 0006 0092     		str	r2, [sp]
+ 1275 0008 0123     		movs	r3, #1
+ 1276              	.LVL94:
+ 1277 000a 0A46     		mov	r2, r1
+ 1278              	.LVL95:
+ 1279 000c 0146     		mov	r1, r0
+ 1280              	.LVL96:
+ 1281 000e 0348     		ldr	r0, .L97
+ 1282              	.LVL97:
+ 1283 0010 FFF7FEFF 		bl	I2Cx_ReadMultiple
+ 1284              	.LVL98:
+ 620:libs/iot/stm32l475e_iot01.c **** }
+ 1285              		.loc 1 620 0
+ 1286 0014 03B0     		add	sp, sp, #12
+ 1287              	.LCFI43:
+ 1288              		.cfi_def_cfa_offset 4
+ 1289              		@ sp needed
+ 1290 0016 5DF804FB 		ldr	pc, [sp], #4
+ 1291              	.L98:
+ 1292 001a 00BF     		.align	2
+ 1293              	.L97:
+ 1294 001c 00000000 		.word	hI2cHandler
+ 1295              		.cfi_endproc
+ 1296              	.LFE151:
+ 1298              		.section	.text.SENSOR_IO_WriteMultiple,"ax",%progbits
+ 1299              		.align	1
+ 1300              		.global	SENSOR_IO_WriteMultiple
+ 1301              		.syntax unified
+ 1302              		.thumb
+ 1303              		.thumb_func
+ 1304              		.fpu fpv4-sp-d16
+ 1306              	SENSOR_IO_WriteMultiple:
+ 1307              	.LFB152:
+ 621:libs/iot/stm32l475e_iot01.c **** 
+ 622:libs/iot/stm32l475e_iot01.c **** /**
+ 623:libs/iot/stm32l475e_iot01.c ****   * @brief  Writes multiple data with I2C communication
+ 624:libs/iot/stm32l475e_iot01.c ****   *         channel from MCU to TouchScreen.
+ 625:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: I2C address
+ 626:libs/iot/stm32l475e_iot01.c ****   * @param  Reg: Register address
+ 627:libs/iot/stm32l475e_iot01.c ****   * @param  Buffer: Pointer to data buffer
+ 628:libs/iot/stm32l475e_iot01.c ****   * @param  Length: Length of the data
+ 629:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 630:libs/iot/stm32l475e_iot01.c ****   */
+ 631:libs/iot/stm32l475e_iot01.c **** void SENSOR_IO_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length)
+ 632:libs/iot/stm32l475e_iot01.c **** {
+ARM GAS  /tmp/cczG30i3.s 			page 36
+
+
+ 1308              		.loc 1 632 0
+ 1309              		.cfi_startproc
+ 1310              		@ args = 0, pretend = 0, frame = 0
+ 1311              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1312              	.LVL99:
+ 1313 0000 00B5     		push	{lr}
+ 1314              	.LCFI44:
+ 1315              		.cfi_def_cfa_offset 4
+ 1316              		.cfi_offset 14, -4
+ 1317 0002 83B0     		sub	sp, sp, #12
+ 1318              	.LCFI45:
+ 1319              		.cfi_def_cfa_offset 16
+ 633:libs/iot/stm32l475e_iot01.c ****   I2Cx_WriteMultiple(&hI2cHandler, Addr, (uint16_t)Reg, I2C_MEMADD_SIZE_8BIT, Buffer, Length);
+ 1320              		.loc 1 633 0
+ 1321 0004 0193     		str	r3, [sp, #4]
+ 1322 0006 0092     		str	r2, [sp]
+ 1323 0008 0123     		movs	r3, #1
+ 1324              	.LVL100:
+ 1325 000a 0A46     		mov	r2, r1
+ 1326              	.LVL101:
+ 1327 000c 0146     		mov	r1, r0
+ 1328              	.LVL102:
+ 1329 000e 0348     		ldr	r0, .L101
+ 1330              	.LVL103:
+ 1331 0010 FFF7FEFF 		bl	I2Cx_WriteMultiple
+ 1332              	.LVL104:
+ 634:libs/iot/stm32l475e_iot01.c **** }
+ 1333              		.loc 1 634 0
+ 1334 0014 03B0     		add	sp, sp, #12
+ 1335              	.LCFI46:
+ 1336              		.cfi_def_cfa_offset 4
+ 1337              		@ sp needed
+ 1338 0016 5DF804FB 		ldr	pc, [sp], #4
+ 1339              	.L102:
+ 1340 001a 00BF     		.align	2
+ 1341              	.L101:
+ 1342 001c 00000000 		.word	hI2cHandler
+ 1343              		.cfi_endproc
+ 1344              	.LFE152:
+ 1346              		.section	.text.SENSOR_IO_IsDeviceReady,"ax",%progbits
+ 1347              		.align	1
+ 1348              		.global	SENSOR_IO_IsDeviceReady
+ 1349              		.syntax unified
+ 1350              		.thumb
+ 1351              		.thumb_func
+ 1352              		.fpu fpv4-sp-d16
+ 1354              	SENSOR_IO_IsDeviceReady:
+ 1355              	.LFB153:
+ 635:libs/iot/stm32l475e_iot01.c **** 
+ 636:libs/iot/stm32l475e_iot01.c **** /**
+ 637:libs/iot/stm32l475e_iot01.c ****   * @brief  Checks if target device is ready for communication. 
+ 638:libs/iot/stm32l475e_iot01.c ****   * @note   This function is used with Memory devices
+ 639:libs/iot/stm32l475e_iot01.c ****   * @param  DevAddress: Target device address
+ 640:libs/iot/stm32l475e_iot01.c ****   * @param  Trials: Number of trials
+ 641:libs/iot/stm32l475e_iot01.c ****   * @retval HAL status
+ 642:libs/iot/stm32l475e_iot01.c ****   */
+ 643:libs/iot/stm32l475e_iot01.c **** HAL_StatusTypeDef SENSOR_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
+ARM GAS  /tmp/cczG30i3.s 			page 37
+
+
+ 644:libs/iot/stm32l475e_iot01.c **** { 
+ 1356              		.loc 1 644 0
+ 1357              		.cfi_startproc
+ 1358              		@ args = 0, pretend = 0, frame = 0
+ 1359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1360              	.LVL105:
+ 1361 0000 08B5     		push	{r3, lr}
+ 1362              	.LCFI47:
+ 1363              		.cfi_def_cfa_offset 8
+ 1364              		.cfi_offset 3, -8
+ 1365              		.cfi_offset 14, -4
+ 645:libs/iot/stm32l475e_iot01.c ****   return (I2Cx_IsDeviceReady(&hI2cHandler, DevAddress, Trials));
+ 1366              		.loc 1 645 0
+ 1367 0002 0A46     		mov	r2, r1
+ 1368 0004 0146     		mov	r1, r0
+ 1369              	.LVL106:
+ 1370 0006 0248     		ldr	r0, .L105
+ 1371              	.LVL107:
+ 1372 0008 FFF7FEFF 		bl	I2Cx_IsDeviceReady
+ 1373              	.LVL108:
+ 646:libs/iot/stm32l475e_iot01.c **** }
+ 1374              		.loc 1 646 0
+ 1375 000c 08BD     		pop	{r3, pc}
+ 1376              	.L106:
+ 1377 000e 00BF     		.align	2
+ 1378              	.L105:
+ 1379 0010 00000000 		.word	hI2cHandler
+ 1380              		.cfi_endproc
+ 1381              	.LFE153:
+ 1383              		.section	.text.SENSOR_IO_Delay,"ax",%progbits
+ 1384              		.align	1
+ 1385              		.global	SENSOR_IO_Delay
+ 1386              		.syntax unified
+ 1387              		.thumb
+ 1388              		.thumb_func
+ 1389              		.fpu fpv4-sp-d16
+ 1391              	SENSOR_IO_Delay:
+ 1392              	.LFB154:
+ 647:libs/iot/stm32l475e_iot01.c **** 
+ 648:libs/iot/stm32l475e_iot01.c **** /**
+ 649:libs/iot/stm32l475e_iot01.c ****   * @brief  Delay function used in TouchScreen low level driver.
+ 650:libs/iot/stm32l475e_iot01.c ****   * @param  Delay: Delay in ms
+ 651:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 652:libs/iot/stm32l475e_iot01.c ****   */
+ 653:libs/iot/stm32l475e_iot01.c **** void SENSOR_IO_Delay(uint32_t Delay)
+ 654:libs/iot/stm32l475e_iot01.c **** {
+ 1393              		.loc 1 654 0
+ 1394              		.cfi_startproc
+ 1395              		@ args = 0, pretend = 0, frame = 0
+ 1396              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1397              	.LVL109:
+ 1398 0000 08B5     		push	{r3, lr}
+ 1399              	.LCFI48:
+ 1400              		.cfi_def_cfa_offset 8
+ 1401              		.cfi_offset 3, -8
+ 1402              		.cfi_offset 14, -4
+ 655:libs/iot/stm32l475e_iot01.c ****   HAL_Delay(Delay);
+ARM GAS  /tmp/cczG30i3.s 			page 38
+
+
+ 1403              		.loc 1 655 0
+ 1404 0002 FFF7FEFF 		bl	HAL_Delay
+ 1405              	.LVL110:
+ 656:libs/iot/stm32l475e_iot01.c **** }
+ 1406              		.loc 1 656 0
+ 1407 0006 08BD     		pop	{r3, pc}
+ 1408              		.cfi_endproc
+ 1409              	.LFE154:
+ 1411              		.section	.text.NFC_IO_Init,"ax",%progbits
+ 1412              		.align	1
+ 1413              		.global	NFC_IO_Init
+ 1414              		.syntax unified
+ 1415              		.thumb
+ 1416              		.thumb_func
+ 1417              		.fpu fpv4-sp-d16
+ 1419              	NFC_IO_Init:
+ 1420              	.LFB155:
+ 657:libs/iot/stm32l475e_iot01.c **** 
+ 658:libs/iot/stm32l475e_iot01.c **** /******************************** LINK NFC ********************************/
+ 659:libs/iot/stm32l475e_iot01.c **** 
+ 660:libs/iot/stm32l475e_iot01.c **** /**
+ 661:libs/iot/stm32l475e_iot01.c ****   * @brief  Initializes Sensors low level.
+ 662:libs/iot/stm32l475e_iot01.c ****   * @param  GpoIrqEnable: 0x0 is disable, otherwise enabled  
+ 663:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 664:libs/iot/stm32l475e_iot01.c ****   */
+ 665:libs/iot/stm32l475e_iot01.c **** void NFC_IO_Init(uint8_t GpoIrqEnable)
+ 666:libs/iot/stm32l475e_iot01.c **** {
+ 1421              		.loc 1 666 0
+ 1422              		.cfi_startproc
+ 1423              		@ args = 0, pretend = 0, frame = 24
+ 1424              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1425              	.LVL111:
+ 1426 0000 10B5     		push	{r4, lr}
+ 1427              	.LCFI49:
+ 1428              		.cfi_def_cfa_offset 8
+ 1429              		.cfi_offset 4, -8
+ 1430              		.cfi_offset 14, -4
+ 1431 0002 86B0     		sub	sp, sp, #24
+ 1432              	.LCFI50:
+ 1433              		.cfi_def_cfa_offset 32
+ 1434 0004 0446     		mov	r4, r0
+ 667:libs/iot/stm32l475e_iot01.c ****   GPIO_InitTypeDef GPIO_InitStruct;
+ 668:libs/iot/stm32l475e_iot01.c **** 
+ 669:libs/iot/stm32l475e_iot01.c ****   /* I2C init */
+ 670:libs/iot/stm32l475e_iot01.c ****   I2Cx_Init(&hI2cHandler);
+ 1435              		.loc 1 670 0
+ 1436 0006 1D48     		ldr	r0, .L114
+ 1437              	.LVL112:
+ 1438 0008 FFF7FEFF 		bl	I2Cx_Init
+ 1439              	.LVL113:
+ 1440              	.LBB9:
+ 671:libs/iot/stm32l475e_iot01.c ****   
+ 672:libs/iot/stm32l475e_iot01.c ****   /* GPIO Ports Clock Enable */
+ 673:libs/iot/stm32l475e_iot01.c ****   NFC_GPIO_CLK_ENABLE();
+ 1441              		.loc 1 673 0
+ 1442 000c 1C4B     		ldr	r3, .L114+4
+ 1443 000e DA6C     		ldr	r2, [r3, #76]
+ARM GAS  /tmp/cczG30i3.s 			page 39
+
+
+ 1444 0010 42F01002 		orr	r2, r2, #16
+ 1445 0014 DA64     		str	r2, [r3, #76]
+ 1446 0016 DB6C     		ldr	r3, [r3, #76]
+ 1447 0018 03F01003 		and	r3, r3, #16
+ 1448 001c 0093     		str	r3, [sp]
+ 1449 001e 009B     		ldr	r3, [sp]
+ 1450              	.LBE9:
+ 674:libs/iot/stm32l475e_iot01.c ****   
+ 675:libs/iot/stm32l475e_iot01.c ****   /* Configure GPIO pins for GPO (PE4) */
+ 676:libs/iot/stm32l475e_iot01.c ****   if(GpoIrqEnable == 0)
+ 1451              		.loc 1 676 0
+ 1452 0020 FCB1     		cbz	r4, .L113
+ 677:libs/iot/stm32l475e_iot01.c ****   {
+ 678:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Pin = NFC_GPIO_GPO_PIN;
+ 679:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Mode = GPIO_MODE_INPUT; 
+ 680:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 681:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 682:libs/iot/stm32l475e_iot01.c ****     HAL_GPIO_Init(NFC_GPIO_GPO_PIN_PORT, &GPIO_InitStruct);
+ 683:libs/iot/stm32l475e_iot01.c ****   }
+ 684:libs/iot/stm32l475e_iot01.c ****   else
+ 685:libs/iot/stm32l475e_iot01.c ****   {
+ 686:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Pin = NFC_GPIO_GPO_PIN;
+ 1453              		.loc 1 686 0
+ 1454 0022 1023     		movs	r3, #16
+ 1455 0024 0193     		str	r3, [sp, #4]
+ 687:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+ 1456              		.loc 1 687 0
+ 1457 0026 174B     		ldr	r3, .L114+8
+ 1458 0028 0293     		str	r3, [sp, #8]
+ 688:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 1459              		.loc 1 688 0
+ 1460 002a 0123     		movs	r3, #1
+ 1461 002c 0393     		str	r3, [sp, #12]
+ 689:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 1462              		.loc 1 689 0
+ 1463 002e 0324     		movs	r4, #3
+ 1464 0030 0494     		str	r4, [sp, #16]
+ 690:libs/iot/stm32l475e_iot01.c ****     HAL_GPIO_Init(NFC_GPIO_GPO_PIN_PORT, &GPIO_InitStruct);
+ 1465              		.loc 1 690 0
+ 1466 0032 01A9     		add	r1, sp, #4
+ 1467 0034 1448     		ldr	r0, .L114+12
+ 1468 0036 FFF7FEFF 		bl	HAL_GPIO_Init
+ 1469              	.LVL114:
+ 691:libs/iot/stm32l475e_iot01.c ****     /* Enable and set EXTI4_IRQn Interrupt to the lowest priority */
+ 692:libs/iot/stm32l475e_iot01.c ****     HAL_NVIC_SetPriority(EXTI4_IRQn, 3, 0);
+ 1470              		.loc 1 692 0
+ 1471 003a 0022     		movs	r2, #0
+ 1472 003c 2146     		mov	r1, r4
+ 1473 003e 0A20     		movs	r0, #10
+ 1474 0040 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 1475              	.LVL115:
+ 693:libs/iot/stm32l475e_iot01.c ****     HAL_NVIC_EnableIRQ(EXTI4_IRQn);    
+ 1476              		.loc 1 693 0
+ 1477 0044 0A20     		movs	r0, #10
+ 1478 0046 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 1479              	.LVL116:
+ 1480              	.L111:
+ARM GAS  /tmp/cczG30i3.s 			page 40
+
+
+ 694:libs/iot/stm32l475e_iot01.c ****   }
+ 695:libs/iot/stm32l475e_iot01.c ****   
+ 696:libs/iot/stm32l475e_iot01.c ****   /* Configure GPIO pins for DISABLE (PE2)*/
+ 697:libs/iot/stm32l475e_iot01.c ****   GPIO_InitStruct.Pin = NFC_GPIO_RFDISABLE_PIN;
+ 1481              		.loc 1 697 0
+ 1482 004a 0423     		movs	r3, #4
+ 1483 004c 0193     		str	r3, [sp, #4]
+ 698:libs/iot/stm32l475e_iot01.c ****   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 1484              		.loc 1 698 0
+ 1485 004e 0123     		movs	r3, #1
+ 1486 0050 0293     		str	r3, [sp, #8]
+ 699:libs/iot/stm32l475e_iot01.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 1487              		.loc 1 699 0
+ 1488 0052 0023     		movs	r3, #0
+ 1489 0054 0393     		str	r3, [sp, #12]
+ 700:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_Init(NFC_GPIO_RFDISABLE_PIN_PORT, &GPIO_InitStruct);
+ 1490              		.loc 1 700 0
+ 1491 0056 01A9     		add	r1, sp, #4
+ 1492 0058 0B48     		ldr	r0, .L114+12
+ 1493 005a FFF7FEFF 		bl	HAL_GPIO_Init
+ 1494              	.LVL117:
+ 701:libs/iot/stm32l475e_iot01.c **** }
+ 1495              		.loc 1 701 0
+ 1496 005e 06B0     		add	sp, sp, #24
+ 1497              	.LCFI51:
+ 1498              		.cfi_remember_state
+ 1499              		.cfi_def_cfa_offset 8
+ 1500              		@ sp needed
+ 1501 0060 10BD     		pop	{r4, pc}
+ 1502              	.L113:
+ 1503              	.LCFI52:
+ 1504              		.cfi_restore_state
+ 678:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Mode = GPIO_MODE_INPUT; 
+ 1505              		.loc 1 678 0
+ 1506 0062 1023     		movs	r3, #16
+ 1507 0064 0193     		str	r3, [sp, #4]
+ 679:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Pull = GPIO_PULLUP;
+ 1508              		.loc 1 679 0
+ 1509 0066 0023     		movs	r3, #0
+ 1510 0068 0293     		str	r3, [sp, #8]
+ 680:libs/iot/stm32l475e_iot01.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+ 1511              		.loc 1 680 0
+ 1512 006a 0123     		movs	r3, #1
+ 1513 006c 0393     		str	r3, [sp, #12]
+ 681:libs/iot/stm32l475e_iot01.c ****     HAL_GPIO_Init(NFC_GPIO_GPO_PIN_PORT, &GPIO_InitStruct);
+ 1514              		.loc 1 681 0
+ 1515 006e 0323     		movs	r3, #3
+ 1516 0070 0493     		str	r3, [sp, #16]
+ 682:libs/iot/stm32l475e_iot01.c ****   }
+ 1517              		.loc 1 682 0
+ 1518 0072 01A9     		add	r1, sp, #4
+ 1519 0074 0448     		ldr	r0, .L114+12
+ 1520 0076 FFF7FEFF 		bl	HAL_GPIO_Init
+ 1521              	.LVL118:
+ 1522 007a E6E7     		b	.L111
+ 1523              	.L115:
+ 1524              		.align	2
+ARM GAS  /tmp/cczG30i3.s 			page 41
+
+
+ 1525              	.L114:
+ 1526 007c 00000000 		.word	hI2cHandler
+ 1527 0080 00100240 		.word	1073876992
+ 1528 0084 00002110 		.word	270598144
+ 1529 0088 00100048 		.word	1207963648
+ 1530              		.cfi_endproc
+ 1531              	.LFE155:
+ 1533              		.section	.text.NFC_IO_DeInit,"ax",%progbits
+ 1534              		.align	1
+ 1535              		.global	NFC_IO_DeInit
+ 1536              		.syntax unified
+ 1537              		.thumb
+ 1538              		.thumb_func
+ 1539              		.fpu fpv4-sp-d16
+ 1541              	NFC_IO_DeInit:
+ 1542              	.LFB156:
+ 702:libs/iot/stm32l475e_iot01.c **** 
+ 703:libs/iot/stm32l475e_iot01.c **** /**
+ 704:libs/iot/stm32l475e_iot01.c ****   * @brief  DeInitializes Sensors low level.
+ 705:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 706:libs/iot/stm32l475e_iot01.c ****   */
+ 707:libs/iot/stm32l475e_iot01.c **** void NFC_IO_DeInit(void)
+ 708:libs/iot/stm32l475e_iot01.c **** {
+ 1543              		.loc 1 708 0
+ 1544              		.cfi_startproc
+ 1545              		@ args = 0, pretend = 0, frame = 0
+ 1546              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1547 0000 08B5     		push	{r3, lr}
+ 1548              	.LCFI53:
+ 1549              		.cfi_def_cfa_offset 8
+ 1550              		.cfi_offset 3, -8
+ 1551              		.cfi_offset 14, -4
+ 709:libs/iot/stm32l475e_iot01.c ****   I2Cx_DeInit(&hI2cHandler);
+ 1552              		.loc 1 709 0
+ 1553 0002 0248     		ldr	r0, .L118
+ 1554 0004 FFF7FEFF 		bl	I2Cx_DeInit
+ 1555              	.LVL119:
+ 710:libs/iot/stm32l475e_iot01.c **** }
+ 1556              		.loc 1 710 0
+ 1557 0008 08BD     		pop	{r3, pc}
+ 1558              	.L119:
+ 1559 000a 00BF     		.align	2
+ 1560              	.L118:
+ 1561 000c 00000000 		.word	hI2cHandler
+ 1562              		.cfi_endproc
+ 1563              	.LFE156:
+ 1565              		.section	.text.NFC_IO_IsDeviceReady,"ax",%progbits
+ 1566              		.align	1
+ 1567              		.global	NFC_IO_IsDeviceReady
+ 1568              		.syntax unified
+ 1569              		.thumb
+ 1570              		.thumb_func
+ 1571              		.fpu fpv4-sp-d16
+ 1573              	NFC_IO_IsDeviceReady:
+ 1574              	.LFB159:
+ 711:libs/iot/stm32l475e_iot01.c **** 
+ 712:libs/iot/stm32l475e_iot01.c **** /**
+ARM GAS  /tmp/cczG30i3.s 			page 42
+
+
+ 713:libs/iot/stm32l475e_iot01.c ****   * @brief  This functions reads a response of the M24SR device
+ 714:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: M24SR I2C address   (do we really need to add??)
+ 715:libs/iot/stm32l475e_iot01.c ****   * @param  pBuffer : Pointer on the buffer to retrieve M24SR response
+ 716:libs/iot/stm32l475e_iot01.c ****   * @param  Length: Length of the data
+ 717:libs/iot/stm32l475e_iot01.c ****   * @retval Status: Success or Timeout
+ 718:libs/iot/stm32l475e_iot01.c ****   */
+ 719:libs/iot/stm32l475e_iot01.c **** uint16_t NFC_IO_ReadMultiple (uint8_t Addr, uint8_t *pBuffer, uint16_t Length )
+ 720:libs/iot/stm32l475e_iot01.c **** {
+ 721:libs/iot/stm32l475e_iot01.c ****   uint16_t status ;
+ 722:libs/iot/stm32l475e_iot01.c ****     
+ 723:libs/iot/stm32l475e_iot01.c ****     /* Before calling this function M24SR must be ready: check to detect potential issues */
+ 724:libs/iot/stm32l475e_iot01.c ****   status = NFC_IO_IsDeviceReady(Addr, NFC_I2C_TRIALS);
+ 725:libs/iot/stm32l475e_iot01.c ****   if (status != NFC_I2C_STATUS_SUCCESS)
+ 726:libs/iot/stm32l475e_iot01.c ****   {
+ 727:libs/iot/stm32l475e_iot01.c ****     return NFC_I2C_ERROR_TIMEOUT;
+ 728:libs/iot/stm32l475e_iot01.c ****   } 
+ 729:libs/iot/stm32l475e_iot01.c ****     
+ 730:libs/iot/stm32l475e_iot01.c ****   if( HAL_I2C_Master_Receive(&hI2cHandler, Addr, (uint8_t*)pBuffer, Length, NFC_I2C_TIMEOUT_STD) !=
+ 731:libs/iot/stm32l475e_iot01.c ****   {
+ 732:libs/iot/stm32l475e_iot01.c ****     return NFC_I2C_ERROR_TIMEOUT;
+ 733:libs/iot/stm32l475e_iot01.c ****   }
+ 734:libs/iot/stm32l475e_iot01.c ****     
+ 735:libs/iot/stm32l475e_iot01.c ****   return NFC_I2C_STATUS_SUCCESS;    
+ 736:libs/iot/stm32l475e_iot01.c **** }
+ 737:libs/iot/stm32l475e_iot01.c **** 
+ 738:libs/iot/stm32l475e_iot01.c **** /**
+ 739:libs/iot/stm32l475e_iot01.c ****   * @brief  This functions sends the command buffer 
+ 740:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: M24SR I2C address   (do we really need to add??)
+ 741:libs/iot/stm32l475e_iot01.c ****   * @param  pBuffer : pointer to the buffer to send to the M24SR
+ 742:libs/iot/stm32l475e_iot01.c ****   * @param  Length: Length of the data
+ 743:libs/iot/stm32l475e_iot01.c ****   * @retval Status: Success or Timeout
+ 744:libs/iot/stm32l475e_iot01.c ****   */
+ 745:libs/iot/stm32l475e_iot01.c **** uint16_t  NFC_IO_WriteMultiple (uint8_t Addr, uint8_t *pBuffer, uint16_t Length) 
+ 746:libs/iot/stm32l475e_iot01.c **** {
+ 747:libs/iot/stm32l475e_iot01.c ****   uint16_t status ;
+ 748:libs/iot/stm32l475e_iot01.c ****     
+ 749:libs/iot/stm32l475e_iot01.c ****   /* Before calling this function M24SR must be ready: check to detect potential issues */
+ 750:libs/iot/stm32l475e_iot01.c ****   status = NFC_IO_IsDeviceReady(Addr, NFC_I2C_TRIALS);
+ 751:libs/iot/stm32l475e_iot01.c ****   if (status != NFC_I2C_STATUS_SUCCESS)
+ 752:libs/iot/stm32l475e_iot01.c ****   {
+ 753:libs/iot/stm32l475e_iot01.c ****     return NFC_I2C_ERROR_TIMEOUT;
+ 754:libs/iot/stm32l475e_iot01.c ****   } 
+ 755:libs/iot/stm32l475e_iot01.c ****     
+ 756:libs/iot/stm32l475e_iot01.c ****   if( HAL_I2C_Master_Transmit(&hI2cHandler, Addr, (uint8_t*)pBuffer, Length, NFC_I2C_TIMEOUT_STD) !
+ 757:libs/iot/stm32l475e_iot01.c ****   {
+ 758:libs/iot/stm32l475e_iot01.c ****     return NFC_I2C_ERROR_TIMEOUT;
+ 759:libs/iot/stm32l475e_iot01.c ****   }
+ 760:libs/iot/stm32l475e_iot01.c **** 
+ 761:libs/iot/stm32l475e_iot01.c ****   return NFC_I2C_STATUS_SUCCESS;
+ 762:libs/iot/stm32l475e_iot01.c **** }
+ 763:libs/iot/stm32l475e_iot01.c **** 
+ 764:libs/iot/stm32l475e_iot01.c **** /**
+ 765:libs/iot/stm32l475e_iot01.c ****   * @brief  Checks if target device is ready for communication.
+ 766:libs/iot/stm32l475e_iot01.c ****   * @param  Addr: M24SR I2C address   (do we really need to add??)
+ 767:libs/iot/stm32l475e_iot01.c ****   * @param  Trials: Number of trials (currently not present in M24sr)
+ 768:libs/iot/stm32l475e_iot01.c ****   * @retval Status: Success or Timeout
+ 769:libs/iot/stm32l475e_iot01.c ****   */
+ARM GAS  /tmp/cczG30i3.s 			page 43
+
+
+ 770:libs/iot/stm32l475e_iot01.c **** uint16_t   NFC_IO_IsDeviceReady (uint8_t Addr, uint32_t Trials)
+ 771:libs/iot/stm32l475e_iot01.c **** {
+ 1575              		.loc 1 771 0
+ 1576              		.cfi_startproc
+ 1577              		@ args = 0, pretend = 0, frame = 0
+ 1578              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1579              	.LVL120:
+ 1580 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1581              	.LCFI54:
+ 1582              		.cfi_def_cfa_offset 24
+ 1583              		.cfi_offset 3, -24
+ 1584              		.cfi_offset 4, -20
+ 1585              		.cfi_offset 5, -16
+ 1586              		.cfi_offset 6, -12
+ 1587              		.cfi_offset 7, -8
+ 1588              		.cfi_offset 14, -4
+ 1589 0002 0746     		mov	r7, r0
+ 1590 0004 0E46     		mov	r6, r1
+ 1591              	.LVL121:
+ 772:libs/iot/stm32l475e_iot01.c ****     HAL_StatusTypeDef status;
+ 773:libs/iot/stm32l475e_iot01.c ****     uint32_t tickstart = 0;
+ 774:libs/iot/stm32l475e_iot01.c ****     uint32_t currenttick = 0;
+ 775:libs/iot/stm32l475e_iot01.c ****     
+ 776:libs/iot/stm32l475e_iot01.c ****     /* Get tick */
+ 777:libs/iot/stm32l475e_iot01.c ****     tickstart = HAL_GetTick();
+ 1592              		.loc 1 777 0
+ 1593 0006 FFF7FEFF 		bl	HAL_GetTick
+ 1594              	.LVL122:
+ 1595 000a 0546     		mov	r5, r0
+ 1596              	.LVL123:
+ 1597              	.L122:
+ 778:libs/iot/stm32l475e_iot01.c ****     
+ 779:libs/iot/stm32l475e_iot01.c ****     /* Wait until M24SR is ready or timeout occurs */
+ 780:libs/iot/stm32l475e_iot01.c ****     do
+ 781:libs/iot/stm32l475e_iot01.c ****     {
+ 782:libs/iot/stm32l475e_iot01.c ****         status = HAL_I2C_IsDeviceReady(&hI2cHandler, Addr, Trials, NFC_I2C_TIMEOUT_STD);
+ 1598              		.loc 1 782 0 discriminator 2
+ 1599 000c 0823     		movs	r3, #8
+ 1600 000e 3246     		mov	r2, r6
+ 1601 0010 3946     		mov	r1, r7
+ 1602 0012 0848     		ldr	r0, .L127
+ 1603 0014 FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
+ 1604              	.LVL124:
+ 1605 0018 0446     		mov	r4, r0
+ 1606              	.LVL125:
+ 783:libs/iot/stm32l475e_iot01.c ****         currenttick = HAL_GetTick();
+ 1607              		.loc 1 783 0 discriminator 2
+ 1608 001a FFF7FEFF 		bl	HAL_GetTick
+ 1609              	.LVL126:
+ 784:libs/iot/stm32l475e_iot01.c ****     } while( ( (currenttick - tickstart) < NFC_I2C_TIMEOUT_MAX) && (status != HAL_OK) );
+ 1610              		.loc 1 784 0 discriminator 2
+ 1611 001e 401B     		subs	r0, r0, r5
+ 1612              	.LVL127:
+ 1613 0020 C728     		cmp	r0, #199
+ 1614 0022 01D8     		bhi	.L121
+ 1615              		.loc 1 784 0 is_stmt 0 discriminator 1
+ 1616 0024 002C     		cmp	r4, #0
+ARM GAS  /tmp/cczG30i3.s 			page 44
+
+
+ 1617 0026 F1D1     		bne	.L122
+ 1618              	.L121:
+ 785:libs/iot/stm32l475e_iot01.c ****     
+ 786:libs/iot/stm32l475e_iot01.c ****     if (status != HAL_OK)
+ 1619              		.loc 1 786 0 is_stmt 1
+ 1620 0028 0CB9     		cbnz	r4, .L126
+ 787:libs/iot/stm32l475e_iot01.c ****     {
+ 788:libs/iot/stm32l475e_iot01.c ****         return NFC_I2C_ERROR_TIMEOUT;
+ 789:libs/iot/stm32l475e_iot01.c ****     } 
+ 790:libs/iot/stm32l475e_iot01.c **** 
+ 791:libs/iot/stm32l475e_iot01.c ****     return NFC_I2C_STATUS_SUCCESS;
+ 1621              		.loc 1 791 0
+ 1622 002a 0020     		movs	r0, #0
+ 1623              	.L123:
+ 792:libs/iot/stm32l475e_iot01.c **** }
+ 1624              		.loc 1 792 0
+ 1625 002c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1626              	.LVL128:
+ 1627              	.L126:
+ 788:libs/iot/stm32l475e_iot01.c ****     } 
+ 1628              		.loc 1 788 0
+ 1629 002e 1120     		movs	r0, #17
+ 1630 0030 FCE7     		b	.L123
+ 1631              	.L128:
+ 1632 0032 00BF     		.align	2
+ 1633              	.L127:
+ 1634 0034 00000000 		.word	hI2cHandler
+ 1635              		.cfi_endproc
+ 1636              	.LFE159:
+ 1638              		.section	.text.NFC_IO_ReadMultiple,"ax",%progbits
+ 1639              		.align	1
+ 1640              		.global	NFC_IO_ReadMultiple
+ 1641              		.syntax unified
+ 1642              		.thumb
+ 1643              		.thumb_func
+ 1644              		.fpu fpv4-sp-d16
+ 1646              	NFC_IO_ReadMultiple:
+ 1647              	.LFB157:
+ 720:libs/iot/stm32l475e_iot01.c ****   uint16_t status ;
+ 1648              		.loc 1 720 0
+ 1649              		.cfi_startproc
+ 1650              		@ args = 0, pretend = 0, frame = 0
+ 1651              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1652              	.LVL129:
+ 1653 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1654              	.LCFI55:
+ 1655              		.cfi_def_cfa_offset 20
+ 1656              		.cfi_offset 4, -20
+ 1657              		.cfi_offset 5, -16
+ 1658              		.cfi_offset 6, -12
+ 1659              		.cfi_offset 7, -8
+ 1660              		.cfi_offset 14, -4
+ 1661 0002 83B0     		sub	sp, sp, #12
+ 1662              	.LCFI56:
+ 1663              		.cfi_def_cfa_offset 32
+ 1664 0004 0546     		mov	r5, r0
+ 1665 0006 0E46     		mov	r6, r1
+ARM GAS  /tmp/cczG30i3.s 			page 45
+
+
+ 1666 0008 1746     		mov	r7, r2
+ 724:libs/iot/stm32l475e_iot01.c ****   if (status != NFC_I2C_STATUS_SUCCESS)
+ 1667              		.loc 1 724 0
+ 1668 000a 0121     		movs	r1, #1
+ 1669              	.LVL130:
+ 1670 000c FFF7FEFF 		bl	NFC_IO_IsDeviceReady
+ 1671              	.LVL131:
+ 725:libs/iot/stm32l475e_iot01.c ****   {
+ 1672              		.loc 1 725 0
+ 1673 0010 58B9     		cbnz	r0, .L131
+ 1674 0012 0446     		mov	r4, r0
+ 730:libs/iot/stm32l475e_iot01.c ****   {
+ 1675              		.loc 1 730 0
+ 1676 0014 0823     		movs	r3, #8
+ 1677 0016 0093     		str	r3, [sp]
+ 1678 0018 3B46     		mov	r3, r7
+ 1679 001a 3246     		mov	r2, r6
+ 1680 001c 2946     		mov	r1, r5
+ 1681 001e 0548     		ldr	r0, .L133
+ 1682              	.LVL132:
+ 1683 0020 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 1684              	.LVL133:
+ 1685 0024 10B1     		cbz	r0, .L130
+ 732:libs/iot/stm32l475e_iot01.c ****   }
+ 1686              		.loc 1 732 0
+ 1687 0026 1124     		movs	r4, #17
+ 1688 0028 00E0     		b	.L130
+ 1689              	.LVL134:
+ 1690              	.L131:
+ 727:libs/iot/stm32l475e_iot01.c ****   } 
+ 1691              		.loc 1 727 0
+ 1692 002a 1124     		movs	r4, #17
+ 1693              	.LVL135:
+ 1694              	.L130:
+ 736:libs/iot/stm32l475e_iot01.c **** 
+ 1695              		.loc 1 736 0
+ 1696 002c 2046     		mov	r0, r4
+ 1697 002e 03B0     		add	sp, sp, #12
+ 1698              	.LCFI57:
+ 1699              		.cfi_def_cfa_offset 20
+ 1700              		@ sp needed
+ 1701 0030 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1702              	.LVL136:
+ 1703              	.L134:
+ 1704 0032 00BF     		.align	2
+ 1705              	.L133:
+ 1706 0034 00000000 		.word	hI2cHandler
+ 1707              		.cfi_endproc
+ 1708              	.LFE157:
+ 1710              		.section	.text.NFC_IO_WriteMultiple,"ax",%progbits
+ 1711              		.align	1
+ 1712              		.global	NFC_IO_WriteMultiple
+ 1713              		.syntax unified
+ 1714              		.thumb
+ 1715              		.thumb_func
+ 1716              		.fpu fpv4-sp-d16
+ 1718              	NFC_IO_WriteMultiple:
+ARM GAS  /tmp/cczG30i3.s 			page 46
+
+
+ 1719              	.LFB158:
+ 746:libs/iot/stm32l475e_iot01.c ****   uint16_t status ;
+ 1720              		.loc 1 746 0
+ 1721              		.cfi_startproc
+ 1722              		@ args = 0, pretend = 0, frame = 0
+ 1723              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1724              	.LVL137:
+ 1725 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1726              	.LCFI58:
+ 1727              		.cfi_def_cfa_offset 20
+ 1728              		.cfi_offset 4, -20
+ 1729              		.cfi_offset 5, -16
+ 1730              		.cfi_offset 6, -12
+ 1731              		.cfi_offset 7, -8
+ 1732              		.cfi_offset 14, -4
+ 1733 0002 83B0     		sub	sp, sp, #12
+ 1734              	.LCFI59:
+ 1735              		.cfi_def_cfa_offset 32
+ 1736 0004 0546     		mov	r5, r0
+ 1737 0006 0E46     		mov	r6, r1
+ 1738 0008 1746     		mov	r7, r2
+ 750:libs/iot/stm32l475e_iot01.c ****   if (status != NFC_I2C_STATUS_SUCCESS)
+ 1739              		.loc 1 750 0
+ 1740 000a 0121     		movs	r1, #1
+ 1741              	.LVL138:
+ 1742 000c FFF7FEFF 		bl	NFC_IO_IsDeviceReady
+ 1743              	.LVL139:
+ 751:libs/iot/stm32l475e_iot01.c ****   {
+ 1744              		.loc 1 751 0
+ 1745 0010 58B9     		cbnz	r0, .L137
+ 1746 0012 0446     		mov	r4, r0
+ 756:libs/iot/stm32l475e_iot01.c ****   {
+ 1747              		.loc 1 756 0
+ 1748 0014 0823     		movs	r3, #8
+ 1749 0016 0093     		str	r3, [sp]
+ 1750 0018 3B46     		mov	r3, r7
+ 1751 001a 3246     		mov	r2, r6
+ 1752 001c 2946     		mov	r1, r5
+ 1753 001e 0548     		ldr	r0, .L139
+ 1754              	.LVL140:
+ 1755 0020 FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 1756              	.LVL141:
+ 1757 0024 10B1     		cbz	r0, .L136
+ 758:libs/iot/stm32l475e_iot01.c ****   }
+ 1758              		.loc 1 758 0
+ 1759 0026 1124     		movs	r4, #17
+ 1760 0028 00E0     		b	.L136
+ 1761              	.LVL142:
+ 1762              	.L137:
+ 753:libs/iot/stm32l475e_iot01.c ****   } 
+ 1763              		.loc 1 753 0
+ 1764 002a 1124     		movs	r4, #17
+ 1765              	.LVL143:
+ 1766              	.L136:
+ 762:libs/iot/stm32l475e_iot01.c **** 
+ 1767              		.loc 1 762 0
+ 1768 002c 2046     		mov	r0, r4
+ARM GAS  /tmp/cczG30i3.s 			page 47
+
+
+ 1769 002e 03B0     		add	sp, sp, #12
+ 1770              	.LCFI60:
+ 1771              		.cfi_def_cfa_offset 20
+ 1772              		@ sp needed
+ 1773 0030 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1774              	.LVL144:
+ 1775              	.L140:
+ 1776 0032 00BF     		.align	2
+ 1777              	.L139:
+ 1778 0034 00000000 		.word	hI2cHandler
+ 1779              		.cfi_endproc
+ 1780              	.LFE158:
+ 1782              		.section	.text.NFC_IO_ReadState,"ax",%progbits
+ 1783              		.align	1
+ 1784              		.global	NFC_IO_ReadState
+ 1785              		.syntax unified
+ 1786              		.thumb
+ 1787              		.thumb_func
+ 1788              		.fpu fpv4-sp-d16
+ 1790              	NFC_IO_ReadState:
+ 1791              	.LFB160:
+ 793:libs/iot/stm32l475e_iot01.c **** 
+ 794:libs/iot/stm32l475e_iot01.c **** /**
+ 795:libs/iot/stm32l475e_iot01.c ****   * @brief  This function read the state of the M24SR GPO
+ 796:libs/iot/stm32l475e_iot01.c ****   * @param  none
+ 797:libs/iot/stm32l475e_iot01.c ****   * @retval GPIO_PinState : state of the M24SR GPO
+ 798:libs/iot/stm32l475e_iot01.c ****   */
+ 799:libs/iot/stm32l475e_iot01.c **** void NFC_IO_ReadState(uint8_t * pPinState)
+ 800:libs/iot/stm32l475e_iot01.c **** {
+ 1792              		.loc 1 800 0
+ 1793              		.cfi_startproc
+ 1794              		@ args = 0, pretend = 0, frame = 0
+ 1795              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1796              	.LVL145:
+ 1797 0000 10B5     		push	{r4, lr}
+ 1798              	.LCFI61:
+ 1799              		.cfi_def_cfa_offset 8
+ 1800              		.cfi_offset 4, -8
+ 1801              		.cfi_offset 14, -4
+ 1802 0002 0446     		mov	r4, r0
+ 801:libs/iot/stm32l475e_iot01.c ****   *pPinState = (uint8_t)HAL_GPIO_ReadPin(NFC_GPIO_GPO_PIN_PORT,NFC_GPIO_GPO_PIN);
+ 1803              		.loc 1 801 0
+ 1804 0004 1021     		movs	r1, #16
+ 1805 0006 0248     		ldr	r0, .L143
+ 1806              	.LVL146:
+ 1807 0008 FFF7FEFF 		bl	HAL_GPIO_ReadPin
+ 1808              	.LVL147:
+ 1809 000c 2070     		strb	r0, [r4]
+ 802:libs/iot/stm32l475e_iot01.c **** }
+ 1810              		.loc 1 802 0
+ 1811 000e 10BD     		pop	{r4, pc}
+ 1812              	.LVL148:
+ 1813              	.L144:
+ 1814              		.align	2
+ 1815              	.L143:
+ 1816 0010 00100048 		.word	1207963648
+ 1817              		.cfi_endproc
+ARM GAS  /tmp/cczG30i3.s 			page 48
+
+
+ 1818              	.LFE160:
+ 1820              		.section	.text.NFC_IO_RfDisable,"ax",%progbits
+ 1821              		.align	1
+ 1822              		.global	NFC_IO_RfDisable
+ 1823              		.syntax unified
+ 1824              		.thumb
+ 1825              		.thumb_func
+ 1826              		.fpu fpv4-sp-d16
+ 1828              	NFC_IO_RfDisable:
+ 1829              	.LFB161:
+ 803:libs/iot/stm32l475e_iot01.c **** 
+ 804:libs/iot/stm32l475e_iot01.c **** /**
+ 805:libs/iot/stm32l475e_iot01.c ****   * @brief  This function set the state of the M24SR RF disable pin
+ 806:libs/iot/stm32l475e_iot01.c ****   * @param  PinState: put RF disable pin of M24SR in PinState (1 or 0)
+ 807:libs/iot/stm32l475e_iot01.c ****   */
+ 808:libs/iot/stm32l475e_iot01.c **** void NFC_IO_RfDisable(uint8_t PinState)
+ 809:libs/iot/stm32l475e_iot01.c **** {
+ 1830              		.loc 1 809 0
+ 1831              		.cfi_startproc
+ 1832              		@ args = 0, pretend = 0, frame = 0
+ 1833              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1834              	.LVL149:
+ 1835 0000 08B5     		push	{r3, lr}
+ 1836              	.LCFI62:
+ 1837              		.cfi_def_cfa_offset 8
+ 1838              		.cfi_offset 3, -8
+ 1839              		.cfi_offset 14, -4
+ 810:libs/iot/stm32l475e_iot01.c ****   HAL_GPIO_WritePin(NFC_GPIO_RFDISABLE_PIN_PORT,NFC_GPIO_RFDISABLE_PIN,(GPIO_PinState)PinState);
+ 1840              		.loc 1 810 0
+ 1841 0002 0246     		mov	r2, r0
+ 1842 0004 0421     		movs	r1, #4
+ 1843 0006 0248     		ldr	r0, .L147
+ 1844              	.LVL150:
+ 1845 0008 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1846              	.LVL151:
+ 811:libs/iot/stm32l475e_iot01.c **** }
+ 1847              		.loc 1 811 0
+ 1848 000c 08BD     		pop	{r3, pc}
+ 1849              	.L148:
+ 1850 000e 00BF     		.align	2
+ 1851              	.L147:
+ 1852 0010 00100048 		.word	1207963648
+ 1853              		.cfi_endproc
+ 1854              	.LFE161:
+ 1856              		.section	.text.NFC_IO_Delay,"ax",%progbits
+ 1857              		.align	1
+ 1858              		.global	NFC_IO_Delay
+ 1859              		.syntax unified
+ 1860              		.thumb
+ 1861              		.thumb_func
+ 1862              		.fpu fpv4-sp-d16
+ 1864              	NFC_IO_Delay:
+ 1865              	.LFB162:
+ 812:libs/iot/stm32l475e_iot01.c **** 
+ 813:libs/iot/stm32l475e_iot01.c **** /**
+ 814:libs/iot/stm32l475e_iot01.c ****   * @brief  This function wait the time given in param (in milisecond)
+ 815:libs/iot/stm32l475e_iot01.c ****   * @param  Delay: Delay in ms
+ARM GAS  /tmp/cczG30i3.s 			page 49
+
+
+ 816:libs/iot/stm32l475e_iot01.c ****   * @retval None
+ 817:libs/iot/stm32l475e_iot01.c ****   */
+ 818:libs/iot/stm32l475e_iot01.c **** void NFC_IO_Delay(uint32_t Delay)
+ 819:libs/iot/stm32l475e_iot01.c **** {
+ 1866              		.loc 1 819 0
+ 1867              		.cfi_startproc
+ 1868              		@ args = 0, pretend = 0, frame = 0
+ 1869              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1870              	.LVL152:
+ 1871 0000 08B5     		push	{r3, lr}
+ 1872              	.LCFI63:
+ 1873              		.cfi_def_cfa_offset 8
+ 1874              		.cfi_offset 3, -8
+ 1875              		.cfi_offset 14, -4
+ 820:libs/iot/stm32l475e_iot01.c ****   HAL_Delay(Delay);
+ 1876              		.loc 1 820 0
+ 1877 0002 FFF7FEFF 		bl	HAL_Delay
+ 1878              	.LVL153:
+ 821:libs/iot/stm32l475e_iot01.c **** }
+ 1879              		.loc 1 821 0
+ 1880 0006 08BD     		pop	{r3, pc}
+ 1881              		.cfi_endproc
+ 1882              	.LFE162:
+ 1884              		.comm	hDiscoUart,112,4
+ 1885              		.comm	hI2cHandler,76,4
+ 1886              		.global	COM_RX_AF
+ 1887              		.global	COM_TX_AF
+ 1888              		.global	COM_RX_PIN
+ 1889              		.global	COM_TX_PIN
+ 1890              		.global	COM_RX_PORT
+ 1891              		.global	COM_TX_PORT
+ 1892              		.global	COM_USART
+ 1893              		.global	BUTTON_IRQn
+ 1894              		.global	BUTTON_PIN
+ 1895              		.global	BUTTON_PORT
+ 1896              		.global	GPIO_PORT
+ 1897              		.global	GPIO_PIN
+ 1898              		.section	.data.BUTTON_PORT,"aw",%progbits
+ 1899              		.align	2
+ 1900              		.set	.LANCHOR1,. + 0
+ 1903              	BUTTON_PORT:
+ 1904 0000 00080048 		.word	1207961600
+ 1905              		.section	.data.COM_RX_PORT,"aw",%progbits
+ 1906              		.align	2
+ 1907              		.set	.LANCHOR3,. + 0
+ 1910              	COM_RX_PORT:
+ 1911 0000 00040048 		.word	1207960576
+ 1912              		.section	.data.COM_TX_PORT,"aw",%progbits
+ 1913              		.align	2
+ 1914              		.set	.LANCHOR2,. + 0
+ 1917              	COM_TX_PORT:
+ 1918 0000 00040048 		.word	1207960576
+ 1919              		.section	.data.COM_USART,"aw",%progbits
+ 1920              		.align	2
+ 1921              		.set	.LANCHOR4,. + 0
+ 1924              	COM_USART:
+ 1925 0000 00380140 		.word	1073821696
+ARM GAS  /tmp/cczG30i3.s 			page 50
+
+
+ 1926              		.section	.data.GPIO_PORT,"aw",%progbits
+ 1927              		.align	2
+ 1928              		.set	.LANCHOR0,. + 0
+ 1931              	GPIO_PORT:
+ 1932 0000 00040048 		.word	1207960576
+ 1933              		.section	.rodata.BUTTON_IRQn,"a",%progbits
+ 1934              		.align	2
+ 1937              	BUTTON_IRQn:
+ 1938 0000 2800     		.short	40
+ 1939              		.section	.rodata.BUTTON_PIN,"a",%progbits
+ 1940              		.align	2
+ 1943              	BUTTON_PIN:
+ 1944 0000 0020     		.short	8192
+ 1945              		.section	.rodata.COM_RX_AF,"a",%progbits
+ 1946              		.align	2
+ 1949              	COM_RX_AF:
+ 1950 0000 0700     		.short	7
+ 1951              		.section	.rodata.COM_RX_PIN,"a",%progbits
+ 1952              		.align	2
+ 1955              	COM_RX_PIN:
+ 1956 0000 8000     		.short	128
+ 1957              		.section	.rodata.COM_TX_AF,"a",%progbits
+ 1958              		.align	2
+ 1961              	COM_TX_AF:
+ 1962 0000 0700     		.short	7
+ 1963              		.section	.rodata.COM_TX_PIN,"a",%progbits
+ 1964              		.align	2
+ 1967              	COM_TX_PIN:
+ 1968 0000 4000     		.short	64
+ 1969              		.section	.rodata.GPIO_PIN,"a",%progbits
+ 1970              		.align	2
+ 1973              	GPIO_PIN:
+ 1974 0000 00400000 		.word	16384
+ 1975              		.text
+ 1976              	.Letext0:
+ 1977              		.file 2 "Drivers/CMSIS/Device/ST/STM32L4xx/Include/stm32l475xx.h"
+ 1978              		.file 3 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/machine/_default_types.h"
+ 1979              		.file 4 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_stdint.h"
+ 1980              		.file 5 "Drivers/CMSIS/Include/core_cm4.h"
+ 1981              		.file 6 "Drivers/CMSIS/Device/ST/STM32L4xx/Include/system_stm32l4xx.h"
+ 1982              		.file 7 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/lock.h"
+ 1983              		.file 8 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_types.h"
+ 1984              		.file 9 "/opt/gcc-arm-none-eabi-7-2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 1985              		.file 10 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/reent.h"
+ 1986              		.file 11 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_def.h"
+ 1987              		.file 12 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h"
+ 1988              		.file 13 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h"
+ 1989              		.file 14 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c.h"
+ 1990              		.file 15 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h"
+ 1991              		.file 16 "libs/iot/stm32l475e_iot01.h"
+ 1992              		.file 17 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h"
+ 1993              		.file 18 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h"
+ 1994              		.file 19 "Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_i2c_ex.h"
+ARM GAS  /tmp/cczG30i3.s 			page 51
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32l475e_iot01.c
+     /tmp/cczG30i3.s:18     .text.I2Cx_MspDeInit:0000000000000000 $t
+     /tmp/cczG30i3.s:24     .text.I2Cx_MspDeInit:0000000000000000 I2Cx_MspDeInit
+     /tmp/cczG30i3.s:57     .text.I2Cx_MspDeInit:0000000000000020 $d
+     /tmp/cczG30i3.s:63     .text.I2Cx_MspInit:0000000000000000 $t
+     /tmp/cczG30i3.s:69     .text.I2Cx_MspInit:0000000000000000 I2Cx_MspInit
+     /tmp/cczG30i3.s:170    .text.I2Cx_MspInit:0000000000000088 $d
+     /tmp/cczG30i3.s:176    .text.I2Cx_Init:0000000000000000 $t
+     /tmp/cczG30i3.s:182    .text.I2Cx_Init:0000000000000000 I2Cx_Init
+     /tmp/cczG30i3.s:235    .text.I2Cx_Init:0000000000000030 $d
+     /tmp/cczG30i3.s:241    .text.I2Cx_DeInit:0000000000000000 $t
+     /tmp/cczG30i3.s:247    .text.I2Cx_DeInit:0000000000000000 I2Cx_DeInit
+     /tmp/cczG30i3.s:273    .text.I2Cx_Error:0000000000000000 $t
+     /tmp/cczG30i3.s:279    .text.I2Cx_Error:0000000000000000 I2Cx_Error
+     /tmp/cczG30i3.s:305    .text.I2Cx_WriteMultiple:0000000000000000 $t
+     /tmp/cczG30i3.s:311    .text.I2Cx_WriteMultiple:0000000000000000 I2Cx_WriteMultiple
+     /tmp/cczG30i3.s:370    .text.I2Cx_ReadMultiple:0000000000000000 $t
+     /tmp/cczG30i3.s:376    .text.I2Cx_ReadMultiple:0000000000000000 I2Cx_ReadMultiple
+     /tmp/cczG30i3.s:435    .text.I2Cx_IsDeviceReady:0000000000000000 $t
+     /tmp/cczG30i3.s:441    .text.I2Cx_IsDeviceReady:0000000000000000 I2Cx_IsDeviceReady
+     /tmp/cczG30i3.s:463    .text.BSP_GetVersion:0000000000000000 $t
+     /tmp/cczG30i3.s:470    .text.BSP_GetVersion:0000000000000000 BSP_GetVersion
+     /tmp/cczG30i3.s:483    .text.BSP_GetVersion:0000000000000004 $d
+     /tmp/cczG30i3.s:488    .text.BSP_LED_Init:0000000000000000 $t
+     /tmp/cczG30i3.s:495    .text.BSP_LED_Init:0000000000000000 BSP_LED_Init
+     /tmp/cczG30i3.s:553    .text.BSP_LED_Init:0000000000000040 $d
+     /tmp/cczG30i3.s:559    .text.BSP_LED_DeInit:0000000000000000 $t
+     /tmp/cczG30i3.s:566    .text.BSP_LED_DeInit:0000000000000000 BSP_LED_DeInit
+     /tmp/cczG30i3.s:599    .text.BSP_LED_DeInit:0000000000000024 $d
+     /tmp/cczG30i3.s:604    .text.BSP_LED_On:0000000000000000 $t
+     /tmp/cczG30i3.s:611    .text.BSP_LED_On:0000000000000000 BSP_LED_On
+     /tmp/cczG30i3.s:636    .text.BSP_LED_On:0000000000000014 $d
+     /tmp/cczG30i3.s:641    .text.BSP_LED_Off:0000000000000000 $t
+     /tmp/cczG30i3.s:648    .text.BSP_LED_Off:0000000000000000 BSP_LED_Off
+     /tmp/cczG30i3.s:673    .text.BSP_LED_Off:0000000000000014 $d
+     /tmp/cczG30i3.s:678    .text.BSP_LED_Toggle:0000000000000000 $t
+     /tmp/cczG30i3.s:685    .text.BSP_LED_Toggle:0000000000000000 BSP_LED_Toggle
+     /tmp/cczG30i3.s:709    .text.BSP_LED_Toggle:0000000000000014 $d
+     /tmp/cczG30i3.s:714    .text.BSP_PB_Init:0000000000000000 $t
+     /tmp/cczG30i3.s:721    .text.BSP_PB_Init:0000000000000000 BSP_PB_Init
+     /tmp/cczG30i3.s:824    .text.BSP_PB_Init:0000000000000078 $d
+     /tmp/cczG30i3.s:831    .text.BSP_PB_DeInit:0000000000000000 $t
+     /tmp/cczG30i3.s:838    .text.BSP_PB_DeInit:0000000000000000 BSP_PB_DeInit
+     /tmp/cczG30i3.s:867    .text.BSP_PB_DeInit:000000000000001c $d
+     /tmp/cczG30i3.s:872    .text.BSP_PB_GetState:0000000000000000 $t
+     /tmp/cczG30i3.s:879    .text.BSP_PB_GetState:0000000000000000 BSP_PB_GetState
+     /tmp/cczG30i3.s:903    .text.BSP_PB_GetState:0000000000000014 $d
+     /tmp/cczG30i3.s:908    .text.BSP_COM_Init:0000000000000000 $t
+     /tmp/cczG30i3.s:915    .text.BSP_COM_Init:0000000000000000 BSP_COM_Init
+     /tmp/cczG30i3.s:1030   .text.BSP_COM_Init:0000000000000090 $d
+     /tmp/cczG30i3.s:1038   .text.BSP_COM_DeInit:0000000000000000 $t
+     /tmp/cczG30i3.s:1045   .text.BSP_COM_DeInit:0000000000000000 BSP_COM_DeInit
+     /tmp/cczG30i3.s:1080   .text.BSP_COM_DeInit:0000000000000020 $d
+     /tmp/cczG30i3.s:1086   .text.SENSOR_IO_Init:0000000000000000 $t
+     /tmp/cczG30i3.s:1093   .text.SENSOR_IO_Init:0000000000000000 SENSOR_IO_Init
+     /tmp/cczG30i3.s:1113   .text.SENSOR_IO_Init:000000000000000c $d
+ARM GAS  /tmp/cczG30i3.s 			page 52
+
+
+                            *COM*:000000000000004c hI2cHandler
+     /tmp/cczG30i3.s:1118   .text.SENSOR_IO_DeInit:0000000000000000 $t
+     /tmp/cczG30i3.s:1125   .text.SENSOR_IO_DeInit:0000000000000000 SENSOR_IO_DeInit
+     /tmp/cczG30i3.s:1145   .text.SENSOR_IO_DeInit:000000000000000c $d
+     /tmp/cczG30i3.s:1150   .text.SENSOR_IO_Write:0000000000000000 $t
+     /tmp/cczG30i3.s:1157   .text.SENSOR_IO_Write:0000000000000000 SENSOR_IO_Write
+     /tmp/cczG30i3.s:1195   .text.SENSOR_IO_Write:0000000000000020 $d
+     /tmp/cczG30i3.s:1200   .text.SENSOR_IO_Read:0000000000000000 $t
+     /tmp/cczG30i3.s:1207   .text.SENSOR_IO_Read:0000000000000000 SENSOR_IO_Read
+     /tmp/cczG30i3.s:1246   .text.SENSOR_IO_Read:0000000000000028 $d
+     /tmp/cczG30i3.s:1251   .text.SENSOR_IO_ReadMultiple:0000000000000000 $t
+     /tmp/cczG30i3.s:1258   .text.SENSOR_IO_ReadMultiple:0000000000000000 SENSOR_IO_ReadMultiple
+     /tmp/cczG30i3.s:1294   .text.SENSOR_IO_ReadMultiple:000000000000001c $d
+     /tmp/cczG30i3.s:1299   .text.SENSOR_IO_WriteMultiple:0000000000000000 $t
+     /tmp/cczG30i3.s:1306   .text.SENSOR_IO_WriteMultiple:0000000000000000 SENSOR_IO_WriteMultiple
+     /tmp/cczG30i3.s:1342   .text.SENSOR_IO_WriteMultiple:000000000000001c $d
+     /tmp/cczG30i3.s:1347   .text.SENSOR_IO_IsDeviceReady:0000000000000000 $t
+     /tmp/cczG30i3.s:1354   .text.SENSOR_IO_IsDeviceReady:0000000000000000 SENSOR_IO_IsDeviceReady
+     /tmp/cczG30i3.s:1379   .text.SENSOR_IO_IsDeviceReady:0000000000000010 $d
+     /tmp/cczG30i3.s:1384   .text.SENSOR_IO_Delay:0000000000000000 $t
+     /tmp/cczG30i3.s:1391   .text.SENSOR_IO_Delay:0000000000000000 SENSOR_IO_Delay
+     /tmp/cczG30i3.s:1412   .text.NFC_IO_Init:0000000000000000 $t
+     /tmp/cczG30i3.s:1419   .text.NFC_IO_Init:0000000000000000 NFC_IO_Init
+     /tmp/cczG30i3.s:1526   .text.NFC_IO_Init:000000000000007c $d
+     /tmp/cczG30i3.s:1534   .text.NFC_IO_DeInit:0000000000000000 $t
+     /tmp/cczG30i3.s:1541   .text.NFC_IO_DeInit:0000000000000000 NFC_IO_DeInit
+     /tmp/cczG30i3.s:1561   .text.NFC_IO_DeInit:000000000000000c $d
+     /tmp/cczG30i3.s:1566   .text.NFC_IO_IsDeviceReady:0000000000000000 $t
+     /tmp/cczG30i3.s:1573   .text.NFC_IO_IsDeviceReady:0000000000000000 NFC_IO_IsDeviceReady
+     /tmp/cczG30i3.s:1634   .text.NFC_IO_IsDeviceReady:0000000000000034 $d
+     /tmp/cczG30i3.s:1639   .text.NFC_IO_ReadMultiple:0000000000000000 $t
+     /tmp/cczG30i3.s:1646   .text.NFC_IO_ReadMultiple:0000000000000000 NFC_IO_ReadMultiple
+     /tmp/cczG30i3.s:1706   .text.NFC_IO_ReadMultiple:0000000000000034 $d
+     /tmp/cczG30i3.s:1711   .text.NFC_IO_WriteMultiple:0000000000000000 $t
+     /tmp/cczG30i3.s:1718   .text.NFC_IO_WriteMultiple:0000000000000000 NFC_IO_WriteMultiple
+     /tmp/cczG30i3.s:1778   .text.NFC_IO_WriteMultiple:0000000000000034 $d
+     /tmp/cczG30i3.s:1783   .text.NFC_IO_ReadState:0000000000000000 $t
+     /tmp/cczG30i3.s:1790   .text.NFC_IO_ReadState:0000000000000000 NFC_IO_ReadState
+     /tmp/cczG30i3.s:1816   .text.NFC_IO_ReadState:0000000000000010 $d
+     /tmp/cczG30i3.s:1821   .text.NFC_IO_RfDisable:0000000000000000 $t
+     /tmp/cczG30i3.s:1828   .text.NFC_IO_RfDisable:0000000000000000 NFC_IO_RfDisable
+     /tmp/cczG30i3.s:1852   .text.NFC_IO_RfDisable:0000000000000010 $d
+     /tmp/cczG30i3.s:1857   .text.NFC_IO_Delay:0000000000000000 $t
+     /tmp/cczG30i3.s:1864   .text.NFC_IO_Delay:0000000000000000 NFC_IO_Delay
+                            *COM*:0000000000000070 hDiscoUart
+     /tmp/cczG30i3.s:1949   .rodata.COM_RX_AF:0000000000000000 COM_RX_AF
+     /tmp/cczG30i3.s:1961   .rodata.COM_TX_AF:0000000000000000 COM_TX_AF
+     /tmp/cczG30i3.s:1955   .rodata.COM_RX_PIN:0000000000000000 COM_RX_PIN
+     /tmp/cczG30i3.s:1967   .rodata.COM_TX_PIN:0000000000000000 COM_TX_PIN
+     /tmp/cczG30i3.s:1910   .data.COM_RX_PORT:0000000000000000 COM_RX_PORT
+     /tmp/cczG30i3.s:1917   .data.COM_TX_PORT:0000000000000000 COM_TX_PORT
+     /tmp/cczG30i3.s:1924   .data.COM_USART:0000000000000000 COM_USART
+     /tmp/cczG30i3.s:1937   .rodata.BUTTON_IRQn:0000000000000000 BUTTON_IRQn
+     /tmp/cczG30i3.s:1943   .rodata.BUTTON_PIN:0000000000000000 BUTTON_PIN
+     /tmp/cczG30i3.s:1903   .data.BUTTON_PORT:0000000000000000 BUTTON_PORT
+     /tmp/cczG30i3.s:1931   .data.GPIO_PORT:0000000000000000 GPIO_PORT
+     /tmp/cczG30i3.s:1973   .rodata.GPIO_PIN:0000000000000000 GPIO_PIN
+ARM GAS  /tmp/cczG30i3.s 			page 53
+
+
+     /tmp/cczG30i3.s:1899   .data.BUTTON_PORT:0000000000000000 $d
+     /tmp/cczG30i3.s:1906   .data.COM_RX_PORT:0000000000000000 $d
+     /tmp/cczG30i3.s:1913   .data.COM_TX_PORT:0000000000000000 $d
+     /tmp/cczG30i3.s:1920   .data.COM_USART:0000000000000000 $d
+     /tmp/cczG30i3.s:1927   .data.GPIO_PORT:0000000000000000 $d
+     /tmp/cczG30i3.s:1934   .rodata.BUTTON_IRQn:0000000000000000 $d
+     /tmp/cczG30i3.s:1940   .rodata.BUTTON_PIN:0000000000000000 $d
+     /tmp/cczG30i3.s:1946   .rodata.COM_RX_AF:0000000000000000 $d
+     /tmp/cczG30i3.s:1952   .rodata.COM_RX_PIN:0000000000000000 $d
+     /tmp/cczG30i3.s:1958   .rodata.COM_TX_AF:0000000000000000 $d
+     /tmp/cczG30i3.s:1964   .rodata.COM_TX_PIN:0000000000000000 $d
+     /tmp/cczG30i3.s:1970   .rodata.GPIO_PIN:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_DeInit
+HAL_GPIO_Init
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_I2C_Init
+HAL_I2CEx_ConfigAnalogFilter
+HAL_I2C_DeInit
+HAL_I2C_Mem_Write
+HAL_I2C_Mem_Read
+HAL_I2C_IsDeviceReady
+HAL_GPIO_WritePin
+HAL_GPIO_TogglePin
+HAL_NVIC_DisableIRQ
+HAL_GPIO_ReadPin
+HAL_UART_Init
+HAL_UART_DeInit
+HAL_Delay
+HAL_GetTick
+HAL_I2C_Master_Receive
+HAL_I2C_Master_Transmit

@@ -1,0 +1,18 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Cortex Debug",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/B-L475E-IOT01A1.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "device": "STM32L475VGTx",
+            "armToolchainPath": "/opt/gcc-arm-none-eabi-7-2018-q2-update/bin",
+            "servertype": "jlink"
+        }
+    ]
+ }

@@ -1,0 +1,2100 @@
+ARM GAS  /tmp/ccDkcymV.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"wifi.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.WIFI_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	WIFI_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	WIFI_Init:
+  26              	.LFB128:
+  27              		.file 1 "libs/WIFI/Src/wifi.c"
+   1:libs/WIFI/Src/wifi.c **** /**
+   2:libs/WIFI/Src/wifi.c ****   ******************************************************************************
+   3:libs/WIFI/Src/wifi.c ****   * @file    wifi.c
+   4:libs/WIFI/Src/wifi.c ****   * @author  MCD Application Team
+   5:libs/WIFI/Src/wifi.c ****   * @version V1.8.0
+   6:libs/WIFI/Src/wifi.c ****   * @date    21-April-2017
+   7:libs/WIFI/Src/wifi.c ****   * @brief   WIFI interface file.
+   8:libs/WIFI/Src/wifi.c ****   ******************************************************************************
+   9:libs/WIFI/Src/wifi.c ****   * @attention
+  10:libs/WIFI/Src/wifi.c ****   *
+  11:libs/WIFI/Src/wifi.c ****   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
+  12:libs/WIFI/Src/wifi.c ****   * All rights reserved.</center></h2>
+  13:libs/WIFI/Src/wifi.c ****   *
+  14:libs/WIFI/Src/wifi.c ****   * Redistribution and use in source and binary forms, with or without 
+  15:libs/WIFI/Src/wifi.c ****   * modification, are permitted, provided that the following conditions are met:
+  16:libs/WIFI/Src/wifi.c ****   *
+  17:libs/WIFI/Src/wifi.c ****   * 1. Redistribution of source code must retain the above copyright notice, 
+  18:libs/WIFI/Src/wifi.c ****   *    this list of conditions and the following disclaimer.
+  19:libs/WIFI/Src/wifi.c ****   * 2. Redistributions in binary form must reproduce the above copyright notice,
+  20:libs/WIFI/Src/wifi.c ****   *    this list of conditions and the following disclaimer in the documentation
+  21:libs/WIFI/Src/wifi.c ****   *    and/or other materials provided with the distribution.
+  22:libs/WIFI/Src/wifi.c ****   * 3. Neither the name of STMicroelectronics nor the names of other 
+  23:libs/WIFI/Src/wifi.c ****   *    contributors to this software may be used to endorse or promote products 
+  24:libs/WIFI/Src/wifi.c ****   *    derived from this software without specific written permission.
+  25:libs/WIFI/Src/wifi.c ****   * 4. This software, including modifications and/or derivative works of this 
+  26:libs/WIFI/Src/wifi.c ****   *    software, must execute solely and exclusively on microcontroller or
+  27:libs/WIFI/Src/wifi.c ****   *    microprocessor devices manufactured by or for STMicroelectronics.
+  28:libs/WIFI/Src/wifi.c ****   * 5. Redistribution and use of this software other than as permitted under 
+  29:libs/WIFI/Src/wifi.c ****   *    this license is void and will automatically terminate your rights under 
+  30:libs/WIFI/Src/wifi.c ****   *    this license. 
+  31:libs/WIFI/Src/wifi.c ****   *
+ARM GAS  /tmp/ccDkcymV.s 			page 2
+
+
+  32:libs/WIFI/Src/wifi.c ****   * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
+  33:libs/WIFI/Src/wifi.c ****   * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
+  34:libs/WIFI/Src/wifi.c ****   * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  35:libs/WIFI/Src/wifi.c ****   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
+  36:libs/WIFI/Src/wifi.c ****   * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  37:libs/WIFI/Src/wifi.c ****   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+  38:libs/WIFI/Src/wifi.c ****   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  39:libs/WIFI/Src/wifi.c ****   * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
+  40:libs/WIFI/Src/wifi.c ****   * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
+  41:libs/WIFI/Src/wifi.c ****   * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  42:libs/WIFI/Src/wifi.c ****   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+  43:libs/WIFI/Src/wifi.c ****   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  44:libs/WIFI/Src/wifi.c ****   *
+  45:libs/WIFI/Src/wifi.c ****   ******************************************************************************
+  46:libs/WIFI/Src/wifi.c ****   */
+  47:libs/WIFI/Src/wifi.c **** /* Includes ------------------------------------------------------------------*/
+  48:libs/WIFI/Src/wifi.c **** #include "wifi.h"
+  49:libs/WIFI/Src/wifi.c **** 
+  50:libs/WIFI/Src/wifi.c **** /* Private define ------------------------------------------------------------*/
+  51:libs/WIFI/Src/wifi.c **** /* Private variables ---------------------------------------------------------*/
+  52:libs/WIFI/Src/wifi.c **** ES_WIFIObject_t    EsWifiObj;
+  53:libs/WIFI/Src/wifi.c **** 
+  54:libs/WIFI/Src/wifi.c **** /* Private functions ---------------------------------------------------------*/
+  55:libs/WIFI/Src/wifi.c **** /**
+  56:libs/WIFI/Src/wifi.c ****   * @brief  Initialiaze the WIFI core
+  57:libs/WIFI/Src/wifi.c ****   * @param  None
+  58:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+  59:libs/WIFI/Src/wifi.c ****   */
+  60:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_Init(void)
+  61:libs/WIFI/Src/wifi.c **** {
+  28              		.loc 1 61 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 00B5     		push	{lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 14, -4
+  36 0002 83B0     		sub	sp, sp, #12
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 16
+  39              	.LVL0:
+  62:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;
+  63:libs/WIFI/Src/wifi.c ****   
+  64:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_RegisterBusIO(&EsWifiObj, 
+  40              		.loc 1 64 0
+  41 0004 0B4B     		ldr	r3, .L8
+  42 0006 0193     		str	r3, [sp, #4]
+  43 0008 0B4B     		ldr	r3, .L8+4
+  44 000a 0093     		str	r3, [sp]
+  45 000c 0B4B     		ldr	r3, .L8+8
+  46 000e 0C4A     		ldr	r2, .L8+12
+  47 0010 0C49     		ldr	r1, .L8+16
+  48 0012 0D48     		ldr	r0, .L8+20
+  49 0014 FFF7FEFF 		bl	ES_WIFI_RegisterBusIO
+  50              	.LVL1:
+  51 0018 18B1     		cbz	r0, .L6
+ARM GAS  /tmp/ccDkcymV.s 			page 3
+
+
+  62:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;
+  52              		.loc 1 62 0
+  53 001a 0120     		movs	r0, #1
+  54              	.L2:
+  55              	.LVL2:
+  65:libs/WIFI/Src/wifi.c ****                            SPI_WIFI_Init, 
+  66:libs/WIFI/Src/wifi.c ****                            SPI_WIFI_DeInit,
+  67:libs/WIFI/Src/wifi.c ****                            SPI_WIFI_Delay,
+  68:libs/WIFI/Src/wifi.c ****                            SPI_WIFI_SendData,
+  69:libs/WIFI/Src/wifi.c ****                            SPI_WIFI_ReceiveData) == ES_WIFI_STATUS_OK)
+  70:libs/WIFI/Src/wifi.c ****   {
+  71:libs/WIFI/Src/wifi.c ****     
+  72:libs/WIFI/Src/wifi.c ****     if(ES_WIFI_Init(&EsWifiObj) == ES_WIFI_STATUS_OK)
+  73:libs/WIFI/Src/wifi.c ****     {
+  74:libs/WIFI/Src/wifi.c ****       ret = WIFI_STATUS_OK;
+  75:libs/WIFI/Src/wifi.c ****     }
+  76:libs/WIFI/Src/wifi.c ****   }
+  77:libs/WIFI/Src/wifi.c ****   return ret;
+  78:libs/WIFI/Src/wifi.c **** }
+  56              		.loc 1 78 0
+  57 001c 03B0     		add	sp, sp, #12
+  58              	.LCFI2:
+  59              		.cfi_remember_state
+  60              		.cfi_def_cfa_offset 4
+  61              		@ sp needed
+  62 001e 5DF804FB 		ldr	pc, [sp], #4
+  63              	.LVL3:
+  64              	.L6:
+  65              	.LCFI3:
+  66              		.cfi_restore_state
+  72:libs/WIFI/Src/wifi.c ****     {
+  67              		.loc 1 72 0
+  68 0022 0948     		ldr	r0, .L8+20
+  69 0024 FFF7FEFF 		bl	ES_WIFI_Init
+  70              	.LVL4:
+  71 0028 08B9     		cbnz	r0, .L7
+  74:libs/WIFI/Src/wifi.c ****     }
+  72              		.loc 1 74 0
+  73 002a 0020     		movs	r0, #0
+  74 002c F6E7     		b	.L2
+  75              	.L7:
+  62:libs/WIFI/Src/wifi.c ****   
+  76              		.loc 1 62 0
+  77 002e 0120     		movs	r0, #1
+  78 0030 F4E7     		b	.L2
+  79              	.L9:
+  80 0032 00BF     		.align	2
+  81              	.L8:
+  82 0034 00000000 		.word	SPI_WIFI_ReceiveData
+  83 0038 00000000 		.word	SPI_WIFI_SendData
+  84 003c 00000000 		.word	SPI_WIFI_Delay
+  85 0040 00000000 		.word	SPI_WIFI_DeInit
+  86 0044 00000000 		.word	SPI_WIFI_Init
+  87 0048 00000000 		.word	EsWifiObj
+  88              		.cfi_endproc
+  89              	.LFE128:
+  91              		.section	.text.WIFI_ListAccessPoints,"ax",%progbits
+ARM GAS  /tmp/ccDkcymV.s 			page 4
+
+
+  92              		.align	1
+  93              		.global	WIFI_ListAccessPoints
+  94              		.syntax unified
+  95              		.thumb
+  96              		.thumb_func
+  97              		.fpu fpv4-sp-d16
+  99              	WIFI_ListAccessPoints:
+ 100              	.LFB129:
+  79:libs/WIFI/Src/wifi.c **** 
+  80:libs/WIFI/Src/wifi.c **** /**
+  81:libs/WIFI/Src/wifi.c ****   * @brief  List a defined number of vailable access points
+  82:libs/WIFI/Src/wifi.c ****   * @param  APs : pointer to APs structure
+  83:libs/WIFI/Src/wifi.c ****   * @param  AP_MaxNbr : Max APs number to be listed
+  84:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+  85:libs/WIFI/Src/wifi.c ****   */
+  86:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_ListAccessPoints(WIFI_APs_t *APs, uint8_t AP_MaxNbr)
+  87:libs/WIFI/Src/wifi.c **** {
+ 101              		.loc 1 87 0
+ 102              		.cfi_startproc
+ 103              		@ args = 0, pretend = 0, frame = 448
+ 104              		@ frame_needed = 0, uses_anonymous_args = 0
+ 105              	.LVL5:
+ 106 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 107              	.LCFI4:
+ 108              		.cfi_def_cfa_offset 28
+ 109              		.cfi_offset 4, -28
+ 110              		.cfi_offset 5, -24
+ 111              		.cfi_offset 6, -20
+ 112              		.cfi_offset 7, -16
+ 113              		.cfi_offset 8, -12
+ 114              		.cfi_offset 9, -8
+ 115              		.cfi_offset 14, -4
+ 116 0004 F1B0     		sub	sp, sp, #452
+ 117              	.LCFI5:
+ 118              		.cfi_def_cfa_offset 480
+ 119 0006 0746     		mov	r7, r0
+ 120 0008 0C46     		mov	r4, r1
+ 121              	.LVL6:
+  88:libs/WIFI/Src/wifi.c ****   uint8_t APCount;
+  89:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;  
+  90:libs/WIFI/Src/wifi.c ****   ES_WIFI_APs_t esWifiAPs;
+  91:libs/WIFI/Src/wifi.c ****   
+  92:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_ListAccessPoints(&EsWifiObj, &esWifiAPs) == ES_WIFI_STATUS_OK)
+ 122              		.loc 1 92 0
+ 123 000a 01A9     		add	r1, sp, #4
+ 124              	.LVL7:
+ 125 000c 2048     		ldr	r0, .L17
+ 126              	.LVL8:
+ 127 000e FFF7FEFF 		bl	ES_WIFI_ListAccessPoints
+ 128              	.LVL9:
+ 129 0012 B0BB     		cbnz	r0, .L14
+  93:libs/WIFI/Src/wifi.c ****   {
+  94:libs/WIFI/Src/wifi.c ****     if(esWifiAPs.nbr > 0)
+ 130              		.loc 1 94 0
+ 131 0014 9DF8BC11 		ldrb	r1, [sp, #444]	@ zero_extendqisi2
+ 132 0018 B9B3     		cbz	r1, .L15
+  95:libs/WIFI/Src/wifi.c ****     {
+ARM GAS  /tmp/ccDkcymV.s 			page 5
+
+
+  96:libs/WIFI/Src/wifi.c ****       APs->count = MIN(esWifiAPs.nbr, AP_MaxNbr);  
+ 133              		.loc 1 96 0
+ 134 001a A142     		cmp	r1, r4
+ 135 001c 28BF     		it	cs
+ 136 001e 2146     		movcs	r1, r4
+ 137 0020 42F68843 		movw	r3, #11400
+ 138 0024 F954     		strb	r1, [r7, r3]
+ 139              	.LVL10:
+  97:libs/WIFI/Src/wifi.c ****       for(APCount = 0; APCount < APs->count; APCount++)
+ 140              		.loc 1 97 0
+ 141 0026 0025     		movs	r5, #0
+ 142 0028 24E0     		b	.L12
+ 143              	.LVL11:
+ 144              	.L13:
+  98:libs/WIFI/Src/wifi.c ****       {
+  99:libs/WIFI/Src/wifi.c ****         APs->ap[APCount].Ecn = (WIFI_Ecn_t)esWifiAPs.AP[APCount].Security;
+ 145              		.loc 1 99 0 discriminator 3
+ 146 002a 2C26     		movs	r6, #44
+ 147 002c 06FB05F6 		mul	r6, r6, r5
+ 148 0030 01AB     		add	r3, sp, #4
+ 149 0032 03EB0608 		add	r8, r3, r6
+ 150 0036 98F82130 		ldrb	r3, [r8, #33]	@ zero_extendqisi2
+ 151 003a 7224     		movs	r4, #114
+ 152 003c 04FB05F4 		mul	r4, r4, r5
+ 153 0040 07EB0409 		add	r9, r7, r4
+ 154 0044 3B55     		strb	r3, [r7, r4]
+ 100:libs/WIFI/Src/wifi.c ****         strncpy( (char *)APs->ap[APCount].SSID, (char *)esWifiAPs.AP[APCount].SSID, MIN (WIFI_MAX_S
+ 155              		.loc 1 100 0 discriminator 3
+ 156 0046 6422     		movs	r2, #100
+ 157 0048 4146     		mov	r1, r8
+ 158 004a 09F10100 		add	r0, r9, #1
+ 159 004e FFF7FEFF 		bl	strncpy
+ 160              	.LVL12:
+ 101:libs/WIFI/Src/wifi.c ****         APs->ap[APCount].RSSI = esWifiAPs.AP[APCount].RSSI;
+ 161              		.loc 1 101 0 discriminator 3
+ 162 0052 B8F92230 		ldrsh	r3, [r8, #34]
+ 163 0056 A9F86630 		strh	r3, [r9, #102]	@ movhi
+ 102:libs/WIFI/Src/wifi.c ****         memcpy(APs->ap[APCount].MAC, esWifiAPs.AP[APCount].MAC, 6);
+ 164              		.loc 1 102 0 discriminator 3
+ 165 005a 6834     		adds	r4, r4, #104
+ 166 005c 3A19     		adds	r2, r7, r4
+ 167 005e 06F12003 		add	r3, r6, #32
+ 168 0062 01A9     		add	r1, sp, #4
+ 169 0064 0B44     		add	r3, r3, r1
+ 170 0066 53F8041F 		ldr	r1, [r3, #4]!	@ unaligned
+ 171 006a 3951     		str	r1, [r7, r4]	@ unaligned
+ 172 006c 9B88     		ldrh	r3, [r3, #4]	@ unaligned
+ 173 006e 9380     		strh	r3, [r2, #4]	@ unaligned
+  97:libs/WIFI/Src/wifi.c ****       {
+ 174              		.loc 1 97 0 discriminator 3
+ 175 0070 0135     		adds	r5, r5, #1
+ 176              	.LVL13:
+ 177 0072 EDB2     		uxtb	r5, r5
+ 178              	.LVL14:
+ 179              	.L12:
+  97:libs/WIFI/Src/wifi.c ****       {
+ 180              		.loc 1 97 0 is_stmt 0 discriminator 1
+ARM GAS  /tmp/ccDkcymV.s 			page 6
+
+
+ 181 0074 42F68843 		movw	r3, #11400
+ 182 0078 FB5C     		ldrb	r3, [r7, r3]	@ zero_extendqisi2
+ 183 007a AB42     		cmp	r3, r5
+ 184 007c D5D8     		bhi	.L13
+ 103:libs/WIFI/Src/wifi.c ****       }
+ 104:libs/WIFI/Src/wifi.c ****     }
+ 105:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK;  
+ 185              		.loc 1 105 0 is_stmt 1
+ 186 007e 0020     		movs	r0, #0
+ 187 0080 00E0     		b	.L11
+ 188              	.LVL15:
+ 189              	.L14:
+  89:libs/WIFI/Src/wifi.c ****   ES_WIFI_APs_t esWifiAPs;
+ 190              		.loc 1 89 0
+ 191 0082 0120     		movs	r0, #1
+ 192              	.L11:
+ 193              	.LVL16:
+ 106:libs/WIFI/Src/wifi.c ****   }
+ 107:libs/WIFI/Src/wifi.c ****   return ret;
+ 108:libs/WIFI/Src/wifi.c **** }
+ 194              		.loc 1 108 0
+ 195 0084 71B0     		add	sp, sp, #452
+ 196              	.LCFI6:
+ 197              		.cfi_remember_state
+ 198              		.cfi_def_cfa_offset 28
+ 199              		@ sp needed
+ 200 0086 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 201              	.LVL17:
+ 202              	.L15:
+ 203              	.LCFI7:
+ 204              		.cfi_restore_state
+ 105:libs/WIFI/Src/wifi.c ****   }
+ 205              		.loc 1 105 0
+ 206 008a 0020     		movs	r0, #0
+ 207 008c FAE7     		b	.L11
+ 208              	.L18:
+ 209 008e 00BF     		.align	2
+ 210              	.L17:
+ 211 0090 00000000 		.word	EsWifiObj
+ 212              		.cfi_endproc
+ 213              	.LFE129:
+ 215              		.section	.text.WIFI_Connect,"ax",%progbits
+ 216              		.align	1
+ 217              		.global	WIFI_Connect
+ 218              		.syntax unified
+ 219              		.thumb
+ 220              		.thumb_func
+ 221              		.fpu fpv4-sp-d16
+ 223              	WIFI_Connect:
+ 224              	.LFB130:
+ 109:libs/WIFI/Src/wifi.c **** 
+ 110:libs/WIFI/Src/wifi.c **** /**
+ 111:libs/WIFI/Src/wifi.c ****   * @brief  Join an Access Point
+ 112:libs/WIFI/Src/wifi.c ****   * @param  SSID : SSID string
+ 113:libs/WIFI/Src/wifi.c ****   * @param  Password : Password string
+ 114:libs/WIFI/Src/wifi.c ****   * @param  ecn : Encryption type
+ 115:libs/WIFI/Src/wifi.c ****   * @param  IP_Addr : Got IP Address
+ARM GAS  /tmp/ccDkcymV.s 			page 7
+
+
+ 116:libs/WIFI/Src/wifi.c ****   * @param  IP_Mask : Network IP mask
+ 117:libs/WIFI/Src/wifi.c ****   * @param  Gateway_Addr : Gateway IP address
+ 118:libs/WIFI/Src/wifi.c ****   * @param  MAC : pointer to MAC Address
+ 119:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 120:libs/WIFI/Src/wifi.c ****   */
+ 121:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_Connect(
+ 122:libs/WIFI/Src/wifi.c ****                              const char* SSID, 
+ 123:libs/WIFI/Src/wifi.c ****                              const char* Password,
+ 124:libs/WIFI/Src/wifi.c ****                              WIFI_Ecn_t ecn)
+ 125:libs/WIFI/Src/wifi.c **** {
+ 225              		.loc 1 125 0
+ 226              		.cfi_startproc
+ 227              		@ args = 0, pretend = 0, frame = 0
+ 228              		@ frame_needed = 0, uses_anonymous_args = 0
+ 229              	.LVL18:
+ 230 0000 08B5     		push	{r3, lr}
+ 231              	.LCFI8:
+ 232              		.cfi_def_cfa_offset 8
+ 233              		.cfi_offset 3, -8
+ 234              		.cfi_offset 14, -4
+ 235              	.LVL19:
+ 126:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;  
+ 127:libs/WIFI/Src/wifi.c ****  
+ 128:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_Connect(&EsWifiObj, SSID, Password, (ES_WIFI_SecurityType_t) ecn) == ES_WIFI_STATUS_OK
+ 236              		.loc 1 128 0
+ 237 0002 1346     		mov	r3, r2
+ 238 0004 0A46     		mov	r2, r1
+ 239              	.LVL20:
+ 240 0006 0146     		mov	r1, r0
+ 241              	.LVL21:
+ 242 0008 0648     		ldr	r0, .L26
+ 243              	.LVL22:
+ 244 000a FFF7FEFF 		bl	ES_WIFI_Connect
+ 245              	.LVL23:
+ 246 000e 08B1     		cbz	r0, .L24
+ 126:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;  
+ 247              		.loc 1 126 0
+ 248 0010 0120     		movs	r0, #1
+ 249              	.L20:
+ 250              	.LVL24:
+ 129:libs/WIFI/Src/wifi.c ****   {
+ 130:libs/WIFI/Src/wifi.c ****     if(ES_WIFI_GetNetworkSettings(&EsWifiObj) == ES_WIFI_STATUS_OK)
+ 131:libs/WIFI/Src/wifi.c ****     {
+ 132:libs/WIFI/Src/wifi.c ****        ret = WIFI_STATUS_OK;
+ 133:libs/WIFI/Src/wifi.c ****     }
+ 134:libs/WIFI/Src/wifi.c ****     
+ 135:libs/WIFI/Src/wifi.c ****   }
+ 136:libs/WIFI/Src/wifi.c ****   return ret;
+ 137:libs/WIFI/Src/wifi.c **** }
+ 251              		.loc 1 137 0
+ 252 0012 08BD     		pop	{r3, pc}
+ 253              	.LVL25:
+ 254              	.L24:
+ 130:libs/WIFI/Src/wifi.c ****     {
+ 255              		.loc 1 130 0
+ 256 0014 0348     		ldr	r0, .L26
+ 257 0016 FFF7FEFF 		bl	ES_WIFI_GetNetworkSettings
+ARM GAS  /tmp/ccDkcymV.s 			page 8
+
+
+ 258              	.LVL26:
+ 259 001a 08B9     		cbnz	r0, .L25
+ 132:libs/WIFI/Src/wifi.c ****     }
+ 260              		.loc 1 132 0
+ 261 001c 0020     		movs	r0, #0
+ 262 001e F8E7     		b	.L20
+ 263              	.L25:
+ 126:libs/WIFI/Src/wifi.c ****  
+ 264              		.loc 1 126 0
+ 265 0020 0120     		movs	r0, #1
+ 266 0022 F6E7     		b	.L20
+ 267              	.L27:
+ 268              		.align	2
+ 269              	.L26:
+ 270 0024 00000000 		.word	EsWifiObj
+ 271              		.cfi_endproc
+ 272              	.LFE130:
+ 274              		.section	.text.WIFI_GetMAC_Address,"ax",%progbits
+ 275              		.align	1
+ 276              		.global	WIFI_GetMAC_Address
+ 277              		.syntax unified
+ 278              		.thumb
+ 279              		.thumb_func
+ 280              		.fpu fpv4-sp-d16
+ 282              	WIFI_GetMAC_Address:
+ 283              	.LFB131:
+ 138:libs/WIFI/Src/wifi.c **** 
+ 139:libs/WIFI/Src/wifi.c **** /**
+ 140:libs/WIFI/Src/wifi.c ****   * @brief  This function retrieves the WiFi interface's MAC address.
+ 141:libs/WIFI/Src/wifi.c ****   * @retval Operation Status.
+ 142:libs/WIFI/Src/wifi.c ****   */
+ 143:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_GetMAC_Address(uint8_t  *mac)
+ 144:libs/WIFI/Src/wifi.c **** {
+ 284              		.loc 1 144 0
+ 285              		.cfi_startproc
+ 286              		@ args = 0, pretend = 0, frame = 0
+ 287              		@ frame_needed = 0, uses_anonymous_args = 0
+ 288              	.LVL27:
+ 289 0000 08B5     		push	{r3, lr}
+ 290              	.LCFI9:
+ 291              		.cfi_def_cfa_offset 8
+ 292              		.cfi_offset 3, -8
+ 293              		.cfi_offset 14, -4
+ 294              	.LVL28:
+ 145:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 146:libs/WIFI/Src/wifi.c ****   
+ 147:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_GetMACAddress(&EsWifiObj, mac) == ES_WIFI_STATUS_OK)
+ 295              		.loc 1 147 0
+ 296 0002 0146     		mov	r1, r0
+ 297 0004 0348     		ldr	r0, .L33
+ 298              	.LVL29:
+ 299 0006 FFF7FEFF 		bl	ES_WIFI_GetMACAddress
+ 300              	.LVL30:
+ 301 000a 08B9     		cbnz	r0, .L32
+ 148:libs/WIFI/Src/wifi.c ****   {
+ 149:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK;
+ 302              		.loc 1 149 0
+ARM GAS  /tmp/ccDkcymV.s 			page 9
+
+
+ 303 000c 0020     		movs	r0, #0
+ 304              	.L29:
+ 305              	.LVL31:
+ 150:libs/WIFI/Src/wifi.c ****   }
+ 151:libs/WIFI/Src/wifi.c ****   return ret;
+ 152:libs/WIFI/Src/wifi.c **** }
+ 306              		.loc 1 152 0
+ 307 000e 08BD     		pop	{r3, pc}
+ 308              	.LVL32:
+ 309              	.L32:
+ 145:libs/WIFI/Src/wifi.c ****   
+ 310              		.loc 1 145 0
+ 311 0010 0120     		movs	r0, #1
+ 312 0012 FCE7     		b	.L29
+ 313              	.L34:
+ 314              		.align	2
+ 315              	.L33:
+ 316 0014 00000000 		.word	EsWifiObj
+ 317              		.cfi_endproc
+ 318              	.LFE131:
+ 320              		.section	.text.WIFI_GetIP_Address,"ax",%progbits
+ 321              		.align	1
+ 322              		.global	WIFI_GetIP_Address
+ 323              		.syntax unified
+ 324              		.thumb
+ 325              		.thumb_func
+ 326              		.fpu fpv4-sp-d16
+ 328              	WIFI_GetIP_Address:
+ 329              	.LFB132:
+ 153:libs/WIFI/Src/wifi.c **** 
+ 154:libs/WIFI/Src/wifi.c **** /**
+ 155:libs/WIFI/Src/wifi.c ****   * @brief  This function retrieves the WiFi interface's IP address.
+ 156:libs/WIFI/Src/wifi.c ****   * @retval Operation Status.
+ 157:libs/WIFI/Src/wifi.c ****   */
+ 158:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_GetIP_Address (uint8_t  *ipaddr)
+ 159:libs/WIFI/Src/wifi.c **** {
+ 330              		.loc 1 159 0
+ 331              		.cfi_startproc
+ 332              		@ args = 0, pretend = 0, frame = 0
+ 333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 334              		@ link register save eliminated.
+ 335              	.LVL33:
+ 160:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 161:libs/WIFI/Src/wifi.c ****   
+ 162:libs/WIFI/Src/wifi.c ****   if(EsWifiObj.NetSettings.IsConnected)
+ 336              		.loc 1 162 0
+ 337 0000 054B     		ldr	r3, .L38
+ 338 0002 93F8CA30 		ldrb	r3, [r3, #202]	@ zero_extendqisi2
+ 339 0006 2BB1     		cbz	r3, .L37
+ 163:libs/WIFI/Src/wifi.c ****   {
+ 164:libs/WIFI/Src/wifi.c ****     memcpy(ipaddr, EsWifiObj.NetSettings.IP_Addr, 4);
+ 340              		.loc 1 164 0
+ 341 0008 034B     		ldr	r3, .L38
+ 342 000a D3F8CD30 		ldr	r3, [r3, #205]	@ unaligned
+ 343 000e 0360     		str	r3, [r0]	@ unaligned
+ 344              	.LVL34:
+ 165:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK;
+ARM GAS  /tmp/ccDkcymV.s 			page 10
+
+
+ 345              		.loc 1 165 0
+ 346 0010 0020     		movs	r0, #0
+ 347              	.LVL35:
+ 348 0012 7047     		bx	lr
+ 349              	.LVL36:
+ 350              	.L37:
+ 160:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 351              		.loc 1 160 0
+ 352 0014 0120     		movs	r0, #1
+ 353              	.LVL37:
+ 166:libs/WIFI/Src/wifi.c ****   }
+ 167:libs/WIFI/Src/wifi.c ****   return ret;
+ 168:libs/WIFI/Src/wifi.c **** }
+ 354              		.loc 1 168 0
+ 355 0016 7047     		bx	lr
+ 356              	.L39:
+ 357              		.align	2
+ 358              	.L38:
+ 359 0018 00000000 		.word	EsWifiObj
+ 360              		.cfi_endproc
+ 361              	.LFE132:
+ 363              		.section	.text.WIFI_Disconnect,"ax",%progbits
+ 364              		.align	1
+ 365              		.global	WIFI_Disconnect
+ 366              		.syntax unified
+ 367              		.thumb
+ 368              		.thumb_func
+ 369              		.fpu fpv4-sp-d16
+ 371              	WIFI_Disconnect:
+ 372              	.LFB133:
+ 169:libs/WIFI/Src/wifi.c **** 
+ 170:libs/WIFI/Src/wifi.c **** /**
+ 171:libs/WIFI/Src/wifi.c ****   * @brief  Disconnect from a network
+ 172:libs/WIFI/Src/wifi.c ****   * @param  None
+ 173:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 174:libs/WIFI/Src/wifi.c ****   */
+ 175:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_Disconnect(void)
+ 176:libs/WIFI/Src/wifi.c **** {
+ 373              		.loc 1 176 0
+ 374              		.cfi_startproc
+ 375              		@ args = 0, pretend = 0, frame = 0
+ 376              		@ frame_needed = 0, uses_anonymous_args = 0
+ 377 0000 08B5     		push	{r3, lr}
+ 378              	.LCFI10:
+ 379              		.cfi_def_cfa_offset 8
+ 380              		.cfi_offset 3, -8
+ 381              		.cfi_offset 14, -4
+ 382              	.LVL38:
+ 177:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;    
+ 178:libs/WIFI/Src/wifi.c ****   if( ES_WIFI_Disconnect(&EsWifiObj)== ES_WIFI_STATUS_OK)
+ 383              		.loc 1 178 0
+ 384 0002 0448     		ldr	r0, .L45
+ 385 0004 FFF7FEFF 		bl	ES_WIFI_Disconnect
+ 386              	.LVL39:
+ 387 0008 08B9     		cbnz	r0, .L44
+ 179:libs/WIFI/Src/wifi.c ****   {
+ 180:libs/WIFI/Src/wifi.c ****       ret = WIFI_STATUS_OK; 
+ARM GAS  /tmp/ccDkcymV.s 			page 11
+
+
+ 388              		.loc 1 180 0
+ 389 000a 0020     		movs	r0, #0
+ 390              	.L41:
+ 391              	.LVL40:
+ 181:libs/WIFI/Src/wifi.c ****   }
+ 182:libs/WIFI/Src/wifi.c ****   
+ 183:libs/WIFI/Src/wifi.c ****   return ret;
+ 184:libs/WIFI/Src/wifi.c **** }
+ 392              		.loc 1 184 0
+ 393 000c 08BD     		pop	{r3, pc}
+ 394              	.LVL41:
+ 395              	.L44:
+ 177:libs/WIFI/Src/wifi.c ****   if( ES_WIFI_Disconnect(&EsWifiObj)== ES_WIFI_STATUS_OK)
+ 396              		.loc 1 177 0
+ 397 000e 0120     		movs	r0, #1
+ 398 0010 FCE7     		b	.L41
+ 399              	.L46:
+ 400 0012 00BF     		.align	2
+ 401              	.L45:
+ 402 0014 00000000 		.word	EsWifiObj
+ 403              		.cfi_endproc
+ 404              	.LFE133:
+ 406              		.section	.text.WIFI_ConfigureAP,"ax",%progbits
+ 407              		.align	1
+ 408              		.global	WIFI_ConfigureAP
+ 409              		.syntax unified
+ 410              		.thumb
+ 411              		.thumb_func
+ 412              		.fpu fpv4-sp-d16
+ 414              	WIFI_ConfigureAP:
+ 415              	.LFB134:
+ 185:libs/WIFI/Src/wifi.c **** 
+ 186:libs/WIFI/Src/wifi.c **** /**
+ 187:libs/WIFI/Src/wifi.c ****   * @brief  Configure an Access Point
+ 188:libs/WIFI/Src/wifi.c **** 
+ 189:libs/WIFI/Src/wifi.c ****   * @param  ssid : SSID string
+ 190:libs/WIFI/Src/wifi.c ****   * @param  pass : Password string
+ 191:libs/WIFI/Src/wifi.c ****   * @param  ecn : Encryption type
+ 192:libs/WIFI/Src/wifi.c ****   * @param  channel : channel number
+ 193:libs/WIFI/Src/wifi.c ****   * @param  max_conn : Max allowed connections
+ 194:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 195:libs/WIFI/Src/wifi.c ****   */
+ 196:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_ConfigureAP(uint8_t *ssid, uint8_t *pass, WIFI_Ecn_t ecn, uint8_t channel, uint8
+ 197:libs/WIFI/Src/wifi.c **** {
+ 416              		.loc 1 197 0
+ 417              		.cfi_startproc
+ 418              		@ args = 4, pretend = 0, frame = 72
+ 419              		@ frame_needed = 0, uses_anonymous_args = 0
+ 420              	.LVL42:
+ 421 0000 70B5     		push	{r4, r5, r6, lr}
+ 422              	.LCFI11:
+ 423              		.cfi_def_cfa_offset 16
+ 424              		.cfi_offset 4, -16
+ 425              		.cfi_offset 5, -12
+ 426              		.cfi_offset 6, -8
+ 427              		.cfi_offset 14, -4
+ 428 0002 92B0     		sub	sp, sp, #72
+ARM GAS  /tmp/ccDkcymV.s 			page 12
+
+
+ 429              	.LCFI12:
+ 430              		.cfi_def_cfa_offset 88
+ 431 0004 0E46     		mov	r6, r1
+ 432 0006 1446     		mov	r4, r2
+ 433 0008 1D46     		mov	r5, r3
+ 434              	.LVL43:
+ 198:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;  
+ 199:libs/WIFI/Src/wifi.c ****   ES_WIFI_APConfig_t ApConfig;
+ 200:libs/WIFI/Src/wifi.c ****   
+ 201:libs/WIFI/Src/wifi.c ****   strncpy((char*)ApConfig.SSID, (char*)ssid, ES_WIFI_MAX_SSID_NAME_SIZE);
+ 435              		.loc 1 201 0
+ 436 000a 2022     		movs	r2, #32
+ 437              	.LVL44:
+ 438 000c 0146     		mov	r1, r0
+ 439              	.LVL45:
+ 440 000e 6846     		mov	r0, sp
+ 441              	.LVL46:
+ 442 0010 FFF7FEFF 		bl	strncpy
+ 443              	.LVL47:
+ 202:libs/WIFI/Src/wifi.c ****   strncpy((char*)ApConfig.Pass, (char*)pass, ES_WIFI_MAX_PSWD_NAME_SIZE);
+ 444              		.loc 1 202 0
+ 445 0014 2022     		movs	r2, #32
+ 446 0016 3146     		mov	r1, r6
+ 447 0018 0DF12100 		add	r0, sp, #33
+ 448 001c FFF7FEFF 		bl	strncpy
+ 449              	.LVL48:
+ 203:libs/WIFI/Src/wifi.c ****   ApConfig.Channel = channel;
+ 450              		.loc 1 203 0
+ 451 0020 8DF84350 		strb	r5, [sp, #67]
+ 204:libs/WIFI/Src/wifi.c ****   ApConfig.MaxConnections = WIFI_MAX_CONNECTED_STATIONS;
+ 452              		.loc 1 204 0
+ 453 0024 0223     		movs	r3, #2
+ 454 0026 8DF84430 		strb	r3, [sp, #68]
+ 205:libs/WIFI/Src/wifi.c ****   ApConfig.Security = (ES_WIFI_SecurityType_t)ecn;
+ 455              		.loc 1 205 0
+ 456 002a 8DF84240 		strb	r4, [sp, #66]
+ 206:libs/WIFI/Src/wifi.c ****   
+ 207:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_ActivateAP(&EsWifiObj, &ApConfig) == ES_WIFI_STATUS_OK)
+ 457              		.loc 1 207 0
+ 458 002e 6946     		mov	r1, sp
+ 459 0030 0448     		ldr	r0, .L52
+ 460 0032 FFF7FEFF 		bl	ES_WIFI_ActivateAP
+ 461              	.LVL49:
+ 462 0036 10B9     		cbnz	r0, .L51
+ 208:libs/WIFI/Src/wifi.c ****   {
+ 209:libs/WIFI/Src/wifi.c ****       ret = WIFI_STATUS_OK; 
+ 463              		.loc 1 209 0
+ 464 0038 0020     		movs	r0, #0
+ 465              	.L48:
+ 466              	.LVL50:
+ 210:libs/WIFI/Src/wifi.c ****   }
+ 211:libs/WIFI/Src/wifi.c ****   return ret;
+ 212:libs/WIFI/Src/wifi.c **** }
+ 467              		.loc 1 212 0
+ 468 003a 12B0     		add	sp, sp, #72
+ 469              	.LCFI13:
+ 470              		.cfi_remember_state
+ARM GAS  /tmp/ccDkcymV.s 			page 13
+
+
+ 471              		.cfi_def_cfa_offset 16
+ 472              		@ sp needed
+ 473 003c 70BD     		pop	{r4, r5, r6, pc}
+ 474              	.LVL51:
+ 475              	.L51:
+ 476              	.LCFI14:
+ 477              		.cfi_restore_state
+ 198:libs/WIFI/Src/wifi.c ****   ES_WIFI_APConfig_t ApConfig;
+ 478              		.loc 1 198 0
+ 479 003e 0120     		movs	r0, #1
+ 480 0040 FBE7     		b	.L48
+ 481              	.L53:
+ 482 0042 00BF     		.align	2
+ 483              	.L52:
+ 484 0044 00000000 		.word	EsWifiObj
+ 485              		.cfi_endproc
+ 486              	.LFE134:
+ 488              		.section	.text.WIFI_HandleAPEvents,"ax",%progbits
+ 489              		.align	1
+ 490              		.global	WIFI_HandleAPEvents
+ 491              		.syntax unified
+ 492              		.thumb
+ 493              		.thumb_func
+ 494              		.fpu fpv4-sp-d16
+ 496              	WIFI_HandleAPEvents:
+ 497              	.LFB135:
+ 213:libs/WIFI/Src/wifi.c **** 
+ 214:libs/WIFI/Src/wifi.c **** /**
+ 215:libs/WIFI/Src/wifi.c ****   * @brief  Handle the background events of the wifi module
+ 216:libs/WIFI/Src/wifi.c **** 
+ 217:libs/WIFI/Src/wifi.c ****   * @retval None
+ 218:libs/WIFI/Src/wifi.c **** */
+ 219:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_HandleAPEvents(WIFI_APSettings_t *setting)
+ 220:libs/WIFI/Src/wifi.c **** {
+ 498              		.loc 1 220 0
+ 499              		.cfi_startproc
+ 500              		@ args = 0, pretend = 0, frame = 0
+ 501              		@ frame_needed = 0, uses_anonymous_args = 0
+ 502              	.LVL52:
+ 503 0000 38B5     		push	{r3, r4, r5, lr}
+ 504              	.LCFI15:
+ 505              		.cfi_def_cfa_offset 16
+ 506              		.cfi_offset 3, -16
+ 507              		.cfi_offset 4, -12
+ 508              		.cfi_offset 5, -8
+ 509              		.cfi_offset 14, -4
+ 510 0002 0446     		mov	r4, r0
+ 511              	.LVL53:
+ 221:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_OK;   
+ 222:libs/WIFI/Src/wifi.c ****   ES_WIFI_APState_t State;
+ 223:libs/WIFI/Src/wifi.c ****   
+ 224:libs/WIFI/Src/wifi.c ****   State= ES_WIFI_WaitAPStateChange(&EsWifiObj);
+ 512              		.loc 1 224 0
+ 513 0004 1448     		ldr	r0, .L61
+ 514              	.LVL54:
+ 515 0006 FFF7FEFF 		bl	ES_WIFI_WaitAPStateChange
+ 516              	.LVL55:
+ARM GAS  /tmp/ccDkcymV.s 			page 14
+
+
+ 225:libs/WIFI/Src/wifi.c ****   
+ 226:libs/WIFI/Src/wifi.c ****   switch (State)
+ 517              		.loc 1 226 0
+ 518 000a 0228     		cmp	r0, #2
+ 519 000c 15D0     		beq	.L56
+ 520 000e FF28     		cmp	r0, #255
+ 521 0010 1FD0     		beq	.L59
+ 522 0012 0128     		cmp	r0, #1
+ 523 0014 01D0     		beq	.L58
+ 221:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_OK;   
+ 524              		.loc 1 221 0
+ 525 0016 0020     		movs	r0, #0
+ 526              	.LVL56:
+ 527              	.L57:
+ 227:libs/WIFI/Src/wifi.c ****   {
+ 228:libs/WIFI/Src/wifi.c ****   case ES_WIFI_AP_ASSIGNED:
+ 229:libs/WIFI/Src/wifi.c ****     memcpy(setting->IP_Addr, EsWifiObj.APSettings.IP_Addr, 4);  
+ 230:libs/WIFI/Src/wifi.c ****     memcpy(setting->MAC_Addr, EsWifiObj.APSettings.MAC_Addr, 6);
+ 231:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_ASSIGNED;    
+ 232:libs/WIFI/Src/wifi.c ****     break;
+ 233:libs/WIFI/Src/wifi.c ****     
+ 234:libs/WIFI/Src/wifi.c ****   case ES_WIFI_AP_JOINED:
+ 235:libs/WIFI/Src/wifi.c ****     strncpy((char *)setting->SSID, (char *)EsWifiObj.APSettings.SSID, WIFI_MAX_SSID_NAME);
+ 236:libs/WIFI/Src/wifi.c ****     memcpy(setting->IP_Addr, EsWifiObj.APSettings.IP_Addr, 4); 
+ 237:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_JOINED;
+ 238:libs/WIFI/Src/wifi.c ****     break;
+ 239:libs/WIFI/Src/wifi.c ****     
+ 240:libs/WIFI/Src/wifi.c ****   case ES_WIFI_AP_ERROR:
+ 241:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_ERROR;  
+ 242:libs/WIFI/Src/wifi.c ****     break;
+ 243:libs/WIFI/Src/wifi.c ****     
+ 244:libs/WIFI/Src/wifi.c ****   default:
+ 245:libs/WIFI/Src/wifi.c ****     break;
+ 246:libs/WIFI/Src/wifi.c ****   }
+ 247:libs/WIFI/Src/wifi.c ****   
+ 248:libs/WIFI/Src/wifi.c ****   return ret;
+ 249:libs/WIFI/Src/wifi.c **** }
+ 528              		.loc 1 249 0
+ 529 0018 38BD     		pop	{r3, r4, r5, pc}
+ 530              	.LVL57:
+ 531              	.L58:
+ 229:libs/WIFI/Src/wifi.c ****     memcpy(setting->MAC_Addr, EsWifiObj.APSettings.MAC_Addr, 6);
+ 532              		.loc 1 229 0
+ 533 001a 0F4B     		ldr	r3, .L61
+ 534 001c D3F80221 		ldr	r2, [r3, #258]	@ unaligned
+ 535 0020 C4F86520 		str	r2, [r4, #101]	@ unaligned
+ 230:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_ASSIGNED;    
+ 536              		.loc 1 230 0
+ 537 0024 D3F80621 		ldr	r2, [r3, #262]	@ unaligned
+ 538 0028 03F58373 		add	r3, r3, #262
+ 539 002c C4F86920 		str	r2, [r4, #105]	@ unaligned
+ 540 0030 9B88     		ldrh	r3, [r3, #4]	@ unaligned
+ 541 0032 A4F86D30 		strh	r3, [r4, #109]	@ unaligned
+ 542              	.LVL58:
+ 231:libs/WIFI/Src/wifi.c ****     break;
+ 543              		.loc 1 231 0
+ 544 0036 0420     		movs	r0, #4
+ARM GAS  /tmp/ccDkcymV.s 			page 15
+
+
+ 545              	.LVL59:
+ 232:libs/WIFI/Src/wifi.c ****     
+ 546              		.loc 1 232 0
+ 547 0038 EEE7     		b	.L57
+ 548              	.LVL60:
+ 549              	.L56:
+ 235:libs/WIFI/Src/wifi.c ****     memcpy(setting->IP_Addr, EsWifiObj.APSettings.IP_Addr, 4); 
+ 550              		.loc 1 235 0
+ 551 003a 084D     		ldr	r5, .L61+4
+ 552 003c 6422     		movs	r2, #100
+ 553 003e 2946     		mov	r1, r5
+ 554 0040 2046     		mov	r0, r4
+ 555              	.LVL61:
+ 556 0042 FFF7FEFF 		bl	strncpy
+ 557              	.LVL62:
+ 236:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_JOINED;
+ 558              		.loc 1 236 0
+ 559 0046 D5F82130 		ldr	r3, [r5, #33]	@ unaligned
+ 560 004a C4F86530 		str	r3, [r4, #101]	@ unaligned
+ 561              	.LVL63:
+ 237:libs/WIFI/Src/wifi.c ****     break;
+ 562              		.loc 1 237 0
+ 563 004e 0320     		movs	r0, #3
+ 238:libs/WIFI/Src/wifi.c ****     
+ 564              		.loc 1 238 0
+ 565 0050 E2E7     		b	.L57
+ 566              	.LVL64:
+ 567              	.L59:
+ 241:libs/WIFI/Src/wifi.c ****     break;
+ 568              		.loc 1 241 0
+ 569 0052 0120     		movs	r0, #1
+ 570              	.LVL65:
+ 571 0054 E0E7     		b	.L57
+ 572              	.L62:
+ 573 0056 00BF     		.align	2
+ 574              	.L61:
+ 575 0058 00000000 		.word	EsWifiObj
+ 576 005c E1000000 		.word	EsWifiObj+225
+ 577              		.cfi_endproc
+ 578              	.LFE135:
+ 580              		.section	.text.WIFI_Ping,"ax",%progbits
+ 581              		.align	1
+ 582              		.global	WIFI_Ping
+ 583              		.syntax unified
+ 584              		.thumb
+ 585              		.thumb_func
+ 586              		.fpu fpv4-sp-d16
+ 588              	WIFI_Ping:
+ 589              	.LFB136:
+ 250:libs/WIFI/Src/wifi.c **** 
+ 251:libs/WIFI/Src/wifi.c **** /**
+ 252:libs/WIFI/Src/wifi.c ****   * @brief  Ping an IP address in the network
+ 253:libs/WIFI/Src/wifi.c ****   * @param  ipaddr : array of the IP address
+ 254:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 255:libs/WIFI/Src/wifi.c ****   */
+ 256:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_Ping(uint8_t* ipaddr, uint16_t count, uint16_t interval_ms)
+ 257:libs/WIFI/Src/wifi.c **** {
+ARM GAS  /tmp/ccDkcymV.s 			page 16
+
+
+ 590              		.loc 1 257 0
+ 591              		.cfi_startproc
+ 592              		@ args = 0, pretend = 0, frame = 0
+ 593              		@ frame_needed = 0, uses_anonymous_args = 0
+ 594              	.LVL66:
+ 595 0000 08B5     		push	{r3, lr}
+ 596              	.LCFI16:
+ 597              		.cfi_def_cfa_offset 8
+ 598              		.cfi_offset 3, -8
+ 599              		.cfi_offset 14, -4
+ 600              	.LVL67:
+ 258:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;  
+ 259:libs/WIFI/Src/wifi.c **** 
+ 260:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_Ping(&EsWifiObj, ipaddr, count, interval_ms) == ES_WIFI_STATUS_OK)
+ 601              		.loc 1 260 0
+ 602 0002 1346     		mov	r3, r2
+ 603 0004 0A46     		mov	r2, r1
+ 604              	.LVL68:
+ 605 0006 0146     		mov	r1, r0
+ 606              	.LVL69:
+ 607 0008 0348     		ldr	r0, .L68
+ 608              	.LVL70:
+ 609 000a FFF7FEFF 		bl	ES_WIFI_Ping
+ 610              	.LVL71:
+ 611 000e 08B9     		cbnz	r0, .L67
+ 261:libs/WIFI/Src/wifi.c ****   {
+ 262:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK;
+ 612              		.loc 1 262 0
+ 613 0010 0020     		movs	r0, #0
+ 614              	.L64:
+ 615              	.LVL72:
+ 263:libs/WIFI/Src/wifi.c ****   }
+ 264:libs/WIFI/Src/wifi.c ****   return ret;
+ 265:libs/WIFI/Src/wifi.c **** }
+ 616              		.loc 1 265 0
+ 617 0012 08BD     		pop	{r3, pc}
+ 618              	.LVL73:
+ 619              	.L67:
+ 258:libs/WIFI/Src/wifi.c **** 
+ 620              		.loc 1 258 0
+ 621 0014 0120     		movs	r0, #1
+ 622 0016 FCE7     		b	.L64
+ 623              	.L69:
+ 624              		.align	2
+ 625              	.L68:
+ 626 0018 00000000 		.word	EsWifiObj
+ 627              		.cfi_endproc
+ 628              	.LFE136:
+ 630              		.section	.text.WIFI_GetHostAddress,"ax",%progbits
+ 631              		.align	1
+ 632              		.global	WIFI_GetHostAddress
+ 633              		.syntax unified
+ 634              		.thumb
+ 635              		.thumb_func
+ 636              		.fpu fpv4-sp-d16
+ 638              	WIFI_GetHostAddress:
+ 639              	.LFB137:
+ARM GAS  /tmp/ccDkcymV.s 			page 17
+
+
+ 266:libs/WIFI/Src/wifi.c **** 
+ 267:libs/WIFI/Src/wifi.c **** /**
+ 268:libs/WIFI/Src/wifi.c ****   * @brief  Get IP address from URL using DNS
+ 269:libs/WIFI/Src/wifi.c ****   * @param  location : Host URL
+ 270:libs/WIFI/Src/wifi.c ****   * @param  ipaddr : array of the IP address
+ 271:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 272:libs/WIFI/Src/wifi.c ****   */
+ 273:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_GetHostAddress( char* location, uint8_t* ipaddr)
+ 274:libs/WIFI/Src/wifi.c **** {
+ 640              		.loc 1 274 0
+ 641              		.cfi_startproc
+ 642              		@ args = 0, pretend = 0, frame = 0
+ 643              		@ frame_needed = 0, uses_anonymous_args = 0
+ 644              	.LVL74:
+ 645 0000 08B5     		push	{r3, lr}
+ 646              	.LCFI17:
+ 647              		.cfi_def_cfa_offset 8
+ 648              		.cfi_offset 3, -8
+ 649              		.cfi_offset 14, -4
+ 650              	.LVL75:
+ 275:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;  
+ 276:libs/WIFI/Src/wifi.c ****   
+ 277:libs/WIFI/Src/wifi.c ****   if (ES_WIFI_DNS_LookUp(&EsWifiObj, location, ipaddr) == ES_WIFI_STATUS_OK)
+ 651              		.loc 1 277 0
+ 652 0002 0A46     		mov	r2, r1
+ 653 0004 0146     		mov	r1, r0
+ 654              	.LVL76:
+ 655 0006 0348     		ldr	r0, .L74
+ 656              	.LVL77:
+ 657 0008 FFF7FEFF 		bl	ES_WIFI_DNS_LookUp
+ 658              	.LVL78:
+ 659 000c 00B1     		cbz	r0, .L71
+ 278:libs/WIFI/Src/wifi.c ****   {
+ 279:libs/WIFI/Src/wifi.c ****     return WIFI_STATUS_OK;
+ 280:libs/WIFI/Src/wifi.c ****   }
+ 281:libs/WIFI/Src/wifi.c ****   
+ 282:libs/WIFI/Src/wifi.c ****   return ret;
+ 660              		.loc 1 282 0
+ 661 000e 0120     		movs	r0, #1
+ 662              	.L71:
+ 283:libs/WIFI/Src/wifi.c **** }
+ 663              		.loc 1 283 0
+ 664 0010 08BD     		pop	{r3, pc}
+ 665              	.L75:
+ 666 0012 00BF     		.align	2
+ 667              	.L74:
+ 668 0014 00000000 		.word	EsWifiObj
+ 669              		.cfi_endproc
+ 670              	.LFE137:
+ 672              		.section	.text.WIFI_OpenClientConnection,"ax",%progbits
+ 673              		.align	1
+ 674              		.global	WIFI_OpenClientConnection
+ 675              		.syntax unified
+ 676              		.thumb
+ 677              		.thumb_func
+ 678              		.fpu fpv4-sp-d16
+ 680              	WIFI_OpenClientConnection:
+ARM GAS  /tmp/ccDkcymV.s 			page 18
+
+
+ 681              	.LFB138:
+ 284:libs/WIFI/Src/wifi.c **** /**
+ 285:libs/WIFI/Src/wifi.c ****   * @brief  Configure and start a client connection
+ 286:libs/WIFI/Src/wifi.c ****   * @param  type : Connection type TCP/UDP
+ 287:libs/WIFI/Src/wifi.c ****   * @param  name : name of the connection
+ 288:libs/WIFI/Src/wifi.c ****   * @param  ipaddr : Client IP address
+ 289:libs/WIFI/Src/wifi.c ****   * @param  port : Remote port
+ 290:libs/WIFI/Src/wifi.c ****   * @param  local_port : Local port
+ 291:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 292:libs/WIFI/Src/wifi.c ****   */
+ 293:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_OpenClientConnection(uint32_t socket, WIFI_Protocol_t type, const char* name, ui
+ 294:libs/WIFI/Src/wifi.c **** {
+ 682              		.loc 1 294 0
+ 683              		.cfi_startproc
+ 684              		@ args = 8, pretend = 0, frame = 16
+ 685              		@ frame_needed = 0, uses_anonymous_args = 0
+ 686              	.LVL79:
+ 687 0000 00B5     		push	{lr}
+ 688              	.LCFI18:
+ 689              		.cfi_def_cfa_offset 4
+ 690              		.cfi_offset 14, -4
+ 691 0002 85B0     		sub	sp, sp, #20
+ 692              	.LCFI19:
+ 693              		.cfi_def_cfa_offset 24
+ 694              	.LVL80:
+ 295:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;
+ 296:libs/WIFI/Src/wifi.c ****   ES_WIFI_Conn_t conn;
+ 297:libs/WIFI/Src/wifi.c ****   
+ 298:libs/WIFI/Src/wifi.c ****   conn.Number = socket;
+ 695              		.loc 1 298 0
+ 696 0004 8DF80100 		strb	r0, [sp, #1]
+ 299:libs/WIFI/Src/wifi.c ****   conn.RemotePort = port;
+ 697              		.loc 1 299 0
+ 698 0008 BDF81820 		ldrh	r2, [sp, #24]
+ 699              	.LVL81:
+ 700 000c ADF80220 		strh	r2, [sp, #2]	@ movhi
+ 300:libs/WIFI/Src/wifi.c ****   conn.LocalPort = local_port;
+ 701              		.loc 1 300 0
+ 702 0010 BDF81C20 		ldrh	r2, [sp, #28]
+ 703 0014 ADF80420 		strh	r2, [sp, #4]	@ movhi
+ 301:libs/WIFI/Src/wifi.c ****   conn.Type = (type == WIFI_TCP_PROTOCOL)? ES_WIFI_TCP_CONNECTION : ES_WIFI_UDP_CONNECTION;
+ 704              		.loc 1 301 0
+ 705 0018 0031     		adds	r1, r1, #0
+ 706              	.LVL82:
+ 707 001a 18BF     		it	ne
+ 708 001c 0121     		movne	r1, #1
+ 709 001e 8DF80010 		strb	r1, [sp]
+ 302:libs/WIFI/Src/wifi.c ****   conn.RemoteIP[0] = ipaddr[0];
+ 710              		.loc 1 302 0
+ 711 0022 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 712 0024 8DF80620 		strb	r2, [sp, #6]
+ 303:libs/WIFI/Src/wifi.c ****   conn.RemoteIP[1] = ipaddr[1];
+ 713              		.loc 1 303 0
+ 714 0028 5A78     		ldrb	r2, [r3, #1]	@ zero_extendqisi2
+ 715 002a 8DF80720 		strb	r2, [sp, #7]
+ 304:libs/WIFI/Src/wifi.c ****   conn.RemoteIP[2] = ipaddr[2];
+ 716              		.loc 1 304 0
+ARM GAS  /tmp/ccDkcymV.s 			page 19
+
+
+ 717 002e 9A78     		ldrb	r2, [r3, #2]	@ zero_extendqisi2
+ 718 0030 8DF80820 		strb	r2, [sp, #8]
+ 305:libs/WIFI/Src/wifi.c ****   conn.RemoteIP[3] = ipaddr[3];
+ 719              		.loc 1 305 0
+ 720 0034 DB78     		ldrb	r3, [r3, #3]	@ zero_extendqisi2
+ 721              	.LVL83:
+ 722 0036 8DF80930 		strb	r3, [sp, #9]
+ 306:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_StartClientConnection(&EsWifiObj, &conn)== ES_WIFI_STATUS_OK)
+ 723              		.loc 1 306 0
+ 724 003a 6946     		mov	r1, sp
+ 725 003c 0448     		ldr	r0, .L81
+ 726              	.LVL84:
+ 727 003e FFF7FEFF 		bl	ES_WIFI_StartClientConnection
+ 728              	.LVL85:
+ 729 0042 18B9     		cbnz	r0, .L80
+ 307:libs/WIFI/Src/wifi.c ****   {
+ 308:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK;
+ 730              		.loc 1 308 0
+ 731 0044 0020     		movs	r0, #0
+ 732              	.L77:
+ 733              	.LVL86:
+ 309:libs/WIFI/Src/wifi.c ****   }
+ 310:libs/WIFI/Src/wifi.c ****   return ret;
+ 311:libs/WIFI/Src/wifi.c **** }
+ 734              		.loc 1 311 0
+ 735 0046 05B0     		add	sp, sp, #20
+ 736              	.LCFI20:
+ 737              		.cfi_remember_state
+ 738              		.cfi_def_cfa_offset 4
+ 739              		@ sp needed
+ 740 0048 5DF804FB 		ldr	pc, [sp], #4
+ 741              	.LVL87:
+ 742              	.L80:
+ 743              	.LCFI21:
+ 744              		.cfi_restore_state
+ 295:libs/WIFI/Src/wifi.c ****   ES_WIFI_Conn_t conn;
+ 745              		.loc 1 295 0
+ 746 004c 0120     		movs	r0, #1
+ 747 004e FAE7     		b	.L77
+ 748              	.L82:
+ 749              		.align	2
+ 750              	.L81:
+ 751 0050 00000000 		.word	EsWifiObj
+ 752              		.cfi_endproc
+ 753              	.LFE138:
+ 755              		.section	.text.WIFI_CloseClientConnection,"ax",%progbits
+ 756              		.align	1
+ 757              		.global	WIFI_CloseClientConnection
+ 758              		.syntax unified
+ 759              		.thumb
+ 760              		.thumb_func
+ 761              		.fpu fpv4-sp-d16
+ 763              	WIFI_CloseClientConnection:
+ 764              	.LFB139:
+ 312:libs/WIFI/Src/wifi.c **** 
+ 313:libs/WIFI/Src/wifi.c **** /**
+ 314:libs/WIFI/Src/wifi.c ****   * @brief  Close client connection
+ARM GAS  /tmp/ccDkcymV.s 			page 20
+
+
+ 315:libs/WIFI/Src/wifi.c ****   * @param  type : Connection type TCP/UDP
+ 316:libs/WIFI/Src/wifi.c ****   * @param  name : name of the connection
+ 317:libs/WIFI/Src/wifi.c ****   * @param  location : Client address
+ 318:libs/WIFI/Src/wifi.c ****   * @param  port : Remote port
+ 319:libs/WIFI/Src/wifi.c ****   * @param  local_port : Local port
+ 320:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 321:libs/WIFI/Src/wifi.c ****   */
+ 322:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_CloseClientConnection(uint32_t socket)
+ 323:libs/WIFI/Src/wifi.c **** {
+ 765              		.loc 1 323 0
+ 766              		.cfi_startproc
+ 767              		@ args = 0, pretend = 0, frame = 16
+ 768              		@ frame_needed = 0, uses_anonymous_args = 0
+ 769              	.LVL88:
+ 770 0000 00B5     		push	{lr}
+ 771              	.LCFI22:
+ 772              		.cfi_def_cfa_offset 4
+ 773              		.cfi_offset 14, -4
+ 774 0002 85B0     		sub	sp, sp, #20
+ 775              	.LCFI23:
+ 776              		.cfi_def_cfa_offset 24
+ 777              	.LVL89:
+ 324:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;  
+ 325:libs/WIFI/Src/wifi.c ****   ES_WIFI_Conn_t conn;
+ 326:libs/WIFI/Src/wifi.c ****   conn.Number = socket;
+ 778              		.loc 1 326 0
+ 779 0004 8DF80100 		strb	r0, [sp, #1]
+ 327:libs/WIFI/Src/wifi.c ****   
+ 328:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_StopClientConnection(&EsWifiObj, &conn)== ES_WIFI_STATUS_OK)
+ 780              		.loc 1 328 0
+ 781 0008 6946     		mov	r1, sp
+ 782 000a 0548     		ldr	r0, .L88
+ 783              	.LVL90:
+ 784 000c FFF7FEFF 		bl	ES_WIFI_StopClientConnection
+ 785              	.LVL91:
+ 786 0010 18B9     		cbnz	r0, .L87
+ 329:libs/WIFI/Src/wifi.c ****   {
+ 330:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK;
+ 787              		.loc 1 330 0
+ 788 0012 0020     		movs	r0, #0
+ 789              	.L84:
+ 790              	.LVL92:
+ 331:libs/WIFI/Src/wifi.c ****   }
+ 332:libs/WIFI/Src/wifi.c ****   return ret; 
+ 333:libs/WIFI/Src/wifi.c **** }
+ 791              		.loc 1 333 0
+ 792 0014 05B0     		add	sp, sp, #20
+ 793              	.LCFI24:
+ 794              		.cfi_remember_state
+ 795              		.cfi_def_cfa_offset 4
+ 796              		@ sp needed
+ 797 0016 5DF804FB 		ldr	pc, [sp], #4
+ 798              	.LVL93:
+ 799              	.L87:
+ 800              	.LCFI25:
+ 801              		.cfi_restore_state
+ 324:libs/WIFI/Src/wifi.c ****   ES_WIFI_Conn_t conn;
+ARM GAS  /tmp/ccDkcymV.s 			page 21
+
+
+ 802              		.loc 1 324 0
+ 803 001a 0120     		movs	r0, #1
+ 804 001c FAE7     		b	.L84
+ 805              	.L89:
+ 806 001e 00BF     		.align	2
+ 807              	.L88:
+ 808 0020 00000000 		.word	EsWifiObj
+ 809              		.cfi_endproc
+ 810              	.LFE139:
+ 812              		.section	.text.WIFI_StartServer,"ax",%progbits
+ 813              		.align	1
+ 814              		.global	WIFI_StartServer
+ 815              		.syntax unified
+ 816              		.thumb
+ 817              		.thumb_func
+ 818              		.fpu fpv4-sp-d16
+ 820              	WIFI_StartServer:
+ 821              	.LFB140:
+ 334:libs/WIFI/Src/wifi.c **** 
+ 335:libs/WIFI/Src/wifi.c **** /**
+ 336:libs/WIFI/Src/wifi.c ****   * @brief  Configure and start a Server
+ 337:libs/WIFI/Src/wifi.c ****   * @param  type : Connection type TCP/UDP
+ 338:libs/WIFI/Src/wifi.c ****   * @param  name : name of the connection
+ 339:libs/WIFI/Src/wifi.c ****   * @param  port : Remote port
+ 340:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 341:libs/WIFI/Src/wifi.c ****   */
+ 342:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_StartServer(uint32_t socket, WIFI_Protocol_t protocol, const char* name, uint16_
+ 343:libs/WIFI/Src/wifi.c **** {
+ 822              		.loc 1 343 0
+ 823              		.cfi_startproc
+ 824              		@ args = 0, pretend = 0, frame = 16
+ 825              		@ frame_needed = 0, uses_anonymous_args = 0
+ 826              	.LVL94:
+ 827 0000 00B5     		push	{lr}
+ 828              	.LCFI26:
+ 829              		.cfi_def_cfa_offset 4
+ 830              		.cfi_offset 14, -4
+ 831 0002 85B0     		sub	sp, sp, #20
+ 832              	.LCFI27:
+ 833              		.cfi_def_cfa_offset 24
+ 834              	.LVL95:
+ 344:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;
+ 345:libs/WIFI/Src/wifi.c ****   ES_WIFI_Conn_t conn;
+ 346:libs/WIFI/Src/wifi.c ****   conn.Number = socket;
+ 835              		.loc 1 346 0
+ 836 0004 8DF80100 		strb	r0, [sp, #1]
+ 347:libs/WIFI/Src/wifi.c ****   conn.LocalPort = port;
+ 837              		.loc 1 347 0
+ 838 0008 ADF80430 		strh	r3, [sp, #4]	@ movhi
+ 348:libs/WIFI/Src/wifi.c ****   conn.Type = (protocol == WIFI_TCP_PROTOCOL)? ES_WIFI_TCP_CONNECTION : ES_WIFI_UDP_CONNECTION;
+ 839              		.loc 1 348 0
+ 840 000c 0B1C     		adds	r3, r1, #0
+ 841              	.LVL96:
+ 842 000e 18BF     		it	ne
+ 843 0010 0123     		movne	r3, #1
+ 844 0012 04A9     		add	r1, sp, #16
+ 845              	.LVL97:
+ARM GAS  /tmp/ccDkcymV.s 			page 22
+
+
+ 846 0014 01F8103D 		strb	r3, [r1, #-16]!
+ 349:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_StartServerSingleConn(&EsWifiObj, &conn)== ES_WIFI_STATUS_OK)
+ 847              		.loc 1 349 0
+ 848 0018 0448     		ldr	r0, .L95
+ 849              	.LVL98:
+ 850 001a FFF7FEFF 		bl	ES_WIFI_StartServerSingleConn
+ 851              	.LVL99:
+ 852 001e 18B9     		cbnz	r0, .L94
+ 350:libs/WIFI/Src/wifi.c ****   {
+ 351:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK;
+ 853              		.loc 1 351 0
+ 854 0020 0020     		movs	r0, #0
+ 855              	.L91:
+ 856              	.LVL100:
+ 352:libs/WIFI/Src/wifi.c ****   }
+ 353:libs/WIFI/Src/wifi.c ****   return ret;
+ 354:libs/WIFI/Src/wifi.c **** }
+ 857              		.loc 1 354 0
+ 858 0022 05B0     		add	sp, sp, #20
+ 859              	.LCFI28:
+ 860              		.cfi_remember_state
+ 861              		.cfi_def_cfa_offset 4
+ 862              		@ sp needed
+ 863 0024 5DF804FB 		ldr	pc, [sp], #4
+ 864              	.LVL101:
+ 865              	.L94:
+ 866              	.LCFI29:
+ 867              		.cfi_restore_state
+ 344:libs/WIFI/Src/wifi.c ****   ES_WIFI_Conn_t conn;
+ 868              		.loc 1 344 0
+ 869 0028 0120     		movs	r0, #1
+ 870 002a FAE7     		b	.L91
+ 871              	.L96:
+ 872              		.align	2
+ 873              	.L95:
+ 874 002c 00000000 		.word	EsWifiObj
+ 875              		.cfi_endproc
+ 876              	.LFE140:
+ 878              		.section	.text.WIFI_StopServer,"ax",%progbits
+ 879              		.align	1
+ 880              		.global	WIFI_StopServer
+ 881              		.syntax unified
+ 882              		.thumb
+ 883              		.thumb_func
+ 884              		.fpu fpv4-sp-d16
+ 886              	WIFI_StopServer:
+ 887              	.LFB141:
+ 355:libs/WIFI/Src/wifi.c **** 
+ 356:libs/WIFI/Src/wifi.c **** /**
+ 357:libs/WIFI/Src/wifi.c ****   * @brief  Stop a server
+ 358:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 359:libs/WIFI/Src/wifi.c ****   */
+ 360:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_StopServer(uint32_t socket)
+ 361:libs/WIFI/Src/wifi.c **** {
+ 888              		.loc 1 361 0
+ 889              		.cfi_startproc
+ 890              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /tmp/ccDkcymV.s 			page 23
+
+
+ 891              		@ frame_needed = 0, uses_anonymous_args = 0
+ 892              	.LVL102:
+ 893 0000 08B5     		push	{r3, lr}
+ 894              	.LCFI30:
+ 895              		.cfi_def_cfa_offset 8
+ 896              		.cfi_offset 3, -8
+ 897              		.cfi_offset 14, -4
+ 898              	.LVL103:
+ 362:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;
+ 363:libs/WIFI/Src/wifi.c ****   
+ 364:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_StopServerSingleConn(&EsWifiObj)== ES_WIFI_STATUS_OK)
+ 899              		.loc 1 364 0
+ 900 0002 0448     		ldr	r0, .L102
+ 901              	.LVL104:
+ 902 0004 FFF7FEFF 		bl	ES_WIFI_StopServerSingleConn
+ 903              	.LVL105:
+ 904 0008 08B9     		cbnz	r0, .L101
+ 365:libs/WIFI/Src/wifi.c ****   {
+ 366:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK;
+ 905              		.loc 1 366 0
+ 906 000a 0020     		movs	r0, #0
+ 907              	.L98:
+ 908              	.LVL106:
+ 367:libs/WIFI/Src/wifi.c ****   }
+ 368:libs/WIFI/Src/wifi.c ****   return ret;
+ 369:libs/WIFI/Src/wifi.c **** }
+ 909              		.loc 1 369 0
+ 910 000c 08BD     		pop	{r3, pc}
+ 911              	.LVL107:
+ 912              	.L101:
+ 362:libs/WIFI/Src/wifi.c ****   
+ 913              		.loc 1 362 0
+ 914 000e 0120     		movs	r0, #1
+ 915 0010 FCE7     		b	.L98
+ 916              	.L103:
+ 917 0012 00BF     		.align	2
+ 918              	.L102:
+ 919 0014 00000000 		.word	EsWifiObj
+ 920              		.cfi_endproc
+ 921              	.LFE141:
+ 923              		.section	.text.WIFI_SendData,"ax",%progbits
+ 924              		.align	1
+ 925              		.global	WIFI_SendData
+ 926              		.syntax unified
+ 927              		.thumb
+ 928              		.thumb_func
+ 929              		.fpu fpv4-sp-d16
+ 931              	WIFI_SendData:
+ 932              	.LFB142:
+ 370:libs/WIFI/Src/wifi.c **** /**
+ 371:libs/WIFI/Src/wifi.c ****   * @brief  Send Data on a socket
+ 372:libs/WIFI/Src/wifi.c ****   * @param  pdata : pointer to data to be sent
+ 373:libs/WIFI/Src/wifi.c ****   * @param  len : length of data to be sent
+ 374:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 375:libs/WIFI/Src/wifi.c ****   */
+ 376:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_SendData(uint8_t socket, uint8_t *pdata, uint16_t Reqlen, uint16_t *SentDatalen,
+ 377:libs/WIFI/Src/wifi.c **** {
+ARM GAS  /tmp/ccDkcymV.s 			page 24
+
+
+ 933              		.loc 1 377 0
+ 934              		.cfi_startproc
+ 935              		@ args = 4, pretend = 0, frame = 0
+ 936              		@ frame_needed = 0, uses_anonymous_args = 0
+ 937              	.LVL108:
+ 938 0000 10B5     		push	{r4, lr}
+ 939              	.LCFI31:
+ 940              		.cfi_def_cfa_offset 8
+ 941              		.cfi_offset 4, -8
+ 942              		.cfi_offset 14, -4
+ 943 0002 82B0     		sub	sp, sp, #8
+ 944              	.LCFI32:
+ 945              		.cfi_def_cfa_offset 16
+ 946              	.LVL109:
+ 378:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;
+ 379:libs/WIFI/Src/wifi.c **** 
+ 380:libs/WIFI/Src/wifi.c ****     if(ES_WIFI_SendData(&EsWifiObj, socket, pdata, Reqlen, SentDatalen, Timeout) == ES_WIFI_STATUS_
+ 947              		.loc 1 380 0
+ 948 0004 049C     		ldr	r4, [sp, #16]
+ 949 0006 0194     		str	r4, [sp, #4]
+ 950 0008 0093     		str	r3, [sp]
+ 951 000a 1346     		mov	r3, r2
+ 952              	.LVL110:
+ 953 000c 0A46     		mov	r2, r1
+ 954              	.LVL111:
+ 955 000e 0146     		mov	r1, r0
+ 956              	.LVL112:
+ 957 0010 0448     		ldr	r0, .L109
+ 958              	.LVL113:
+ 959 0012 FFF7FEFF 		bl	ES_WIFI_SendData
+ 960              	.LVL114:
+ 961 0016 10B9     		cbnz	r0, .L108
+ 381:libs/WIFI/Src/wifi.c ****     {
+ 382:libs/WIFI/Src/wifi.c ****       ret = WIFI_STATUS_OK;
+ 962              		.loc 1 382 0
+ 963 0018 0020     		movs	r0, #0
+ 964              	.L105:
+ 965              	.LVL115:
+ 383:libs/WIFI/Src/wifi.c ****     }
+ 384:libs/WIFI/Src/wifi.c **** 
+ 385:libs/WIFI/Src/wifi.c ****   return ret;
+ 386:libs/WIFI/Src/wifi.c **** }
+ 966              		.loc 1 386 0
+ 967 001a 02B0     		add	sp, sp, #8
+ 968              	.LCFI33:
+ 969              		.cfi_remember_state
+ 970              		.cfi_def_cfa_offset 8
+ 971              		@ sp needed
+ 972 001c 10BD     		pop	{r4, pc}
+ 973              	.LVL116:
+ 974              	.L108:
+ 975              	.LCFI34:
+ 976              		.cfi_restore_state
+ 378:libs/WIFI/Src/wifi.c **** 
+ 977              		.loc 1 378 0
+ 978 001e 0120     		movs	r0, #1
+ 979 0020 FBE7     		b	.L105
+ARM GAS  /tmp/ccDkcymV.s 			page 25
+
+
+ 980              	.L110:
+ 981 0022 00BF     		.align	2
+ 982              	.L109:
+ 983 0024 00000000 		.word	EsWifiObj
+ 984              		.cfi_endproc
+ 985              	.LFE142:
+ 987              		.section	.text.WIFI_ReceiveData,"ax",%progbits
+ 988              		.align	1
+ 989              		.global	WIFI_ReceiveData
+ 990              		.syntax unified
+ 991              		.thumb
+ 992              		.thumb_func
+ 993              		.fpu fpv4-sp-d16
+ 995              	WIFI_ReceiveData:
+ 996              	.LFB143:
+ 387:libs/WIFI/Src/wifi.c **** 
+ 388:libs/WIFI/Src/wifi.c **** /**
+ 389:libs/WIFI/Src/wifi.c ****   * @brief  Receive Data from a socket
+ 390:libs/WIFI/Src/wifi.c ****   * @param  pdata : pointer to Rx buffer
+ 391:libs/WIFI/Src/wifi.c ****   * @param  *len :  pointer to length of data
+ 392:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 393:libs/WIFI/Src/wifi.c ****   */
+ 394:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_ReceiveData(uint8_t socket, uint8_t *pdata, uint16_t Reqlen, uint16_t *RcvDatale
+ 395:libs/WIFI/Src/wifi.c **** {
+ 997              		.loc 1 395 0
+ 998              		.cfi_startproc
+ 999              		@ args = 4, pretend = 0, frame = 0
+ 1000              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1001              	.LVL117:
+ 1002 0000 10B5     		push	{r4, lr}
+ 1003              	.LCFI35:
+ 1004              		.cfi_def_cfa_offset 8
+ 1005              		.cfi_offset 4, -8
+ 1006              		.cfi_offset 14, -4
+ 1007 0002 82B0     		sub	sp, sp, #8
+ 1008              	.LCFI36:
+ 1009              		.cfi_def_cfa_offset 16
+ 1010              	.LVL118:
+ 396:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 397:libs/WIFI/Src/wifi.c **** 
+ 398:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_ReceiveData(&EsWifiObj, socket, pdata, Reqlen, RcvDatalen, Timeout) == ES_WIFI_STATUS_
+ 1011              		.loc 1 398 0
+ 1012 0004 049C     		ldr	r4, [sp, #16]
+ 1013 0006 0194     		str	r4, [sp, #4]
+ 1014 0008 0093     		str	r3, [sp]
+ 1015 000a 1346     		mov	r3, r2
+ 1016              	.LVL119:
+ 1017 000c 0A46     		mov	r2, r1
+ 1018              	.LVL120:
+ 1019 000e 0146     		mov	r1, r0
+ 1020              	.LVL121:
+ 1021 0010 0448     		ldr	r0, .L116
+ 1022              	.LVL122:
+ 1023 0012 FFF7FEFF 		bl	ES_WIFI_ReceiveData
+ 1024              	.LVL123:
+ 1025 0016 10B9     		cbnz	r0, .L115
+ 399:libs/WIFI/Src/wifi.c ****   {
+ARM GAS  /tmp/ccDkcymV.s 			page 26
+
+
+ 400:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK; 
+ 1026              		.loc 1 400 0
+ 1027 0018 0020     		movs	r0, #0
+ 1028              	.L112:
+ 1029              	.LVL124:
+ 401:libs/WIFI/Src/wifi.c ****   }
+ 402:libs/WIFI/Src/wifi.c ****   return ret;
+ 403:libs/WIFI/Src/wifi.c **** }
+ 1030              		.loc 1 403 0
+ 1031 001a 02B0     		add	sp, sp, #8
+ 1032              	.LCFI37:
+ 1033              		.cfi_remember_state
+ 1034              		.cfi_def_cfa_offset 8
+ 1035              		@ sp needed
+ 1036 001c 10BD     		pop	{r4, pc}
+ 1037              	.LVL125:
+ 1038              	.L115:
+ 1039              	.LCFI38:
+ 1040              		.cfi_restore_state
+ 396:libs/WIFI/Src/wifi.c **** 
+ 1041              		.loc 1 396 0
+ 1042 001e 0120     		movs	r0, #1
+ 1043 0020 FBE7     		b	.L112
+ 1044              	.L117:
+ 1045 0022 00BF     		.align	2
+ 1046              	.L116:
+ 1047 0024 00000000 		.word	EsWifiObj
+ 1048              		.cfi_endproc
+ 1049              	.LFE143:
+ 1051              		.section	.text.WIFI_SetOEMProperties,"ax",%progbits
+ 1052              		.align	1
+ 1053              		.global	WIFI_SetOEMProperties
+ 1054              		.syntax unified
+ 1055              		.thumb
+ 1056              		.thumb_func
+ 1057              		.fpu fpv4-sp-d16
+ 1059              	WIFI_SetOEMProperties:
+ 1060              	.LFB144:
+ 404:libs/WIFI/Src/wifi.c **** 
+ 405:libs/WIFI/Src/wifi.c **** /**
+ 406:libs/WIFI/Src/wifi.c ****   * @brief  Customize module data
+ 407:libs/WIFI/Src/wifi.c ****   * @param  name : MFC name
+ 408:libs/WIFI/Src/wifi.c ****   * @param  Mac :  Mac Address
+ 409:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 410:libs/WIFI/Src/wifi.c ****   */
+ 411:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_SetOEMProperties(const char *name, uint8_t *Mac)
+ 412:libs/WIFI/Src/wifi.c **** {
+ 1061              		.loc 1 412 0
+ 1062              		.cfi_startproc
+ 1063              		@ args = 0, pretend = 0, frame = 0
+ 1064              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1065              	.LVL126:
+ 1066 0000 10B5     		push	{r4, lr}
+ 1067              	.LCFI39:
+ 1068              		.cfi_def_cfa_offset 8
+ 1069              		.cfi_offset 4, -8
+ 1070              		.cfi_offset 14, -4
+ARM GAS  /tmp/ccDkcymV.s 			page 27
+
+
+ 1071 0002 0C46     		mov	r4, r1
+ 1072              	.LVL127:
+ 413:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 414:libs/WIFI/Src/wifi.c ****   
+ 415:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_SetProductName(&EsWifiObj, (uint8_t *)name) == ES_WIFI_STATUS_OK)
+ 1073              		.loc 1 415 0
+ 1074 0004 0146     		mov	r1, r0
+ 1075              	.LVL128:
+ 1076 0006 0748     		ldr	r0, .L125
+ 1077              	.LVL129:
+ 1078 0008 FFF7FEFF 		bl	ES_WIFI_SetProductName
+ 1079              	.LVL130:
+ 1080 000c 08B1     		cbz	r0, .L123
+ 413:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 1081              		.loc 1 413 0
+ 1082 000e 0120     		movs	r0, #1
+ 1083              	.L119:
+ 1084              	.LVL131:
+ 416:libs/WIFI/Src/wifi.c ****   {
+ 417:libs/WIFI/Src/wifi.c ****     if(ES_WIFI_SetMACAddress(&EsWifiObj, Mac) == ES_WIFI_STATUS_OK)
+ 418:libs/WIFI/Src/wifi.c ****     {
+ 419:libs/WIFI/Src/wifi.c ****       ret = WIFI_STATUS_OK;
+ 420:libs/WIFI/Src/wifi.c ****     }
+ 421:libs/WIFI/Src/wifi.c ****   }
+ 422:libs/WIFI/Src/wifi.c ****   return ret;
+ 423:libs/WIFI/Src/wifi.c **** }
+ 1085              		.loc 1 423 0
+ 1086 0010 10BD     		pop	{r4, pc}
+ 1087              	.LVL132:
+ 1088              	.L123:
+ 417:libs/WIFI/Src/wifi.c ****     {
+ 1089              		.loc 1 417 0
+ 1090 0012 2146     		mov	r1, r4
+ 1091 0014 0348     		ldr	r0, .L125
+ 1092 0016 FFF7FEFF 		bl	ES_WIFI_SetMACAddress
+ 1093              	.LVL133:
+ 1094 001a 08B9     		cbnz	r0, .L124
+ 419:libs/WIFI/Src/wifi.c ****     }
+ 1095              		.loc 1 419 0
+ 1096 001c 0020     		movs	r0, #0
+ 1097 001e F7E7     		b	.L119
+ 1098              	.L124:
+ 413:libs/WIFI/Src/wifi.c ****   
+ 1099              		.loc 1 413 0
+ 1100 0020 0120     		movs	r0, #1
+ 1101 0022 F5E7     		b	.L119
+ 1102              	.L126:
+ 1103              		.align	2
+ 1104              	.L125:
+ 1105 0024 00000000 		.word	EsWifiObj
+ 1106              		.cfi_endproc
+ 1107              	.LFE144:
+ 1109              		.section	.text.WIFI_ResetModule,"ax",%progbits
+ 1110              		.align	1
+ 1111              		.global	WIFI_ResetModule
+ 1112              		.syntax unified
+ 1113              		.thumb
+ARM GAS  /tmp/ccDkcymV.s 			page 28
+
+
+ 1114              		.thumb_func
+ 1115              		.fpu fpv4-sp-d16
+ 1117              	WIFI_ResetModule:
+ 1118              	.LFB145:
+ 424:libs/WIFI/Src/wifi.c **** 
+ 425:libs/WIFI/Src/wifi.c **** /**
+ 426:libs/WIFI/Src/wifi.c ****   * @brief  Reset the WIFI module
+ 427:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 428:libs/WIFI/Src/wifi.c ****   */
+ 429:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_ResetModule(void)
+ 430:libs/WIFI/Src/wifi.c **** {
+ 1119              		.loc 1 430 0
+ 1120              		.cfi_startproc
+ 1121              		@ args = 0, pretend = 0, frame = 0
+ 1122              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1123 0000 08B5     		push	{r3, lr}
+ 1124              	.LCFI40:
+ 1125              		.cfi_def_cfa_offset 8
+ 1126              		.cfi_offset 3, -8
+ 1127              		.cfi_offset 14, -4
+ 1128              	.LVL134:
+ 431:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 432:libs/WIFI/Src/wifi.c ****   
+ 433:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_ResetModule(&EsWifiObj) == ES_WIFI_STATUS_OK)
+ 1129              		.loc 1 433 0
+ 1130 0002 0448     		ldr	r0, .L132
+ 1131 0004 FFF7FEFF 		bl	ES_WIFI_ResetModule
+ 1132              	.LVL135:
+ 1133 0008 08B9     		cbnz	r0, .L131
+ 434:libs/WIFI/Src/wifi.c ****   {
+ 435:libs/WIFI/Src/wifi.c ****       ret = WIFI_STATUS_OK;
+ 1134              		.loc 1 435 0
+ 1135 000a 0020     		movs	r0, #0
+ 1136              	.L128:
+ 1137              	.LVL136:
+ 436:libs/WIFI/Src/wifi.c ****   }
+ 437:libs/WIFI/Src/wifi.c ****   return ret;
+ 438:libs/WIFI/Src/wifi.c **** }
+ 1138              		.loc 1 438 0
+ 1139 000c 08BD     		pop	{r3, pc}
+ 1140              	.LVL137:
+ 1141              	.L131:
+ 431:libs/WIFI/Src/wifi.c ****   
+ 1142              		.loc 1 431 0
+ 1143 000e 0120     		movs	r0, #1
+ 1144 0010 FCE7     		b	.L128
+ 1145              	.L133:
+ 1146 0012 00BF     		.align	2
+ 1147              	.L132:
+ 1148 0014 00000000 		.word	EsWifiObj
+ 1149              		.cfi_endproc
+ 1150              	.LFE145:
+ 1152              		.section	.text.WIFI_SetModuleDefault,"ax",%progbits
+ 1153              		.align	1
+ 1154              		.global	WIFI_SetModuleDefault
+ 1155              		.syntax unified
+ 1156              		.thumb
+ARM GAS  /tmp/ccDkcymV.s 			page 29
+
+
+ 1157              		.thumb_func
+ 1158              		.fpu fpv4-sp-d16
+ 1160              	WIFI_SetModuleDefault:
+ 1161              	.LFB146:
+ 439:libs/WIFI/Src/wifi.c **** 
+ 440:libs/WIFI/Src/wifi.c **** /**
+ 441:libs/WIFI/Src/wifi.c ****   * @brief  Restore module default configuration
+ 442:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 443:libs/WIFI/Src/wifi.c ****   */
+ 444:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_SetModuleDefault(void)
+ 445:libs/WIFI/Src/wifi.c **** {
+ 1162              		.loc 1 445 0
+ 1163              		.cfi_startproc
+ 1164              		@ args = 0, pretend = 0, frame = 0
+ 1165              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1166 0000 08B5     		push	{r3, lr}
+ 1167              	.LCFI41:
+ 1168              		.cfi_def_cfa_offset 8
+ 1169              		.cfi_offset 3, -8
+ 1170              		.cfi_offset 14, -4
+ 1171              	.LVL138:
+ 446:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 447:libs/WIFI/Src/wifi.c ****   
+ 448:libs/WIFI/Src/wifi.c ****   if(ES_WIFI_ResetToFactoryDefault(&EsWifiObj) == ES_WIFI_STATUS_OK)
+ 1172              		.loc 1 448 0
+ 1173 0002 0448     		ldr	r0, .L139
+ 1174 0004 FFF7FEFF 		bl	ES_WIFI_ResetToFactoryDefault
+ 1175              	.LVL139:
+ 1176 0008 08B9     		cbnz	r0, .L138
+ 449:libs/WIFI/Src/wifi.c ****   {
+ 450:libs/WIFI/Src/wifi.c ****       ret = WIFI_STATUS_OK;
+ 1177              		.loc 1 450 0
+ 1178 000a 0020     		movs	r0, #0
+ 1179              	.L135:
+ 1180              	.LVL140:
+ 451:libs/WIFI/Src/wifi.c ****   }
+ 452:libs/WIFI/Src/wifi.c ****   return ret;
+ 453:libs/WIFI/Src/wifi.c **** }
+ 1181              		.loc 1 453 0
+ 1182 000c 08BD     		pop	{r3, pc}
+ 1183              	.LVL141:
+ 1184              	.L138:
+ 446:libs/WIFI/Src/wifi.c ****   
+ 1185              		.loc 1 446 0
+ 1186 000e 0120     		movs	r0, #1
+ 1187 0010 FCE7     		b	.L135
+ 1188              	.L140:
+ 1189 0012 00BF     		.align	2
+ 1190              	.L139:
+ 1191 0014 00000000 		.word	EsWifiObj
+ 1192              		.cfi_endproc
+ 1193              	.LFE146:
+ 1195              		.section	.text.WIFI_ModuleFirmwareUpdate,"ax",%progbits
+ 1196              		.align	1
+ 1197              		.global	WIFI_ModuleFirmwareUpdate
+ 1198              		.syntax unified
+ 1199              		.thumb
+ARM GAS  /tmp/ccDkcymV.s 			page 30
+
+
+ 1200              		.thumb_func
+ 1201              		.fpu fpv4-sp-d16
+ 1203              	WIFI_ModuleFirmwareUpdate:
+ 1204              	.LFB147:
+ 454:libs/WIFI/Src/wifi.c **** 
+ 455:libs/WIFI/Src/wifi.c **** 
+ 456:libs/WIFI/Src/wifi.c **** /**
+ 457:libs/WIFI/Src/wifi.c ****   * @brief  Update module firmware
+ 458:libs/WIFI/Src/wifi.c ****   * @param  location : Binary Location IP address
+ 459:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 460:libs/WIFI/Src/wifi.c ****   */
+ 461:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_ModuleFirmwareUpdate(const char *location)
+ 462:libs/WIFI/Src/wifi.c **** {
+ 1205              		.loc 1 462 0
+ 1206              		.cfi_startproc
+ 1207              		@ args = 0, pretend = 0, frame = 0
+ 1208              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1209              		@ link register save eliminated.
+ 1210              	.LVL142:
+ 463:libs/WIFI/Src/wifi.c ****   return WIFI_STATUS_NOT_SUPPORTED;
+ 464:libs/WIFI/Src/wifi.c **** }
+ 1211              		.loc 1 464 0
+ 1212 0000 0220     		movs	r0, #2
+ 1213              	.LVL143:
+ 1214 0002 7047     		bx	lr
+ 1215              		.cfi_endproc
+ 1216              	.LFE147:
+ 1218              		.section	.text.WIFI_GetModuleFwRevision,"ax",%progbits
+ 1219              		.align	1
+ 1220              		.global	WIFI_GetModuleFwRevision
+ 1221              		.syntax unified
+ 1222              		.thumb
+ 1223              		.thumb_func
+ 1224              		.fpu fpv4-sp-d16
+ 1226              	WIFI_GetModuleFwRevision:
+ 1227              	.LFB148:
+ 465:libs/WIFI/Src/wifi.c **** 
+ 466:libs/WIFI/Src/wifi.c **** /**
+ 467:libs/WIFI/Src/wifi.c ****   * @brief  Return Module firmware revision
+ 468:libs/WIFI/Src/wifi.c ****   * @param  rev : revision string
+ 469:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 470:libs/WIFI/Src/wifi.c ****   */
+ 471:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_GetModuleFwRevision(char *rev)
+ 472:libs/WIFI/Src/wifi.c **** {
+ 1228              		.loc 1 472 0
+ 1229              		.cfi_startproc
+ 1230              		@ args = 0, pretend = 0, frame = 0
+ 1231              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1232              	.LVL144:
+ 1233 0000 08B5     		push	{r3, lr}
+ 1234              	.LCFI42:
+ 1235              		.cfi_def_cfa_offset 8
+ 1236              		.cfi_offset 3, -8
+ 1237              		.cfi_offset 14, -4
+ 1238              	.LVL145:
+ 473:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 474:libs/WIFI/Src/wifi.c ****   
+ARM GAS  /tmp/ccDkcymV.s 			page 31
+
+
+ 475:libs/WIFI/Src/wifi.c ****   if(EsWifiObj.FW_Rev != NULL)
+ 476:libs/WIFI/Src/wifi.c ****   {
+ 477:libs/WIFI/Src/wifi.c ****     strncpy(rev, (char *)EsWifiObj.FW_Rev, ES_WIFI_FW_REV_SIZE);
+ 1239              		.loc 1 477 0
+ 1240 0002 1022     		movs	r2, #16
+ 1241 0004 0249     		ldr	r1, .L144
+ 1242 0006 FFF7FEFF 		bl	strncpy
+ 1243              	.LVL146:
+ 478:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK; 
+ 479:libs/WIFI/Src/wifi.c ****   }
+ 480:libs/WIFI/Src/wifi.c ****   return ret;
+ 481:libs/WIFI/Src/wifi.c **** }
+ 1244              		.loc 1 481 0
+ 1245 000a 0020     		movs	r0, #0
+ 1246 000c 08BD     		pop	{r3, pc}
+ 1247              	.L145:
+ 1248 000e 00BF     		.align	2
+ 1249              	.L144:
+ 1250 0010 20000000 		.word	EsWifiObj+32
+ 1251              		.cfi_endproc
+ 1252              	.LFE148:
+ 1254              		.section	.text.WIFI_GetModuleID,"ax",%progbits
+ 1255              		.align	1
+ 1256              		.global	WIFI_GetModuleID
+ 1257              		.syntax unified
+ 1258              		.thumb
+ 1259              		.thumb_func
+ 1260              		.fpu fpv4-sp-d16
+ 1262              	WIFI_GetModuleID:
+ 1263              	.LFB149:
+ 482:libs/WIFI/Src/wifi.c **** 
+ 483:libs/WIFI/Src/wifi.c **** /**
+ 484:libs/WIFI/Src/wifi.c ****   * @brief  Return Module ID
+ 485:libs/WIFI/Src/wifi.c ****   * @param  Info : Module ID string
+ 486:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 487:libs/WIFI/Src/wifi.c ****   */
+ 488:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_GetModuleID(char *Id)
+ 489:libs/WIFI/Src/wifi.c **** {
+ 1264              		.loc 1 489 0
+ 1265              		.cfi_startproc
+ 1266              		@ args = 0, pretend = 0, frame = 0
+ 1267              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1268              	.LVL147:
+ 1269 0000 08B5     		push	{r3, lr}
+ 1270              	.LCFI43:
+ 1271              		.cfi_def_cfa_offset 8
+ 1272              		.cfi_offset 3, -8
+ 1273              		.cfi_offset 14, -4
+ 1274              	.LVL148:
+ 490:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 491:libs/WIFI/Src/wifi.c ****   
+ 492:libs/WIFI/Src/wifi.c ****   if(EsWifiObj.Product_ID != NULL)
+ 493:libs/WIFI/Src/wifi.c ****   {
+ 494:libs/WIFI/Src/wifi.c ****     strncpy(Id, (char *)EsWifiObj.Product_ID, ES_WIFI_PRODUCT_ID_SIZE);
+ 1275              		.loc 1 494 0
+ 1276 0002 2022     		movs	r2, #32
+ 1277 0004 0249     		ldr	r1, .L148
+ARM GAS  /tmp/ccDkcymV.s 			page 32
+
+
+ 1278 0006 FFF7FEFF 		bl	strncpy
+ 1279              	.LVL149:
+ 495:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK; 
+ 496:libs/WIFI/Src/wifi.c ****   }
+ 497:libs/WIFI/Src/wifi.c ****   return ret;
+ 498:libs/WIFI/Src/wifi.c **** }
+ 1280              		.loc 1 498 0
+ 1281 000a 0020     		movs	r0, #0
+ 1282 000c 08BD     		pop	{r3, pc}
+ 1283              	.L149:
+ 1284 000e 00BF     		.align	2
+ 1285              	.L148:
+ 1286 0010 00000000 		.word	EsWifiObj
+ 1287              		.cfi_endproc
+ 1288              	.LFE149:
+ 1290              		.section	.text.WIFI_GetModuleName,"ax",%progbits
+ 1291              		.align	1
+ 1292              		.global	WIFI_GetModuleName
+ 1293              		.syntax unified
+ 1294              		.thumb
+ 1295              		.thumb_func
+ 1296              		.fpu fpv4-sp-d16
+ 1298              	WIFI_GetModuleName:
+ 1299              	.LFB150:
+ 499:libs/WIFI/Src/wifi.c **** 
+ 500:libs/WIFI/Src/wifi.c **** /**
+ 501:libs/WIFI/Src/wifi.c ****   * @brief  Return Module Name
+ 502:libs/WIFI/Src/wifi.c ****   * @param  Info : Module Name string
+ 503:libs/WIFI/Src/wifi.c ****   * @retval Operation status
+ 504:libs/WIFI/Src/wifi.c ****   */
+ 505:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_GetModuleName(char *ModuleName)
+ 506:libs/WIFI/Src/wifi.c **** {
+ 1300              		.loc 1 506 0
+ 1301              		.cfi_startproc
+ 1302              		@ args = 0, pretend = 0, frame = 0
+ 1303              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1304              	.LVL150:
+ 1305 0000 08B5     		push	{r3, lr}
+ 1306              	.LCFI44:
+ 1307              		.cfi_def_cfa_offset 8
+ 1308              		.cfi_offset 3, -8
+ 1309              		.cfi_offset 14, -4
+ 1310              	.LVL151:
+ 507:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR; 
+ 508:libs/WIFI/Src/wifi.c ****   
+ 509:libs/WIFI/Src/wifi.c ****   if(EsWifiObj.Product_Name != NULL)
+ 510:libs/WIFI/Src/wifi.c ****   {
+ 511:libs/WIFI/Src/wifi.c ****     strncpy(ModuleName, (char *)EsWifiObj.Product_Name, ES_WIFI_PRODUCT_NAME_SIZE);
+ 1311              		.loc 1 511 0
+ 1312 0002 2022     		movs	r2, #32
+ 1313 0004 0249     		ldr	r1, .L152
+ 1314 0006 FFF7FEFF 		bl	strncpy
+ 1315              	.LVL152:
+ 512:libs/WIFI/Src/wifi.c ****     ret = WIFI_STATUS_OK; 
+ 513:libs/WIFI/Src/wifi.c ****   }
+ 514:libs/WIFI/Src/wifi.c ****   return ret;
+ 515:libs/WIFI/Src/wifi.c **** }
+ARM GAS  /tmp/ccDkcymV.s 			page 33
+
+
+ 1316              		.loc 1 515 0
+ 1317 000a 0020     		movs	r0, #0
+ 1318 000c 08BD     		pop	{r3, pc}
+ 1319              	.L153:
+ 1320 000e 00BF     		.align	2
+ 1321              	.L152:
+ 1322 0010 60000000 		.word	EsWifiObj+96
+ 1323              		.cfi_endproc
+ 1324              	.LFE150:
+ 1326              		.section	.text.WIFI_DNS_Lookup,"ax",%progbits
+ 1327              		.align	1
+ 1328              		.global	WIFI_DNS_Lookup
+ 1329              		.syntax unified
+ 1330              		.thumb
+ 1331              		.thumb_func
+ 1332              		.fpu fpv4-sp-d16
+ 1334              	WIFI_DNS_Lookup:
+ 1335              	.LFB151:
+ 516:libs/WIFI/Src/wifi.c **** /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+ 517:libs/WIFI/Src/wifi.c **** WIFI_Status_t WIFI_DNS_Lookup(const char *url, uint8_t *ipaddress){
+ 1336              		.loc 1 517 0
+ 1337              		.cfi_startproc
+ 1338              		@ args = 0, pretend = 0, frame = 0
+ 1339              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1340              	.LVL153:
+ 1341 0000 08B5     		push	{r3, lr}
+ 1342              	.LCFI45:
+ 1343              		.cfi_def_cfa_offset 8
+ 1344              		.cfi_offset 3, -8
+ 1345              		.cfi_offset 14, -4
+ 1346              	.LVL154:
+ 518:libs/WIFI/Src/wifi.c ****   WIFI_Status_t ret = WIFI_STATUS_ERROR;
+ 519:libs/WIFI/Src/wifi.c ****   ret = ES_WIFI_DNS_LookUp(&EsWifiObj, url, ipaddress);
+ 1347              		.loc 1 519 0
+ 1348 0002 0A46     		mov	r2, r1
+ 1349 0004 0146     		mov	r1, r0
+ 1350              	.LVL155:
+ 1351 0006 0248     		ldr	r0, .L156
+ 1352              	.LVL156:
+ 1353 0008 FFF7FEFF 		bl	ES_WIFI_DNS_LookUp
+ 1354              	.LVL157:
+ 520:libs/WIFI/Src/wifi.c ****   return ret;
+ 521:libs/WIFI/Src/wifi.c **** }
+ 1355              		.loc 1 521 0
+ 1356 000c 08BD     		pop	{r3, pc}
+ 1357              	.L157:
+ 1358 000e 00BF     		.align	2
+ 1359              	.L156:
+ 1360 0010 00000000 		.word	EsWifiObj
+ 1361              		.cfi_endproc
+ 1362              	.LFE151:
+ 1364              		.comm	EsWifiObj,1896,4
+ 1365              		.text
+ 1366              	.Letext0:
+ 1367              		.file 2 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/machine/_default_types.h"
+ 1368              		.file 3 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_stdint.h"
+ 1369              		.file 4 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/lock.h"
+ARM GAS  /tmp/ccDkcymV.s 			page 34
+
+
+ 1370              		.file 5 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/_types.h"
+ 1371              		.file 6 "/opt/gcc-arm-none-eabi-7-2018-q2-update/lib/gcc/arm-none-eabi/7.3.1/include/stddef.h"
+ 1372              		.file 7 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/sys/reent.h"
+ 1373              		.file 8 "libs/WIFI/Inc/es_wifi.h"
+ 1374              		.file 9 "Drivers/CMSIS/Include/core_cm4.h"
+ 1375              		.file 10 "Drivers/CMSIS/Device/ST/STM32L4xx/Include/system_stm32l4xx.h"
+ 1376              		.file 11 "libs/WIFI/Inc/wifi.h"
+ 1377              		.file 12 "/opt/gcc-arm-none-eabi-7-2018-q2-update/arm-none-eabi/include/string.h"
+ARM GAS  /tmp/ccDkcymV.s 			page 35
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 wifi.c
+     /tmp/ccDkcymV.s:18     .text.WIFI_Init:0000000000000000 $t
+     /tmp/ccDkcymV.s:25     .text.WIFI_Init:0000000000000000 WIFI_Init
+     /tmp/ccDkcymV.s:82     .text.WIFI_Init:0000000000000034 $d
+                            *COM*:0000000000000768 EsWifiObj
+     /tmp/ccDkcymV.s:92     .text.WIFI_ListAccessPoints:0000000000000000 $t
+     /tmp/ccDkcymV.s:99     .text.WIFI_ListAccessPoints:0000000000000000 WIFI_ListAccessPoints
+     /tmp/ccDkcymV.s:211    .text.WIFI_ListAccessPoints:0000000000000090 $d
+     /tmp/ccDkcymV.s:216    .text.WIFI_Connect:0000000000000000 $t
+     /tmp/ccDkcymV.s:223    .text.WIFI_Connect:0000000000000000 WIFI_Connect
+     /tmp/ccDkcymV.s:270    .text.WIFI_Connect:0000000000000024 $d
+     /tmp/ccDkcymV.s:275    .text.WIFI_GetMAC_Address:0000000000000000 $t
+     /tmp/ccDkcymV.s:282    .text.WIFI_GetMAC_Address:0000000000000000 WIFI_GetMAC_Address
+     /tmp/ccDkcymV.s:316    .text.WIFI_GetMAC_Address:0000000000000014 $d
+     /tmp/ccDkcymV.s:321    .text.WIFI_GetIP_Address:0000000000000000 $t
+     /tmp/ccDkcymV.s:328    .text.WIFI_GetIP_Address:0000000000000000 WIFI_GetIP_Address
+     /tmp/ccDkcymV.s:359    .text.WIFI_GetIP_Address:0000000000000018 $d
+     /tmp/ccDkcymV.s:364    .text.WIFI_Disconnect:0000000000000000 $t
+     /tmp/ccDkcymV.s:371    .text.WIFI_Disconnect:0000000000000000 WIFI_Disconnect
+     /tmp/ccDkcymV.s:402    .text.WIFI_Disconnect:0000000000000014 $d
+     /tmp/ccDkcymV.s:407    .text.WIFI_ConfigureAP:0000000000000000 $t
+     /tmp/ccDkcymV.s:414    .text.WIFI_ConfigureAP:0000000000000000 WIFI_ConfigureAP
+     /tmp/ccDkcymV.s:484    .text.WIFI_ConfigureAP:0000000000000044 $d
+     /tmp/ccDkcymV.s:489    .text.WIFI_HandleAPEvents:0000000000000000 $t
+     /tmp/ccDkcymV.s:496    .text.WIFI_HandleAPEvents:0000000000000000 WIFI_HandleAPEvents
+     /tmp/ccDkcymV.s:575    .text.WIFI_HandleAPEvents:0000000000000058 $d
+     /tmp/ccDkcymV.s:581    .text.WIFI_Ping:0000000000000000 $t
+     /tmp/ccDkcymV.s:588    .text.WIFI_Ping:0000000000000000 WIFI_Ping
+     /tmp/ccDkcymV.s:626    .text.WIFI_Ping:0000000000000018 $d
+     /tmp/ccDkcymV.s:631    .text.WIFI_GetHostAddress:0000000000000000 $t
+     /tmp/ccDkcymV.s:638    .text.WIFI_GetHostAddress:0000000000000000 WIFI_GetHostAddress
+     /tmp/ccDkcymV.s:668    .text.WIFI_GetHostAddress:0000000000000014 $d
+     /tmp/ccDkcymV.s:673    .text.WIFI_OpenClientConnection:0000000000000000 $t
+     /tmp/ccDkcymV.s:680    .text.WIFI_OpenClientConnection:0000000000000000 WIFI_OpenClientConnection
+     /tmp/ccDkcymV.s:751    .text.WIFI_OpenClientConnection:0000000000000050 $d
+     /tmp/ccDkcymV.s:756    .text.WIFI_CloseClientConnection:0000000000000000 $t
+     /tmp/ccDkcymV.s:763    .text.WIFI_CloseClientConnection:0000000000000000 WIFI_CloseClientConnection
+     /tmp/ccDkcymV.s:808    .text.WIFI_CloseClientConnection:0000000000000020 $d
+     /tmp/ccDkcymV.s:813    .text.WIFI_StartServer:0000000000000000 $t
+     /tmp/ccDkcymV.s:820    .text.WIFI_StartServer:0000000000000000 WIFI_StartServer
+     /tmp/ccDkcymV.s:874    .text.WIFI_StartServer:000000000000002c $d
+     /tmp/ccDkcymV.s:879    .text.WIFI_StopServer:0000000000000000 $t
+     /tmp/ccDkcymV.s:886    .text.WIFI_StopServer:0000000000000000 WIFI_StopServer
+     /tmp/ccDkcymV.s:919    .text.WIFI_StopServer:0000000000000014 $d
+     /tmp/ccDkcymV.s:924    .text.WIFI_SendData:0000000000000000 $t
+     /tmp/ccDkcymV.s:931    .text.WIFI_SendData:0000000000000000 WIFI_SendData
+     /tmp/ccDkcymV.s:983    .text.WIFI_SendData:0000000000000024 $d
+     /tmp/ccDkcymV.s:988    .text.WIFI_ReceiveData:0000000000000000 $t
+     /tmp/ccDkcymV.s:995    .text.WIFI_ReceiveData:0000000000000000 WIFI_ReceiveData
+     /tmp/ccDkcymV.s:1047   .text.WIFI_ReceiveData:0000000000000024 $d
+     /tmp/ccDkcymV.s:1052   .text.WIFI_SetOEMProperties:0000000000000000 $t
+     /tmp/ccDkcymV.s:1059   .text.WIFI_SetOEMProperties:0000000000000000 WIFI_SetOEMProperties
+     /tmp/ccDkcymV.s:1105   .text.WIFI_SetOEMProperties:0000000000000024 $d
+     /tmp/ccDkcymV.s:1110   .text.WIFI_ResetModule:0000000000000000 $t
+     /tmp/ccDkcymV.s:1117   .text.WIFI_ResetModule:0000000000000000 WIFI_ResetModule
+     /tmp/ccDkcymV.s:1148   .text.WIFI_ResetModule:0000000000000014 $d
+ARM GAS  /tmp/ccDkcymV.s 			page 36
+
+
+     /tmp/ccDkcymV.s:1153   .text.WIFI_SetModuleDefault:0000000000000000 $t
+     /tmp/ccDkcymV.s:1160   .text.WIFI_SetModuleDefault:0000000000000000 WIFI_SetModuleDefault
+     /tmp/ccDkcymV.s:1191   .text.WIFI_SetModuleDefault:0000000000000014 $d
+     /tmp/ccDkcymV.s:1196   .text.WIFI_ModuleFirmwareUpdate:0000000000000000 $t
+     /tmp/ccDkcymV.s:1203   .text.WIFI_ModuleFirmwareUpdate:0000000000000000 WIFI_ModuleFirmwareUpdate
+     /tmp/ccDkcymV.s:1219   .text.WIFI_GetModuleFwRevision:0000000000000000 $t
+     /tmp/ccDkcymV.s:1226   .text.WIFI_GetModuleFwRevision:0000000000000000 WIFI_GetModuleFwRevision
+     /tmp/ccDkcymV.s:1250   .text.WIFI_GetModuleFwRevision:0000000000000010 $d
+     /tmp/ccDkcymV.s:1255   .text.WIFI_GetModuleID:0000000000000000 $t
+     /tmp/ccDkcymV.s:1262   .text.WIFI_GetModuleID:0000000000000000 WIFI_GetModuleID
+     /tmp/ccDkcymV.s:1286   .text.WIFI_GetModuleID:0000000000000010 $d
+     /tmp/ccDkcymV.s:1291   .text.WIFI_GetModuleName:0000000000000000 $t
+     /tmp/ccDkcymV.s:1298   .text.WIFI_GetModuleName:0000000000000000 WIFI_GetModuleName
+     /tmp/ccDkcymV.s:1322   .text.WIFI_GetModuleName:0000000000000010 $d
+     /tmp/ccDkcymV.s:1327   .text.WIFI_DNS_Lookup:0000000000000000 $t
+     /tmp/ccDkcymV.s:1334   .text.WIFI_DNS_Lookup:0000000000000000 WIFI_DNS_Lookup
+     /tmp/ccDkcymV.s:1360   .text.WIFI_DNS_Lookup:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+ES_WIFI_RegisterBusIO
+ES_WIFI_Init
+SPI_WIFI_ReceiveData
+SPI_WIFI_SendData
+SPI_WIFI_Delay
+SPI_WIFI_DeInit
+SPI_WIFI_Init
+ES_WIFI_ListAccessPoints
+strncpy
+ES_WIFI_Connect
+ES_WIFI_GetNetworkSettings
+ES_WIFI_GetMACAddress
+ES_WIFI_Disconnect
+ES_WIFI_ActivateAP
+ES_WIFI_WaitAPStateChange
+ES_WIFI_Ping
+ES_WIFI_DNS_LookUp
+ES_WIFI_StartClientConnection
+ES_WIFI_StopClientConnection
+ES_WIFI_StartServerSingleConn
+ES_WIFI_StopServerSingleConn
+ES_WIFI_SendData
+ES_WIFI_ReceiveData
+ES_WIFI_SetProductName
+ES_WIFI_SetMACAddress
+ES_WIFI_ResetModule
+ES_WIFI_ResetToFactoryDefault
